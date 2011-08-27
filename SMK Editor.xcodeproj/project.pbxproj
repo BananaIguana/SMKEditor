@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B13140874B200A46814 /* Cocoa.framework */; };
+		3C904B1E140874B200A46814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B1C140874B200A46814 /* InfoPlist.strings */; };
+		3C904B20140874B200A46814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C904B1F140874B200A46814 /* main.m */; };
+		3C904B24140874B200A46814 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B22140874B200A46814 /* Credits.rtf */; };
+		3C904B27140874B200A46814 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C904B26140874B200A46814 /* AppDelegate.m */; };
+		3C904B2A140874B200A46814 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B28140874B200A46814 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3C904B0F140874B200A46814 /* SMK Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMK Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C904B13140874B200A46814 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3C904B16140874B200A46814 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3C904B17140874B200A46814 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3C904B18140874B200A46814 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3C904B1B140874B200A46814 /* SMK Editor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SMK Editor-Info.plist"; sourceTree = "<group>"; };
+		3C904B1D140874B200A46814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3C904B1F140874B200A46814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C904B21140874B200A46814 /* SMK Editor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SMK Editor-Prefix.pch"; sourceTree = "<group>"; };
+		3C904B23140874B200A46814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3C904B25140874B200A46814 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3C904B26140874B200A46814 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3C904B29140874B200A46814 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C904B0C140874B200A46814 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C904B04140874B200A46814 = {
+			isa = PBXGroup;
+			children = (
+				3C904B19140874B200A46814 /* SMK Editor */,
+				3C904B12140874B200A46814 /* Frameworks */,
+				3C904B10140874B200A46814 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3C904B10140874B200A46814 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C904B0F140874B200A46814 /* SMK Editor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C904B12140874B200A46814 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C904B13140874B200A46814 /* Cocoa.framework */,
+				3C904B15140874B200A46814 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C904B15140874B200A46814 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C904B16140874B200A46814 /* AppKit.framework */,
+				3C904B17140874B200A46814 /* CoreData.framework */,
+				3C904B18140874B200A46814 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3C904B19140874B200A46814 /* SMK Editor */ = {
+			isa = PBXGroup;
+			children = (
+				3C904B25140874B200A46814 /* AppDelegate.h */,
+				3C904B26140874B200A46814 /* AppDelegate.m */,
+				3C904B28140874B200A46814 /* MainMenu.xib */,
+				3C904B1A140874B200A46814 /* Supporting Files */,
+			);
+			path = "SMK Editor";
+			sourceTree = "<group>";
+		};
+		3C904B1A140874B200A46814 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C904B1B140874B200A46814 /* SMK Editor-Info.plist */,
+				3C904B1C140874B200A46814 /* InfoPlist.strings */,
+				3C904B1F140874B200A46814 /* main.m */,
+				3C904B21140874B200A46814 /* SMK Editor-Prefix.pch */,
+				3C904B22140874B200A46814 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3C904B0E140874B200A46814 /* SMK Editor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C904B2D140874B200A46814 /* Build configuration list for PBXNativeTarget "SMK Editor" */;
+			buildPhases = (
+				3C904B0B140874B200A46814 /* Sources */,
+				3C904B0C140874B200A46814 /* Frameworks */,
+				3C904B0D140874B200A46814 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SMK Editor";
+			productName = "SMK Editor";
+			productReference = 3C904B0F140874B200A46814 /* SMK Editor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3C904B06140874B200A46814 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Roar Technology";
+			};
+			buildConfigurationList = 3C904B09140874B200A46814 /* Build configuration list for PBXProject "SMK Editor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3C904B04140874B200A46814;
+			productRefGroup = 3C904B10140874B200A46814 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C904B0E140874B200A46814 /* SMK Editor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3C904B0D140874B200A46814 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C904B1E140874B200A46814 /* InfoPlist.strings in Resources */,
+				3C904B24140874B200A46814 /* Credits.rtf in Resources */,
+				3C904B2A140874B200A46814 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C904B0B140874B200A46814 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C904B20140874B200A46814 /* main.m in Sources */,
+				3C904B27140874B200A46814 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3C904B1C140874B200A46814 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C904B1D140874B200A46814 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3C904B22140874B200A46814 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C904B23140874B200A46814 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3C904B28140874B200A46814 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C904B29140874B200A46814 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3C904B2B140874B200A46814 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3C904B2C140874B200A46814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3C904B2E140874B200A46814 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SMK Editor/SMK Editor-Prefix.pch";
+				INFOPLIST_FILE = "SMK Editor/SMK Editor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3C904B2F140874B200A46814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SMK Editor/SMK Editor-Prefix.pch";
+				INFOPLIST_FILE = "SMK Editor/SMK Editor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3C904B09140874B200A46814 /* Build configuration list for PBXProject "SMK Editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C904B2B140874B200A46814 /* Debug */,
+				3C904B2C140874B200A46814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C904B2D140874B200A46814 /* Build configuration list for PBXNativeTarget "SMK Editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C904B2E140874B200A46814 /* Debug */,
+				3C904B2F140874B200A46814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3C904B06140874B200A46814 /* Project object */;
+}
