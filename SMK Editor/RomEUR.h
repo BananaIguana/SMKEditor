@@ -8,17 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RomEUR : NSObject
+#import "RomBase.h"
+
+@interface RomEUR : RomBase
 {
-	NSData				*data;
-	NSDictionary		*romDict;
+
 }
-
-@property(nonatomic,retain) NSData				*data;
-@property(nonatomic,retain) NSDictionary		*romDict;
-
--(id)initWithData:(NSData*)romData;
-
--(void)print;
 
 @end

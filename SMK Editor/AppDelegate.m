@@ -24,7 +24,7 @@
 {
 	// Insert code here to initialize your application
 	
-	ROMBase *rom = [[ROMBase alloc] init];
+	RomBase *rom = [[RomBase alloc] init];
 	
 	[rom test];
 	

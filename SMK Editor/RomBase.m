@@ -1,38 +1,85 @@
 //
-//  ROMBase.m
+//  RomBase.m
 //  SMK Editor
 //
 //  Created by Ian Sidor on 27/08/2011.
 //  Copyright (c) 2011 Roar Technology. All rights reserved.
 //
 
-#import "ROMBase.h"
+#import "RomBase.h"
 #import "RomEUR.h"
+#import "RomRef.h"
 
 #define kRomOffsetTitle						0xFFC0
 #define kRomOffsetCartridgeType				0xFFD6
 #define kRomOffsetRomSize					0xFFD7
 #define kRomOffsetRamSize					0xFFD8
 
-@implementation ROMBase
+@implementation RomBase
 
 @synthesize data;
+@synthesize romDict;
+
+-(id)initWithData:(NSData*)romData offsetDictionary:(NSDictionary*)dictionary
+{
+	self = [super init];
+	
+	if( self )
+	{
+		self.romDict				= dictionary;
+		self.data					= romData;
+	}
+	
+	return( self );
+}
 
 -(void)test
 {
-	NSURL *url = [NSURL fileURLWithPath:@"/Users/Ian/smk_eur.smc"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	NSData *rom = [[NSData alloc] initWithContentsOfURL:url];
+	NSString *romFile = [defaults stringForKey:@"rom"];
+	
+	NSAssert( romFile, @"Setup your rom path as a command line arg. \"-rom <path_to_rom>\"" );
+
+	NSData *rom = [[NSData alloc] initWithContentsOfFile:romFile];
+	
+	NSAssert( rom, @"Failed to load ROM" );
 	
 	self.data = rom;
 
 	[rom release];
 		
-	// Fake it as european
+	// Fake it as european.
 	
-	RomEUR *eurRom = [[RomEUR alloc] initWithData:self.data];
+	NSDictionary *dictionary = [RomEUR offsetDictionary];
 	
-	[eurRom print];
+	RomEUR *eurRom = [[RomEUR alloc] initWithData:self.data offsetDictionary:dictionary];
+	
+	NSArray *keys = [dictionary allKeys];
+	
+	NSNumber *key;
+	
+	for( key in keys )
+	{
+		RomRef *ref = [dictionary objectForKey:key];
+		
+		[RomRef logReference:ref rom:(RomBase*)eurRom];
+	}
+}
+
+-(void)dealloc
+{
+	[data release];
+	[romDict release];
+
+	[super dealloc];
+}
+
++(NSDictionary*)offsetDictionary
+{
+	NSAssert( 0, @"You must override this function" );
+	
+	return( nil );
 }
 
 @end

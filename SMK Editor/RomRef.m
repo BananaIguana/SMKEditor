@@ -7,6 +7,7 @@
 //
 
 #import "RomRef.h"
+#import "RomBase.h"
 
 @implementation RomRef
 
@@ -47,5 +48,42 @@
 	
 	return( romReference );
 }
+
++(void)logReference:(RomRef*)reference rom:(RomBase*)rom
+{
+	RomRef *ref					= reference;
+
+	NSRange range				= NSMakeRange( ref.offset, ref.size );
+	
+	switch( [ref type] )
+	{
+		case kRomRefTypeString :
+			{
+				char initialTest[ range.length + 1 ];
+				
+				[rom.data getBytes:initialTest range:range];
+				initialTest[ range.length ] = 0;
+
+				NSLog( @"Data = %s", initialTest );
+		
+			}break;
+	
+		case kRomRefTypeUnsignedChar :
+			{
+				unsigned char val;
+				
+				[rom.data getBytes:&val range:range];
+				
+				NSLog( @"Data = %d", (int)val );
+			
+			}break;
+	
+		default:
+			{
+				NSAssert( 0, @"Unhandled type in test." );
+			}
+	}
+}
+
 
 @end

@@ -9,91 +9,86 @@
 #import "RomEUR.h"
 #import "RomRef.h"
 
-#define kRomOffsetTitle						0xFFC0
-#define kRomOffsetCartridgeTypeOffset		0xFFD6
+#define kRomOffsetTitle							0xFFC0
+#define kRomOffsetCartridgeTypeOffset			0xFFD6
+#define kRomOffsetRomSizeOffset					0xFFD7
+#define kRomOffsetRamSizeOffset					0xFFD8
+#define kRomOffsetDestinationCodeOffset			0xFFD9
+#define kRomOffsetMaskRomVerOffset				0xFFDB
+#define kRomOffsetComplementCheckLowOffset		0xFFDC
+#define kRomOffsetComplementCheckHighOffset		0xFFDD
+#define kRomOffsetChecksumLowOffset				0xFFDE
+#define kRomOffsetChecksumHighOffset			0xFFDF
+#define kRomOffsetMarkerCode1Offset				0xFFB0
+#define kRomOffsetMarkerCode2Offset				0xFFB1
+#define kRomOffsetGameCode1Offset				0xFFB2
+#define kRomOffsetGameCode2Offset				0xFFB3
+#define kRomOffsetGameCode3Offset				0xFFB4
+#define kRomOffsetGameCode4Offset				0xFFB5
+#define kRomOffsetExpansionRamSizeOffset		0xFFBD
+#define kRomOffsetSpecialVersionOffset			0xFFBE
+#define kRomOffsetCartridgeTypeSubNumOffset		0xFFBF
 
 @implementation RomEUR
-
-@synthesize data;
-@synthesize romDict;
-
--(id)initWithData:(NSData*)romData
-{
-	self = [super init];
-	
-	if( self )
-	{
-		NSArray *objects			= [NSArray arrayWithObjects:
-		
-			[RomRef refWithOffset:kRomOffsetTitle type:kRomRefTypeString size:16 max:21],
-			[RomRef refWithOffset:kRomOffsetCartridgeTypeOffset type:kRomRefTypeUnsignedChar size:1],
-			nil];
-			
-		NSArray *keys				= [NSArray arrayWithObjects:
-		
-			[NSNumber numberWithUnsignedInt:kRomOffsetTitle],
-			[NSNumber numberWithUnsignedInt:kRomOffsetCartridgeTypeOffset],
-			nil];
-
-		NSDictionary *dictionary	= [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-		
-		self.romDict				= dictionary;
-		self.data					= romData;
-		
-		[dictionary release];
-	}
-	
-	return( self );
-}
-
--(void)print
-{
-	NSArray *keys					= [self.romDict allKeys];
-	
-	NSNumber *key;
-	
-	for( key in keys )
-	{
-		RomRef *ref					= [self.romDict objectForKey:key];
-
-		NSRange range				= NSMakeRange( ref.offset, ref.size );
-		
-		switch( [ref type] )
-		{
-			case kRomRefTypeString :
-				{
-					char initialTest[ range.length + 1 ];
-					
-					[self.data getBytes:initialTest range:range];
-					initialTest[ range.length ] = 0;
-	
-					NSLog( @"Data = %s", initialTest );
-			
-				}break;
-		
-			case kRomRefTypeUnsignedChar :
-				{
-					unsigned char val;
-					
-					[self.data getBytes:&val range:range];
-					
-					NSLog( @"Data = %d", (int)val );
-				
-				}break;
-		
-			default:
-				{
-					NSAssert( 0, @"Unhandled type in test." );
-				}
-		}
-	}	
-}
 
 -(void)dealloc
 {
 	[romDict release];
 
 	[super dealloc];
+}
+
++(NSDictionary*)offsetDictionary
+{
+	NSArray *objects			= [NSArray arrayWithObjects:
+	
+		[RomRef refWithOffset:kRomOffsetTitle						type:kRomRefTypeString			size:16		max:21],
+		[RomRef refWithOffset:kRomOffsetCartridgeTypeOffset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetRomSizeOffset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetRamSizeOffset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetDestinationCodeOffset		type:kRomRefTypeUnsignedChar	size:1],	// Check if this is correct
+		[RomRef refWithOffset:kRomOffsetMaskRomVerOffset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetComplementCheckLowOffset	type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetComplementCheckHighOffset	type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetChecksumLowOffset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetChecksumHighOffset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetMarkerCode1Offset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetMarkerCode2Offset			type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetGameCode1Offset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetGameCode2Offset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetGameCode3Offset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetGameCode4Offset				type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetExpansionRamSizeOffset		type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetSpecialVersionOffset		type:kRomRefTypeUnsignedChar	size:1],
+		[RomRef refWithOffset:kRomOffsetCartridgeTypeSubNumOffset	type:kRomRefTypeUnsignedChar	size:1],
+		nil];
+		
+	NSArray *keys				= [NSArray arrayWithObjects:
+	
+		[NSNumber numberWithUnsignedInt:kRomOffsetTitle],
+		[NSNumber numberWithUnsignedInt:kRomOffsetCartridgeTypeOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetRomSizeOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetRamSizeOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetDestinationCodeOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetMaskRomVerOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetComplementCheckLowOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetComplementCheckHighOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetChecksumLowOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetChecksumHighOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetMarkerCode1Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetMarkerCode2Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetGameCode1Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetGameCode2Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetGameCode3Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetGameCode4Offset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetExpansionRamSizeOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetSpecialVersionOffset],
+		[NSNumber numberWithUnsignedInt:kRomOffsetCartridgeTypeSubNumOffset],
+		nil];
+
+	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+	
+	return( dictionary );
 }
 
 @end
