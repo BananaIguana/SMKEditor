@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "ROMBase.h"
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -21,6 +23,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	// Insert code here to initialize your application
+	
+	ROMBase *rom = [[ROMBase alloc] init];
+	
+	[rom test];
+	
+	[rom release];
 }
 
 @end

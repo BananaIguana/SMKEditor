@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0BB1C41408782700D12DDA /* RomBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0BB1C31408782700D12DDA /* RomBase.m */; };
 		3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B13140874B200A46814 /* Cocoa.framework */; };
 		3C904B1E140874B200A46814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B1C140874B200A46814 /* InfoPlist.strings */; };
 		3C904B20140874B200A46814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C904B1F140874B200A46814 /* main.m */; };
 		3C904B24140874B200A46814 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B22140874B200A46814 /* Credits.rtf */; };
 		3C904B27140874B200A46814 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C904B26140874B200A46814 /* AppDelegate.m */; };
 		3C904B2A140874B200A46814 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B28140874B200A46814 /* MainMenu.xib */; };
+		3CDB04E01409C0EE00D4201D /* RomRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB04DF1409C0EE00D4201D /* RomRef.m */; };
+		3CDB04E41409C7FC00D4201D /* RomEUR.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB04E31409C7FC00D4201D /* RomEUR.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C0BB1C21408782700D12DDA /* RomBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomBase.h; sourceTree = "<group>"; };
+		3C0BB1C31408782700D12DDA /* RomBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomBase.m; sourceTree = "<group>"; };
 		3C904B0F140874B200A46814 /* SMK Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMK Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C904B13140874B200A46814 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3C904B16140874B200A46814 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -29,6 +34,10 @@
 		3C904B25140874B200A46814 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C904B26140874B200A46814 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3C904B29140874B200A46814 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3CDB04DE1409C0EE00D4201D /* RomRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomRef.h; sourceTree = "<group>"; };
+		3CDB04DF1409C0EE00D4201D /* RomRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomRef.m; sourceTree = "<group>"; };
+		3CDB04E21409C7FC00D4201D /* RomEUR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomEUR.h; sourceTree = "<group>"; };
+		3CDB04E31409C7FC00D4201D /* RomEUR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomEUR.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +52,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C0BB1C0140877F900D12DDA /* ROM */ = {
+			isa = PBXGroup;
+			children = (
+				3C0BB1C31408782700D12DDA /* RomBase.m */,
+				3C0BB1C21408782700D12DDA /* RomBase.h */,
+				3CDB04DF1409C0EE00D4201D /* RomRef.m */,
+				3CDB04DE1409C0EE00D4201D /* RomRef.h */,
+				3CDB04E31409C7FC00D4201D /* RomEUR.m */,
+				3CDB04E21409C7FC00D4201D /* RomEUR.h */,
+			);
+			name = ROM;
+			sourceTree = "<group>";
+		};
 		3C904B04140874B200A46814 = {
 			isa = PBXGroup;
 			children = (
@@ -82,8 +104,9 @@
 		3C904B19140874B200A46814 /* SMK Editor */ = {
 			isa = PBXGroup;
 			children = (
-				3C904B25140874B200A46814 /* AppDelegate.h */,
+				3C0BB1C0140877F900D12DDA /* ROM */,
 				3C904B26140874B200A46814 /* AppDelegate.m */,
+				3C904B25140874B200A46814 /* AppDelegate.h */,
 				3C904B28140874B200A46814 /* MainMenu.xib */,
 				3C904B1A140874B200A46814 /* Supporting Files */,
 			);
@@ -168,6 +191,9 @@
 			files = (
 				3C904B20140874B200A46814 /* main.m in Sources */,
 				3C904B27140874B200A46814 /* AppDelegate.m in Sources */,
+				3C0BB1C41408782700D12DDA /* RomBase.m in Sources */,
+				3CDB04E01409C0EE00D4201D /* RomRef.m in Sources */,
+				3CDB04E41409C7FC00D4201D /* RomEUR.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +313,7 @@
 				3C904B2F140874B200A46814 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
