@@ -17,6 +17,8 @@ typedef enum kRomRefType
 	
 }kRomRefType;
 
+@class RomBase;
+
 @interface RomRef : NSObject
 {
 	NSUInteger		offset;				// Offset from head of ROM.
@@ -34,5 +36,7 @@ typedef enum kRomRefType
 
 +(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize;
 +(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)max;
+
++(void)logReference:(RomRef*)reference rom:(RomBase*)rom;
 
 @end
