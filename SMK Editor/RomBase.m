@@ -9,10 +9,10 @@
 #import "ROMBase.h"
 #import "RomEUR.h"
 
-#define kRomOffsetTitle						= 0xFFC0;
-#define kRomOffsetCartridgeType				= 0xFFD6;
-#define kRomOffsetRomSize					= 0xFFD7;
-#define kRomOffsetRamSize					= 0xFFD8;
+#define kRomOffsetTitle						0xFFC0
+#define kRomOffsetCartridgeType				0xFFD6
+#define kRomOffsetRomSize					0xFFD7
+#define kRomOffsetRamSize					0xFFD8
 
 @implementation ROMBase
 

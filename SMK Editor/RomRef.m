@@ -11,16 +11,18 @@
 @implementation RomRef
 
 @synthesize offset;
+@synthesize type;
 @synthesize size;
 @synthesize max;
 
--(id)initWithOffset:(NSUInteger)dataOffset size:(NSUInteger)dataSize max:(NSUInteger)dataMax
+-(id)initWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)dataMax
 {
 	self = [super init];
 	
 	if( self )
 	{
 		self.offset			= dataOffset;
+		self.type			= dataType;
 		self.size			= dataSize;
 		self.max			= dataMax;	
 	}
@@ -28,18 +30,18 @@
 	return( self );
 }
 
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset size:(NSUInteger)dataSize
++(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize
 {
-	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset size:dataSize max:dataSize];
+	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset type:dataType size:dataSize max:dataSize];
 	
 	[romReference autorelease];
 	
 	return( romReference );
 }
 
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset size:(NSUInteger)dataSize max:(NSUInteger)max
++(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)max
 {
-	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset size:dataSize max:max];
+	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset type:dataType size:dataSize max:max];
 	
 	[romReference autorelease];
 	

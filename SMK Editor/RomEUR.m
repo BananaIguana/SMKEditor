@@ -10,6 +10,7 @@
 #import "RomRef.h"
 
 #define kRomOffsetTitle						0xFFC0
+#define kRomOffsetCartridgeTypeOffset		0xFFD6
 
 @implementation RomEUR
 
@@ -24,12 +25,14 @@
 	{
 		NSArray *objects			= [NSArray arrayWithObjects:
 		
-			[RomRef refWithOffset:kRomOffsetTitle size:16 max:21],
+			[RomRef refWithOffset:kRomOffsetTitle type:kRomRefTypeString size:16 max:21],
+			[RomRef refWithOffset:kRomOffsetCartridgeTypeOffset type:kRomRefTypeUnsignedChar size:1],
 			nil];
 			
 		NSArray *keys				= [NSArray arrayWithObjects:
 		
 			[NSNumber numberWithUnsignedInt:kRomOffsetTitle],
+			[NSNumber numberWithUnsignedInt:kRomOffsetCartridgeTypeOffset],
 			nil];
 
 		NSDictionary *dictionary	= [NSDictionary dictionaryWithObjects:objects forKeys:keys];
@@ -45,16 +48,45 @@
 
 -(void)print
 {
-	RomRef *ref						= [self.romDict objectForKey:[NSNumber numberWithUnsignedInt:kRomOffsetTitle ]];
+	NSArray *keys					= [self.romDict allKeys];
 	
-	NSRange range					= NSMakeRange( ref.offset, ref.size );
+	NSNumber *key;
 	
-	char initialTest[ range.length + 1 ];
+	for( key in keys )
+	{
+		RomRef *ref					= [self.romDict objectForKey:key];
+
+		NSRange range				= NSMakeRange( ref.offset, ref.size );
+		
+		switch( [ref type] )
+		{
+			case kRomRefTypeString :
+				{
+					char initialTest[ range.length + 1 ];
+					
+					[self.data getBytes:initialTest range:range];
+					initialTest[ range.length ] = 0;
 	
-	[self.data getBytes:initialTest range:range];
-	initialTest[ range.length ] = 0;
-	
-	NSLog( @"%s", initialTest );
+					NSLog( @"Data = %s", initialTest );
+			
+				}break;
+		
+			case kRomRefTypeUnsignedChar :
+				{
+					unsigned char val;
+					
+					[self.data getBytes:&val range:range];
+					
+					NSLog( @"Data = %d", (int)val );
+				
+				}break;
+		
+			default:
+				{
+					NSAssert( 0, @"Unhandled type in test." );
+				}
+		}
+	}	
 }
 
 -(void)dealloc
