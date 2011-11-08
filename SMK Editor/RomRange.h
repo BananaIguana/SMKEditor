@@ -3,37 +3,44 @@
 //  SMK Editor
 //
 //  Created by Ian Sidor on 08/11/2011.
-//  Copyright (c) 2011 Roar Technology. All rights reserved.
+//  Copyright (c) 2011 Banana Iguana. All rights reserved.
 //
 
 #ifndef _ROMRANGE_H_
 #define _ROMRANGE_H_
 
-#import "RomRef.h"
+typedef enum kRomRangeType
+{
+	kRomRangeTypeString,
+	kRomRangeTypeUnsignedChar,
+	
+	kRomRangeNumTypes,
+	
+}kRomRangeType;
 
 typedef struct RomRange
 {
-	NSRange			range;
-	NSUInteger		max;
-	kRomRefType		type;
+	NSRange				range;
+	NSUInteger			max;
+	kRomRangeType		type;
 
 }RomRange;
 
-static RomRange RomRangeMakeFull( kRomRefType type, NSUInteger offset, NSUInteger length, NSUInteger max )\
+static RomRange RomRangeMakeFull( kRomRangeType type, NSUInteger offset, NSUInteger length, NSUInteger max )\
 {\
-    RomRange		r;\
-	r.type			= type;\
-	r.range			= NSMakeRange( offset, length );\
-    r.max			= max;\
+    RomRange			r;\
+	r.type				= type;\
+	r.range				= NSMakeRange( offset, length );\
+    r.max				= max;\
     return( r );\
 }
 
-static RomRange RomRangeMake( kRomRefType type, NSUInteger offset, NSUInteger length )\
+static RomRange RomRangeMake( kRomRangeType type, NSUInteger offset, NSUInteger length )\
 {\
-    RomRange		r;\
-	r.type			= type;\
-    r.range			= NSMakeRange( offset, length );\
-    r.max			= length;\
+    RomRange			r;\
+	r.type				= type;\
+    r.range				= NSMakeRange( offset, length );\
+    r.max				= length;\
     return( r );\
 }
 

@@ -15,9 +15,7 @@
 		3C904B27140874B200A46814 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C904B26140874B200A46814 /* AppDelegate.m */; };
 		3C904B2A140874B200A46814 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C904B28140874B200A46814 /* MainMenu.xib */; };
 		3CA805C81468AEBE0017587F /* NSValue+Rom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA805C71468AEBE0017587F /* NSValue+Rom.m */; };
-		3CDB04E01409C0EE00D4201D /* RomRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB04DF1409C0EE00D4201D /* RomRef.m */; };
 		3CDB04E41409C7FC00D4201D /* RomEUR.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB04E31409C7FC00D4201D /* RomEUR.m */; };
-		3CFA52CA140B3DB200808AB0 /* RomObjectText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA52C9140B3DB200808AB0 /* RomObjectText.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +37,8 @@
 		3CA805C61468AEBE0017587F /* NSValue+Rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+Rom.h"; sourceTree = "<group>"; };
 		3CA805C71468AEBE0017587F /* NSValue+Rom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+Rom.m"; sourceTree = "<group>"; };
 		3CA805CA1468B22D0017587F /* RomRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomRange.h; sourceTree = "<group>"; };
-		3CDB04DE1409C0EE00D4201D /* RomRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomRef.h; sourceTree = "<group>"; };
-		3CDB04DF1409C0EE00D4201D /* RomRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomRef.m; sourceTree = "<group>"; };
 		3CDB04E21409C7FC00D4201D /* RomEUR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomEUR.h; sourceTree = "<group>"; };
 		3CDB04E31409C7FC00D4201D /* RomEUR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomEUR.m; sourceTree = "<group>"; };
-		3CFA52C8140B3DB200808AB0 /* RomObjectText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjectText.h; sourceTree = "<group>"; };
-		3CFA52C9140B3DB200808AB0 /* RomObjectText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjectText.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,10 +139,6 @@
 		3CFA52C6140B3D9100808AB0 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				3CFA52C9140B3DB200808AB0 /* RomObjectText.m */,
-				3CFA52C8140B3DB200808AB0 /* RomObjectText.h */,
-				3CDB04DF1409C0EE00D4201D /* RomRef.m */,
-				3CDB04DE1409C0EE00D4201D /* RomRef.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -180,7 +170,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
-				ORGANIZATIONNAME = "Roar Technology";
+				ORGANIZATIONNAME = "Banana Iguana";
 			};
 			buildConfigurationList = 3C904B09140874B200A46814 /* Build configuration list for PBXProject "SMK Editor" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -220,9 +210,7 @@
 				3C904B20140874B200A46814 /* main.m in Sources */,
 				3C904B27140874B200A46814 /* AppDelegate.m in Sources */,
 				3C0BB1C41408782700D12DDA /* RomBase.m in Sources */,
-				3CDB04E01409C0EE00D4201D /* RomRef.m in Sources */,
 				3CDB04E41409C7FC00D4201D /* RomEUR.m in Sources */,
-				3CFA52CA140B3DB200808AB0 /* RomObjectText.m in Sources */,
 				3CA805C81468AEBE0017587F /* NSValue+Rom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
