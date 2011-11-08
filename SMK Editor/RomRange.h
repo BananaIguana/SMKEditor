@@ -13,6 +13,7 @@ typedef enum kRomRangeType
 {
 	kRomRangeTypeString,
 	kRomRangeTypeUnsignedChar,
+	kRomRangeTypeEncodedString,
 	
 	kRomRangeNumTypes,
 	

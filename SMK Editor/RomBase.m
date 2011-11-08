@@ -9,6 +9,7 @@
 #import "RomBase.h"
 #import "RomEUR.h"
 #import "RomRange.h"
+#import "RomObjText.h"
 #import "NSValue+Rom.h"
 
 @implementation RomBase
@@ -60,6 +61,14 @@
 				return( numValue );
 			
 			}break;
+			
+		case kRomRangeTypeEncodedString :
+			{
+				RomObjText *text				= [[[RomObjText alloc] initWithRomData:self.data range:range] autorelease];
+				
+				return( text );
+			
+			}break;
 		
 		default :
 			{
@@ -93,9 +102,7 @@
 
 -(id)objectFromHandle:(kRomHandle)handle
 {
-	NSNumber *key			= [self keyFromHandle:handle];
-	
-	RomRange romRange		= [self romRangeFromKey:key];
+	RomRange romRange		= [self romRangeFromHandle:handle];
 	
 	id obj					= [self objectFromRange:romRange];
 	

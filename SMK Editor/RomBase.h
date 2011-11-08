@@ -12,6 +12,8 @@
 
 typedef enum kRomHandle
 {
+	// Rom Header
+	
 	kRomHandleTitle,
 	kRomHandleCartridgeTypeOffset,
 	kRomHandleRomSizeOffset,
@@ -32,6 +34,27 @@ typedef enum kRomHandle
 	kRomHandleSpecialVersionOffset,
 	kRomHandleCartridgeTypeSubNumOffset,
 	
+	// Cup Strings
+	
+	kRomHandleTextMushroomCup,
+	kRomHandleTextFlowerCup,
+	kRomHandleTextStarCup,
+	kRomHandleTextSpecialCup,
+	
+	// Track Strings
+	
+	kRomHandleTextMarioCircuit,
+	kRomHandleTextGhostValley,
+	kRomHandleTextDohnutPlains,
+	kRomHandleTextBowserCastle,
+	kRomHandleTextVanillaLake,
+	kRomHandleTextChocoIsland,
+	kRomHandleTextKoopaBeach,
+	kRomHandleTextBattleCourse,
+	kRomHandleTextRainbowRoad,
+
+	// End
+
 	kRomNumHandles,
 
 }kRomHandle;
