@@ -9,6 +9,8 @@
 #import "RomBase.h"
 #import "RomEUR.h"
 #import "RomRef.h"
+#import "RomRange.h"
+#import "NSValue+Rom.h"
 
 #define kRomOffsetTitle						0xFFC0
 #define kRomOffsetCartridgeType				0xFFD6
@@ -61,7 +63,11 @@
 	
 	for( key in keys )
 	{
-		RomRef *ref = [dictionary objectForKey:key];
+		NSValue *value = [dictionary objectForKey:key];
+		
+		RomRange range = [value romRangeValue];
+		
+		RomRef *ref = [RomRef refWithRom:self.data range:range.range type:range.type];
 		
 		[RomRef logReference:ref rom:(RomBase*)eurRom];
 	}

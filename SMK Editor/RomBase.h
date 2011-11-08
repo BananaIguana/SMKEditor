@@ -8,6 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum kRomHandle
+{
+	kRomHandleTitle,
+	kRomHandleCartridgeTypeOffset,
+	kRomHandleRomSizeOffset,
+	kRomHandleRamSizeOffset,
+	kRomHandleDestinationCodeOffset,
+	kRomHandleMaskRomVerOffset,
+	kRomHandleComplementCheckLowOffset,
+	kRomHandleComplementCheckHighOffset,
+	kRomHandleChecksumLowOffset,
+	kRomHandleChecksumHighOffset,
+	kRomHandleMarkerCode1Offset,
+	kRomHandleMarkerCode2Offset,
+	kRomHandleGameCode1Offset,
+	kRomHandleGameCode2Offset,
+	kRomHandleGameCode3Offset,
+	kRomHandleGameCode4Offset,
+	kRomHandleExpansionRamSizeOffset,
+	kRomHandleSpecialVersionOffset,
+	kRomHandleCartridgeTypeSubNumOffset,
+	
+	kRomNumHandles,
+
+}kRomHandle;
+
 @interface RomBase : NSObject
 {
 	NSData				*data;

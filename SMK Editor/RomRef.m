@@ -11,38 +11,48 @@
 
 @implementation RomRef
 
-@synthesize offset;
+@synthesize range;
 @synthesize type;
-@synthesize size;
 @synthesize max;
 
--(id)initWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)dataMax
+-(void)setup
+{
+
+}
+
+-(id)initWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType
+{
+	return( [self initWithRom:rom range:dataRange type:dataType max:dataRange.length] );
+}
+
+-(id)initWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType max:(NSUInteger)dataMax
 {
 	self = [super init];
 	
 	if( self )
 	{
-		self.offset			= dataOffset;
+		self.range			= dataRange;
 		self.type			= dataType;
-		self.size			= dataSize;
-		self.max			= dataMax;	
+		self.max			= dataMax;
+		
+		[self setup];
 	}
 	
 	return( self );
 }
 
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize
++(RomRef*)refWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType
 {
-	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset type:dataType size:dataSize max:dataSize];
+	RomRef *romReference = [[RomRef alloc] initWithRom:rom range:dataRange type:dataType];
 	
 	[romReference autorelease];
 	
 	return( romReference );
 }
 
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)max
++(RomRef*)refWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType max:(NSUInteger)max
 {
-	RomRef *romReference = [[RomRef alloc] initWithOffset:dataOffset type:dataType size:dataSize max:max];
+	RomRef *romReference = [[RomRef alloc] initWithRom:rom range:dataRange type:dataType max:max];
 	
 	[romReference autorelease];
 	
@@ -53,7 +63,7 @@
 {
 	RomRef *ref					= reference;
 
-	NSRange range				= NSMakeRange( ref.offset, ref.size );
+	NSRange range				= ref.range;
 	
 	switch( [ref type] )
 	{

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ROMBase.h"
+#import "RomEUR.h"
 
 @implementation AppDelegate
 
@@ -24,7 +24,7 @@
 {
 	// Insert code here to initialize your application
 	
-	RomBase *rom = [[RomBase alloc] init];
+	RomEUR *rom = [[RomEUR alloc] init];
 	
 	[rom test];
 	

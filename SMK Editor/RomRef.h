@@ -21,21 +21,22 @@ typedef enum kRomRefType
 
 @interface RomRef : NSObject
 {
-	NSUInteger		offset;				// Offset from head of ROM.
+	NSRange			range;				// Offset from head of ROM & length of referenced data.
 	kRomRefType		type;				// Type of data
-	NSUInteger		size;				// Number of bytes to read to acquire object.
-	NSUInteger		max;				// Maximum size you can write at this location without causing damage. (usually the same as 'bytes')
+	NSUInteger		max;				// Maximum size you can write at this location without causing damage. (usually the same as the range)
 }
 
-@property(nonatomic,assign) NSUInteger		offset;
+@property(nonatomic,assign) NSRange			range;
 @property(nonatomic,assign) kRomRefType		type;
-@property(nonatomic,assign) NSUInteger		size;
 @property(nonatomic,assign) NSUInteger		max;
 
--(id)initWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)dataMax;
+-(void)setup;
 
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize;
-+(RomRef*)refWithOffset:(NSUInteger)dataOffset type:(kRomRefType)dataType size:(NSUInteger)dataSize max:(NSUInteger)max;
+-(id)initWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType;
+-(id)initWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType max:(NSUInteger)dataMax;
+
++(RomRef*)refWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType;
++(RomRef*)refWithRom:(NSData*)rom range:(NSRange)dataRange type:(kRomRefType)dataType max:(NSUInteger)max;
 
 +(void)logReference:(RomRef*)reference rom:(RomBase*)rom;
 
