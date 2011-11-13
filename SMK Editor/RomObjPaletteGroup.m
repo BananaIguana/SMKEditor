@@ -7,11 +7,14 @@
 //
 
 #import "RomObjPaletteGroup.h"
+#import "RomObjPalette.h"
 #import "NSData+Decompressor.h"
 
 @implementation RomObjPaletteGroup
 
 // 16 palettes per palette group
+
+@synthesize palette;
 
 -(void)setup
 {
@@ -21,6 +24,21 @@
 	// per group which means the decompressed range should be: 16 * 32 = 512 bytes.
 	
 	NSAssert( decompressedData.length == 512, @"Unexpected size of palette group." );
+	
+	char paletteBuffer[ 512 ];
+	
+	[decompressedData getBytes:paletteBuffer];
+
+	for( int i = 0; i < 16; ++i )
+	{
+	}
+}
+
+-(void)dealloc
+{
+	[palette release];
+
+	[super dealloc];
 }
 
 @end

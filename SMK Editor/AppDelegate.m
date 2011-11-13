@@ -79,6 +79,12 @@
 	NSLog( @"Koopa Beach			= %@", [eurRom objectFromHandle:kRomHandleTextKoopaBeach] );
 	NSLog( @"Battle Course			= %@", [eurRom objectFromHandle:kRomHandleTextBattleCourse] );
 	NSLog( @"Rainbow Road			= %@", [eurRom objectFromHandle:kRomHandleTextRainbowRoad] );
+	
+	NSLog( @"---------< PALETTE GROUP >---------" );
+	
+	id test								= [eurRom objectFromHandle:kRomHandlePaletteGroupGhostValley];
+	
+	NSLog( @"Test = %@", test );
 
 	NSLog( @"---------< TILE GROUP >---------" );
 

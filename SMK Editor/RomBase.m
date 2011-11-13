@@ -11,6 +11,7 @@
 #import "RomRange.h"
 #import "RomObjText.h"
 #import "RomObjTileGroup.h"
+#import "RomObjPaletteGroup.h"
 #import "NSValue+Rom.h"
 
 @implementation RomBase
@@ -76,6 +77,14 @@
 				RomObjTileGroup *group			= [[[RomObjTileGroup alloc] initWithRomData:self.data range:range] autorelease];
 				
 				return( group );			
+			
+			}break;
+			
+		case kRomRangeTypePaletteGroup :
+			{
+				RomObjPaletteGroup *group		= [[[RomObjPaletteGroup alloc] initWithRomData:self.data range:range] autorelease];
+				
+				return( group );
 			
 			}break;
 		

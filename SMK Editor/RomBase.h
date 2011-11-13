@@ -43,19 +43,20 @@ typedef enum kRomHandle
 	
 	// Track Strings
 	
+	kRomHandleTextGhostValley,				// must be sequential with 'kRomTheme'
 	kRomHandleTextMarioCircuit,
-	kRomHandleTextGhostValley,
 	kRomHandleTextDohnutPlains,
-	kRomHandleTextBowserCastle,
-	kRomHandleTextVanillaLake,
 	kRomHandleTextChocoIsland,
+	kRomHandleTextVanillaLake,
 	kRomHandleTextKoopaBeach,
-	kRomHandleTextBattleCourse,
+	kRomHandleTextBowserCastle,
 	kRomHandleTextRainbowRoad,
+
+	kRomHandleTextBattleCourse,
 	
 	// Palette Groups
 	
-	kRomHandlePaletteGroupGhostValley,
+	kRomHandlePaletteGroupGhostValley,		// must be sequential with 'kRomTheme'
 	kRomHandlePaletteGroupMarioCircuit,
 	kRomHandlePaletteGroupDonutPlains,
 	kRomHandlePaletteGroupChocoIsland,
