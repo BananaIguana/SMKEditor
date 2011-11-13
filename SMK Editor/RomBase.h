@@ -52,6 +52,21 @@ typedef enum kRomHandle
 	kRomHandleTextKoopaBeach,
 	kRomHandleTextBattleCourse,
 	kRomHandleTextRainbowRoad,
+	
+	// Palette Groups
+	
+	kRomHandlePaletteGroupGhostValley,
+	kRomHandlePaletteGroupMarioCircuit,
+	kRomHandlePaletteGroupDonutPlains,
+	kRomHandlePaletteGroupChocoIsland,
+	kRomHandlePaletteGroupVanillaLake,
+	kRomHandlePaletteGroupKoopaBeach,
+	kRomHandlePaletteGroupBowserCastle,
+	kRomHandlePaletteGroupRainbowRoad,
+
+	//	
+	
+	kRomHandleDataTileSetCommon,
 
 	// End
 

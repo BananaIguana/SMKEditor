@@ -80,6 +80,10 @@
 	NSLog( @"Battle Course			= %@", [eurRom objectFromHandle:kRomHandleTextBattleCourse] );
 	NSLog( @"Rainbow Road			= %@", [eurRom objectFromHandle:kRomHandleTextRainbowRoad] );
 
+	NSLog( @"---------< TILE GROUP >---------" );
+
+	NSLog( @"Tile Common			= %@", [eurRom objectFromHandle:kRomHandleDataTileSetCommon] );
+
 	[rom release];
 }
 

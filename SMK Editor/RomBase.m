@@ -10,6 +10,7 @@
 #import "RomEUR.h"
 #import "RomRange.h"
 #import "RomObjText.h"
+#import "RomObjTileGroup.h"
 #import "NSValue+Rom.h"
 
 @implementation RomBase
@@ -67,6 +68,14 @@
 				RomObjText *text				= [[[RomObjText alloc] initWithRomData:self.data range:range] autorelease];
 				
 				return( text );
+			
+			}break;
+			
+		case kRomRangeTypeCompressedData :
+			{
+				RomObjTileGroup *group			= [[[RomObjTileGroup alloc] initWithRomData:self.data range:range] autorelease];
+				
+				return( group );			
 			
 			}break;
 		

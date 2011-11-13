@@ -8,6 +8,7 @@
 
 #import "RomEUR.h"
 #import "RomRange.h"
+#import "RomTypes.h"
 #import "NSValue+Rom.h"
 
 // Rom Header
@@ -51,6 +52,25 @@ static const RomRange kRomRangeTextKoopaBeach					= { 0x1C9A7,	11,		11,		kRomRan
 static const RomRange kRomRangeTextBattleCourse					= { 0x1C9B4,	13,		13,		kRomRangeTypeEncodedString };
 static const RomRange kRomRangeTextRainbowRoad					= { 0x1C9C3,	12,		12,		kRomRangeTypeEncodedString };
 
+// Theme Palettes
+
+static const RomRange kRomRangePaletteGroup[ kRomNumThemes ]	= {
+																		{	0x41313,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x4117F,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x414C4,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x419C0,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x4182F,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x41B5B,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x41675,	0,	0,	kRomRangeTypePaletteGroup },
+																		{	0x41D0B,	0,	0,	kRomRangeTypePaletteGroup },
+																	};
+
+// Common Tile Offset 
+
+static const RomRange kRomRangeTileCommon						= { 0x40000,	757,	757,	kRomRangeTypeCompressedData };
+
+//
+
 @implementation RomEUR
 
 -(void)dealloc
@@ -62,7 +82,7 @@ static const RomRange kRomRangeTextRainbowRoad					= { 0x1C9C3,	12,		12,		kRomRa
 
 -(NSDictionary*)offsetDictionary
 {
-	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
+	NSMutableDictionary *dictionary	= [NSMutableDictionary dictionaryWithObjectsAndKeys:
 	
 		// Rom Header
 	
@@ -105,10 +125,20 @@ static const RomRange kRomRangeTextRainbowRoad					= { 0x1C9C3,	12,		12,		kRomRa
 		[NSValue valueWithRomRange:kRomRangeTextBattleCourse],				[NSNumber numberWithUnsignedInt:kRomHandleTextBattleCourse],
 		[NSValue valueWithRomRange:kRomRangeTextRainbowRoad],				[NSNumber numberWithUnsignedInt:kRomHandleTextRainbowRoad],
 		
-		//
+		// Common Tile Offset
+
+		[NSValue valueWithRomRange:kRomRangeTileCommon],					[NSNumber numberWithUnsignedInt:kRomHandleDataTileSetCommon],
 
 		nil];
-
+		
+/*		
+	// We need something like this for theme based handles....
+	
+	for( kRomTheme eTheme = 0; eTheme < kRomNumThemes; ++eTheme )
+	{
+		[dictionary setObject:[NSValue valueWithRomRange:kRomRangePaletteGroup[ eTheme ] forKey:[NSNumber numberWithUnsignedInt:kRomHandleTextGhostValley]]];	
+	}
+*/
 	return( dictionary );
 }
 
