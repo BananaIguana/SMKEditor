@@ -14,7 +14,7 @@
 
 // 16 palettes per palette group
 
-@synthesize palette;
+@synthesize paletteArray;
 
 -(void)setup
 {
@@ -25,18 +25,35 @@
 	
 	NSAssert( decompressedData.length == 512, @"Unexpected size of palette group." );
 	
-	char paletteBuffer[ 512 ];
+	unsigned char paletteBuffer[ 512 ];
 	
 	[decompressedData getBytes:paletteBuffer];
+	
+	NSMutableArray *array			= [NSMutableArray arrayWithCapacity:16];
 
 	for( int i = 0; i < 16; ++i )
 	{
+		RomRange range;
+		
+		range.type					= kRomThemeTypePalette;
+		range.max					= 32;
+		range.range					= NSMakeRange( i * 32, 32 );
+	
+		RomObjPalette *palette		= [[RomObjPalette alloc] initWithRomData:decompressedData range:range];
+		
+		[array addObject:palette];
+		
+		[palette release];
 	}
+	
+	self.paletteArray				= array;
+	
+	[array release];
 }
 
 -(void)dealloc
 {
-	[palette release];
+	[paletteArray release];
 
 	[super dealloc];
 }

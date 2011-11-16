@@ -13,9 +13,7 @@
 +(NSValue*)valueWithRomRange:(RomRange)range
 {
 	NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(RomRange)];
-	
-	[value autorelease];
-	
+
 	return( value );
 }
 

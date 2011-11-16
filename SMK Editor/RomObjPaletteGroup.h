@@ -10,9 +10,9 @@
 
 @interface RomObjPaletteGroup : RomObj
 {
-	NSArray *palette;
+	NSArray *paletteArray;
 }
 
-@property(nonatomic,retain) NSArray *palette;
+@property(nonatomic,retain) NSArray *paletteArray;
 
 @end

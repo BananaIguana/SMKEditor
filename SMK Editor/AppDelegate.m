@@ -90,6 +90,7 @@
 
 	NSLog( @"Tile Common			= %@", [eurRom objectFromHandle:kRomHandleDataTileSetCommon] );
 
+	[eurRom release];
 	[rom release];
 }
 

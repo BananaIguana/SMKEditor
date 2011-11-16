@@ -35,42 +35,42 @@ static const RomRange kRomRangeCartridgeTypeSubNumOffset		=		{ 0xFFBF,		1,		1,		
 
 // Cup Strings
 
-static const RomRange kRomRangeTextMushroomCup					=		{ 0x1C924,	12,		12,		kRomRangeTypeEncodedString };
-static const RomRange kRomRangeTextFlowerCup					=		{ 0x1C931,	10,		10,		kRomRangeTypeEncodedString };
-static const RomRange kRomRangeTextStarCup						=		{ 0x1C93C,	8,		8,		kRomRangeTypeEncodedString };
-static const RomRange kRomRangeTextSpecialCup					=		{ 0x1C945,	11,		11,		kRomRangeTypeEncodedString };
+static const RomRange kRomRangeTextMushroomCup					=		{ 0x1C924,		12,		12,		kRomRangeTypeEncodedString };
+static const RomRange kRomRangeTextFlowerCup					=		{ 0x1C931,		10,		10,		kRomRangeTypeEncodedString };
+static const RomRange kRomRangeTextStarCup						=		{ 0x1C93C,		8,		8,		kRomRangeTypeEncodedString };
+static const RomRange kRomRangeTextSpecialCup					=		{ 0x1C945,		11,		11,		kRomRangeTypeEncodedString };
 
 // Track Strings
 
 static const RomRange kRomRangeTextTheme[ kRomNumThemes ]		= {
-																		{ 0x1C960,	12,		12,		kRomRangeTypeEncodedString },		// Ghost Valley
-																		{ 0x1C951,	13,		13,		kRomRangeTypeEncodedString },		// Mario Circuit
-																		{ 0x1C96E,	13,		13,		kRomRangeTypeEncodedString },		// Donut Plains
-																		{ 0x1C999,	12,		12,		kRomRangeTypeEncodedString },		// Choco Island
-																		{ 0x1C98B,	12,		12,		kRomRangeTypeEncodedString },		// Vanilla Lake
-																		{ 0x1C9A7,	11,		11,		kRomRangeTypeEncodedString },		// Koopa Beach
-																		{ 0x1C97C,	13,		13,		kRomRangeTypeEncodedString },		// Bowser Castle
-																		{ 0x1C9C3,	12,		12,		kRomRangeTypeEncodedString },		// Rainbow Road
+																		{ 0x1C960,		12,		12,		kRomRangeTypeEncodedString },		// Ghost Valley
+																		{ 0x1C951,		13,		13,		kRomRangeTypeEncodedString },		// Mario Circuit
+																		{ 0x1C96E,		13,		13,		kRomRangeTypeEncodedString },		// Donut Plains
+																		{ 0x1C999,		12,		12,		kRomRangeTypeEncodedString },		// Choco Island
+																		{ 0x1C98B,		12,		12,		kRomRangeTypeEncodedString },		// Vanilla Lake
+																		{ 0x1C9A7,		11,		11,		kRomRangeTypeEncodedString },		// Koopa Beach
+																		{ 0x1C97C,		13,		13,		kRomRangeTypeEncodedString },		// Bowser Castle
+																		{ 0x1C9C3,		12,		12,		kRomRangeTypeEncodedString },		// Rainbow Road
 																};
 
-static const RomRange kRomRangeTextBattleCourse					=		{ 0x1C9B4,	13,		13,		kRomRangeTypeEncodedString };
+static const RomRange kRomRangeTextBattleCourse					=		{ 0x1C9B4,		13,		13,		kRomRangeTypeEncodedString };
 
 // Theme Palettes
 
 static const RomRange kRomRangePaletteGroup[ kRomNumThemes ]	= {
-																		{	0x41313,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x4117F,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x414C4,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x419C0,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x4182F,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x41B5B,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x41675,	0,	0,	kRomRangeTypePaletteGroup },
-																		{	0x41D0B,	0,	0,	kRomRangeTypePaletteGroup },
+																		{ 0x41313,		433,	433,	kRomRangeTypePaletteGroup },
+																		{ 0x4117F,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x414C4,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x419C0,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x4182F,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x41B5B,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x41675,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x41D0B,		0,		0,		kRomRangeTypePaletteGroup },
 																};
 
 // Common Tile Offset 
 
-static const RomRange kRomRangeTileCommon						=		{ 0x40000,	757,	757,	kRomRangeTypeCompressedData };
+static const RomRange kRomRangeTileCommon						=		{ 0x40000,		757,	757,	kRomRangeTypeCompressedData };
 
 //
 

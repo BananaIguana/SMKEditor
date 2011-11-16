@@ -40,19 +40,30 @@
 	
 	NSMutableArray *paletteColourArray = [NSMutableArray arrayWithCapacity:16];
 	
-	char		buffer[ 2 ];	
-	NSRange		sourceRange;
+	unsigned char buffer[ 2 ];	
+	NSRange sourceRange;
 	
 	for( int i = 0; i < 16; ++i )
 	{
 		sourceRange				= NSMakeRange( i * 2, 2 );
 	
-		[self.data getBytes:buffer range:sourceRange];				
+		[self.data getBytes:buffer range:sourceRange];
+		
+		NSColor *col			= [self colourFromData:buffer];
+		
+		[paletteColourArray addObject:col];
 	}
 	
 	self.colour					= paletteColourArray;
 
 	[paletteColourArray release];	
+}
+
+-(void)dealloc
+{
+	[colour release];
+
+	[super dealloc];
 }
 
 @end

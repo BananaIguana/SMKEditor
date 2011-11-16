@@ -47,7 +47,7 @@
 	
 	[self getBytes:sourceData range:range];
 	
-	NSInteger destinationPosition = 0, sourcePosition = range.location;
+	NSInteger destinationPosition = 0, sourcePosition = 0;
 	unsigned char cmd;
 	
 	while( ( cmd = sourceData[ sourcePosition++ ] ) != 0xFF )
