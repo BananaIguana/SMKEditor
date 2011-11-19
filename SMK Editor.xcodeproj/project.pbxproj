@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2359EBE414781D6300E6CA39 /* RomObjTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2359EBE314781D6300E6CA39 /* RomObjTile.m */; };
 		3C0BB1C41408782700D12DDA /* RomBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0BB1C31408782700D12DDA /* RomBase.m */; };
 		3C6A5288146E1D87007D4BF3 /* RomObjPaletteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A5287146E1D87007D4BF3 /* RomObjPaletteGroup.m */; };
 		3C6A528C146E1E1B007D4BF3 /* RomObjPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A528B146E1E1B007D4BF3 /* RomObjPalette.m */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2359EBE214781D6300E6CA39 /* RomObjTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjTile.h; sourceTree = "<group>"; };
+		2359EBE314781D6300E6CA39 /* RomObjTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjTile.m; sourceTree = "<group>"; };
 		3C0BB1C21408782700D12DDA /* RomBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomBase.h; sourceTree = "<group>"; };
 		3C0BB1C31408782700D12DDA /* RomBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomBase.m; sourceTree = "<group>"; };
 		3C4F9A19146F7D1A0055796F /* RomTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomTypes.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				3C6A528A146E1E1B007D4BF3 /* RomObjPalette.h */,
 				3CC56384146A1177005FBADC /* RomObjTileGroup.m */,
 				3CC56383146A1177005FBADC /* RomObjTileGroup.h */,
+				2359EBE314781D6300E6CA39 /* RomObjTile.m */,
+				2359EBE214781D6300E6CA39 /* RomObjTile.h */,
 				3CC5637E1469EC1B005FBADC /* RomObjTheme.m */,
 				3CC5637D1469EC1B005FBADC /* RomObjTheme.h */,
 				3CC563781469D933005FBADC /* RomObjText.m */,
@@ -256,6 +261,7 @@
 				3CC56385146A1177005FBADC /* RomObjTileGroup.m in Sources */,
 				3C6A5288146E1D87007D4BF3 /* RomObjPaletteGroup.m in Sources */,
 				3C6A528C146E1E1B007D4BF3 /* RomObjPalette.m in Sources */,
+				2359EBE414781D6300E6CA39 /* RomObjTile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

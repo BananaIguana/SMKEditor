@@ -35,7 +35,7 @@
 	{
 		RomRange range;
 		
-		range.type					= kRomThemeTypePalette;
+		range.type					= kRomRangeTypePalette;
 		range.max					= 32;
 		range.range					= NSMakeRange( i * 32, 32 );
 	

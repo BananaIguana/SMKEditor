@@ -8,6 +8,17 @@
 
 #import "RomObj.h"
 
+@class RomObjPaletteGroup;
+
 @interface RomObjTileGroup : RomObj
+{
+	NSArray					*indexBuffer;
+	RomObjPaletteGroup		*_paletteGroup;
+}
+
+@property(nonatomic,retain) NSArray					*indexBuffer;
+@property(nonatomic,retain) RomObjPaletteGroup		*paletteGroup;
+
+-(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 
 @end

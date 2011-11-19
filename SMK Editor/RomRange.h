@@ -16,7 +16,9 @@ typedef enum kRomRangeType
 	kRomRangeTypeEncodedString,
 	kRomRangeTypeCompressedData,
 	kRomRangeTypePaletteGroup,
-	kRomThemeTypePalette,
+	kRomRangeTypePalette,
+	kRomRangeTypeTileGroup,
+	kRomRangeTypeTile,
 	
 	kRomRangeNumTypes,
 	
