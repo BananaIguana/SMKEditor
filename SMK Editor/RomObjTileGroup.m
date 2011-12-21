@@ -12,7 +12,7 @@
 #import "RomObjPalette.h"
 #import "NSData+Decompressor.h"
 
-static const NSInteger kGroupSize = 32;
+static const NSInteger kGroupSize			= 32;
 
 @interface RomObjTileGroup ()
 -(void)createPaletteIndices:(unsigned char*)buffer;
@@ -22,7 +22,7 @@ static const NSInteger kGroupSize = 32;
 @implementation RomObjTileGroup
 
 @synthesize indexBuffer;
-@synthesize paletteGroup				= _paletteGroup;
+@synthesize paletteGroup					= _paletteGroup;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
@@ -30,9 +30,9 @@ static const NSInteger kGroupSize = 32;
 	
 	if( self )
 	{
-		self.data						= romData;
-		self.dataRange					= range;
-		self.paletteGroup				= paletteGroup;
+		self.data							= romData;
+		self.dataRange						= range;
+		self.paletteGroup					= paletteGroup;
 		
 		[self setup];
 	}
@@ -42,16 +42,16 @@ static const NSInteger kGroupSize = 32;
 
 -(void)setup
 {
-	NSData *decompressedData			= [self.data decompressRange:self.dataRange.range];
+	NSData *decompressedData				= [self.data decompressRange:self.dataRange.range];
 	
-	NSUInteger tilesetLength			= decompressedData.length - 0x100;
+	NSUInteger tilesetLength				= decompressedData.length - 0x100;
 	
 	unsigned char bufferPalette[ 0x100 ], bufferTileset[ tilesetLength ];
 
 	[decompressedData getBytes:bufferPalette length:0x100];
 	[decompressedData getBytes:bufferTileset range:NSMakeRange( 0x100, tilesetLength )];
 	
-	NSData *tilesetData					= [NSData dataWithBytes:bufferTileset length:tilesetLength];
+	NSData *tilesetData						= [NSData dataWithBytes:bufferTileset length:tilesetLength];
 	
 	[self createPaletteIndices:bufferPalette];
 	[self createTileset:tilesetData];
@@ -63,9 +63,9 @@ static const NSInteger kGroupSize = 32;
 	
 	for( int i = 0; i < 0x100; i++ )
 	{
-		unsigned char currentIndex		= ( buffer[ i ] >> 4 ) & 0xFF;
+		unsigned char currentIndex			= ( buffer[ i ] >> 4 ) & 0xFF;
 		
-		NSNumber *index					= [NSNumber numberWithUnsignedChar:currentIndex];
+		NSNumber *index						= [NSNumber numberWithUnsignedChar:currentIndex];
 		
 		[indexArray addObject:index];
 	}
@@ -77,18 +77,18 @@ static const NSInteger kGroupSize = 32;
 
 -(void)createTileset:(NSData*)tilesetData
 {
-	NSUInteger numberOfTiles			= tilesetData.length / kGroupSize;
+	NSUInteger numberOfTiles				= tilesetData.length / kGroupSize;
 	
 	for( NSUInteger i = 0; i < numberOfTiles; ++i )
 	{
-		RomRange range					= RomRangeMake( kRomRangeTypeTile, i * kGroupSize, kGroupSize );
+		RomRange range						= RomRangeMake( kRomRangeTypeTile, i * kGroupSize, kGroupSize );
 	
-		NSNumber *paletteIndex			= [self.indexBuffer objectAtIndex:i];
-		RomObjPalette *palette			= [self.paletteGroup.paletteArray objectAtIndex:[paletteIndex intValue]];
+		NSNumber *paletteIndex				= [self.indexBuffer objectAtIndex:i];
+		RomObjPalette *palette				= [self.paletteGroup.paletteArray objectAtIndex:[paletteIndex intValue]];
 	
-		RomObjTile *tile				= [[RomObjTile alloc] initWithRomData:tilesetData range:range];
+		RomObjTile *tile					= [[RomObjTile alloc] initWithRomData:tilesetData range:range];
 
-		tile.palette					= palette;
+		tile.palette						= palette;
 	}
 }
 

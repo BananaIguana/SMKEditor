@@ -6,8 +6,14 @@
 //  Copyright (c) 2011 Banana Iguana. All rights reserved.
 //
 
+#import "NSData+Decompressor.h"
 #import "RomObjTheme.h"
 
 @implementation RomObjTheme
+
+-(void)setup
+{
+
+}
 
 @end

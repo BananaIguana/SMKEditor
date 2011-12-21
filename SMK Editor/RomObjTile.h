@@ -15,6 +15,8 @@
 @interface RomObjTile : RomObj
 {
 	RomObjPalette			*palette;
+	
+	unsigned char			indexBuffer[ 8 ][ 8 ];
 }
 
 @property(nonatomic,retain) RomObjPalette	*palette;

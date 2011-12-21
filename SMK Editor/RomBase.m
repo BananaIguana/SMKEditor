@@ -72,9 +72,11 @@
 			
 			}break;
 			
-		case kRomRangeTypeCompressedData :
+		case kRomRangeTypeTileGroup :
 			{
-				RomObjTileGroup *group			= [[[RomObjTileGroup alloc] initWithRomData:self.data range:range] autorelease];
+				RomObjPaletteGroup *pg			= 
+			
+				RomObjTileGroup *group			= [[[RomObjTileGroup alloc] initWithRomData:self.data range:range paletteGroup:nil] autorelease];
 				
 				return( group );			
 			

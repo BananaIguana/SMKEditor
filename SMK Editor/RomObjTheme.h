@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RomObjTheme : NSObject
+#import "RomObj.h"
+
+@interface RomObjTheme : RomObj
+{
+
+}
 
 @end
