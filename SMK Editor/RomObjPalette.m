@@ -38,7 +38,7 @@
 	
 	NSAssert( range.length == 32, @"Function expects 32 byte data range." );
 	
-	NSMutableArray *paletteColourArray = [NSMutableArray arrayWithCapacity:16];
+	NSMutableArray *paletteColourArray = [[NSMutableArray alloc] initWithCapacity:16];
 	
 	unsigned char buffer[ 2 ];	
 	NSRange sourceRange;
@@ -57,6 +57,28 @@
 	self.colour					= paletteColourArray;
 
 	[paletteColourArray release];	
+}
+
+-(NSString*)description
+{
+	NSMutableString *desc		= [NSMutableString stringWithFormat:@"Palette 0x%08X", self];
+	
+	[self.colour enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
+	
+		NSAssert( [obj isKindOfClass:[NSColor class]], @"Unexpected type." );
+		
+		NSColor *col			= (NSColor*)obj;
+
+		[desc appendFormat:@"\n--> Colour Index %02u : R-%03d G-%03d B-%03d A-%03d",
+		
+			idx,
+			(int)( [col redComponent]		* 255.0f ),
+			(int)( [col greenComponent]		* 255.0f ),
+			(int)( [col blueComponent]		* 255.0f ),
+			(int)( [col alphaComponent]		* 255.0f )];		
+	}];
+	
+	return( desc );
 }
 
 -(void)dealloc

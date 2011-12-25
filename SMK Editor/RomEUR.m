@@ -78,8 +78,6 @@ static const RomRange kRomRangeTileCommon						=		{ 0x40000,		757,	757,	kRomRang
 
 -(void)dealloc
 {
-	[romDict release];
-
 	[super dealloc];
 }
 

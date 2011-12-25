@@ -29,7 +29,7 @@
 	
 	[decompressedData getBytes:paletteBuffer];
 	
-	NSMutableArray *array			= [NSMutableArray arrayWithCapacity:16];
+	NSMutableArray *array			= [[NSMutableArray alloc] initWithCapacity:16];
 
 	for( int i = 0; i < 16; ++i )
 	{
@@ -49,6 +49,22 @@
 	self.paletteArray				= array;
 	
 	[array release];
+}
+
+-(NSString*)description
+{
+	NSMutableString *desc			= [NSMutableString stringWithFormat:@"Palette Group 0x%08X", self];
+	
+	[self.paletteArray enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
+	
+		NSAssert( [obj class] == [RomObjPalette class], @"Unexpected type." );
+		
+		RomObjPalette *palette		= (RomObjPalette*)obj;
+		
+		[desc appendFormat:@"\n--> Palette Index %02u : %@", idx, palette];
+	}];
+	
+	return( desc );
 }
 
 -(void)dealloc

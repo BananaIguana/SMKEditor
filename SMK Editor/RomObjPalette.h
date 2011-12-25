@@ -17,4 +17,6 @@
 
 @property(nonatomic,retain) NSArray			*colour;
 
+-(NSString*)description;
+
 @end

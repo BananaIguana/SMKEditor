@@ -22,11 +22,12 @@ static const NSInteger kGroupSize			= 32;
 @implementation RomObjTileGroup
 
 @synthesize indexBuffer;
+@synthesize tilesetBuffer;
 @synthesize paletteGroup					= _paletteGroup;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
-	self = [super initWithRomData:romData range:range];
+	self = [super init];
 	
 	if( self )
 	{
@@ -79,6 +80,8 @@ static const NSInteger kGroupSize			= 32;
 {
 	NSUInteger numberOfTiles				= tilesetData.length / kGroupSize;
 	
+	NSMutableArray *tilesetArray			= [[NSMutableArray alloc] initWithCapacity:numberOfTiles];
+	
 	for( NSUInteger i = 0; i < numberOfTiles; ++i )
 	{
 		RomRange range						= RomRangeMake( kRomRangeTypeTile, i * kGroupSize, kGroupSize );
@@ -89,12 +92,21 @@ static const NSInteger kGroupSize			= 32;
 		RomObjTile *tile					= [[RomObjTile alloc] initWithRomData:tilesetData range:range];
 
 		tile.palette						= palette;
+		
+		[tilesetArray addObject:tile];
+				
+		[tile release];
 	}
+	
+	self.tilesetBuffer						= tilesetArray;
+	
+	[tilesetArray release];
 }
 
 -(void)dealloc
 {
 	[indexBuffer release];
+	[tilesetBuffer release];
 	[_paletteGroup release];
 
 	[super dealloc];

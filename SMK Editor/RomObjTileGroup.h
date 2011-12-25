@@ -13,10 +13,12 @@
 @interface RomObjTileGroup : RomObj
 {
 	NSArray					*indexBuffer;
+	NSArray					*tilesetBuffer;
 	RomObjPaletteGroup		*_paletteGroup;
 }
 
 @property(nonatomic,retain) NSArray					*indexBuffer;
+@property(nonatomic,retain) NSArray					*tilesetBuffer;
 @property(nonatomic,retain) RomObjPaletteGroup		*paletteGroup;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup;

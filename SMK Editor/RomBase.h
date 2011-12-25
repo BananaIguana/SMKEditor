@@ -10,6 +10,9 @@
 
 #import "RomRange.h"
 
+@class RomObjPaletteGroup;
+@class RomObjTileGroup;
+
 typedef enum kRomHandle
 {
 	// Rom Header
@@ -95,5 +98,9 @@ typedef enum kRomHandle
 -(NSNumber*)keyFromHandle:(kRomHandle)handle;
 -(id)objectFromHandle:(kRomHandle)handle;
 -(id)objectFromRange:(RomRange)range;
+
+// Custom
+
+-(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)handle paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 
 @end

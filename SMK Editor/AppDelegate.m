@@ -30,7 +30,7 @@
 	NSAssert( romFile, @"Setup your rom path as a command line arg. \"-rom <path_to_rom>\"" );
 
 	NSData *rom							= [[NSData alloc] initWithContentsOfFile:romFile];
-	
+
 	NSAssert( rom, @"Failed to load ROM" );
 			
 	// Fake it as european.
@@ -82,13 +82,13 @@
 	
 	NSLog( @"---------< PALETTE GROUP >---------" );
 	
-	id test								= [eurRom objectFromHandle:kRomHandlePaletteGroupGhostValley];
+	RomObjPaletteGroup *ghostValleyPaletteGroup			= [eurRom objectFromHandle:kRomHandlePaletteGroupGhostValley];
 	
-	NSLog( @"Test = %@", test );
-
+	NSLog( @"Desc = %@", ghostValleyPaletteGroup );
+	
 	NSLog( @"---------< TILE GROUP >---------" );
 
-	NSLog( @"Tile Common			= %@", [eurRom objectFromHandle:kRomHandleDataTileSetCommon] );
+	RomObjTileGroup *commonTileSet						= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:ghostValleyPaletteGroup];
 
 	[eurRom release];
 	[rom release];

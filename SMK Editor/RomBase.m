@@ -74,11 +74,9 @@
 			
 		case kRomRangeTypeTileGroup :
 			{
-				RomObjPaletteGroup *pg			= 
-			
-				RomObjTileGroup *group			= [[[RomObjTileGroup alloc] initWithRomData:self.data range:range paletteGroup:nil] autorelease];
+				NSAssert( 0, @"You must call 'tileGroupFromRomRange'." );
 				
-				return( group );			
+				return( nil );
 			
 			}break;
 			
@@ -127,6 +125,15 @@
 	id obj					= [self objectFromRange:romRange];
 	
 	return( obj );	
+}
+
+-(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)handle paletteGroup:(RomObjPaletteGroup*)paletteGroup
+{
+	RomRange romRange		= [self romRangeFromHandle:handle];
+	
+	RomObjTileGroup *obj	= [[[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup] autorelease];
+	
+	return( obj );
 }
 
 -(void)dealloc
