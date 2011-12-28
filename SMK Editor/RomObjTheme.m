@@ -11,9 +11,25 @@
 
 @implementation RomObjTheme
 
--(void)setup
-{
+@synthesize tileGroupCommon;
 
+-(id)initWithRomData:(NSData*)tilesetGroupRomData range:(RomRange)range commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup
+{
+	self = [super initWithRomData:tilesetGroupRomData range:range paletteGroup:paletteGroup];
+	
+	if( self )
+	{
+		self.tileGroupCommon = commonTileGroup;	
+	}
+	
+	return( self );
+}
+
+-(void)dealloc
+{
+	[tileGroupCommon release];
+	
+	[super dealloc];
 }
 
 @end

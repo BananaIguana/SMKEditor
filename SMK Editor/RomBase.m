@@ -12,6 +12,7 @@
 #import "RomObjText.h"
 #import "RomObjTileGroup.h"
 #import "RomObjPaletteGroup.h"
+#import "RomObjTheme.h"
 #import "NSValue+Rom.h"
 
 @implementation RomBase
@@ -127,13 +128,22 @@
 	return( obj );	
 }
 
--(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)handle paletteGroup:(RomObjPaletteGroup*)paletteGroup
+-(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)tileGroupHandle paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
-	RomRange romRange		= [self romRangeFromHandle:handle];
+	RomRange romRange		= [self romRangeFromHandle:tileGroupHandle];
 	
 	RomObjTileGroup *obj	= [[[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup] autorelease];
 	
 	return( obj );
+}
+
+-(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup
+{
+	RomRange romRange		= [self romRangeFromHandle:tileGroupHandle];
+		
+	RomObjTheme *theme		= [[[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup] autorelease];
+	
+	return( theme );
 }
 
 -(void)dealloc

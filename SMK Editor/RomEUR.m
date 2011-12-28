@@ -58,19 +58,19 @@ static const RomRange kRomRangeTextBattleCourse					=		{ 0x1C9B4,		13,		13,		kRo
 // Theme Palettes
 
 static const RomRange kRomRangePaletteGroup[ kRomNumThemes ]	= {
-																		{ 0x41313,		433,	433,	kRomRangeTypePaletteGroup },
-																		{ 0x4117F,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x414C4,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x419C0,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x4182F,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x41B5B,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x41675,		0,		0,		kRomRangeTypePaletteGroup },
-																		{ 0x41D0B,		0,		0,		kRomRangeTypePaletteGroup },
+																		{ 0x41313,		433,	433,	kRomRangeTypePaletteGroup },		// Ghost Valley
+																		{ 0x4117F,		0,		0,		kRomRangeTypePaletteGroup },		// Mario Ciruit
+																		{ 0x414C4,		0,		0,		kRomRangeTypePaletteGroup },		// Donut Plains
+																		{ 0x419C0,		0,		0,		kRomRangeTypePaletteGroup },		// Choco Island
+																		{ 0x4182F,		0,		0,		kRomRangeTypePaletteGroup },		// Vanilla Lake
+																		{ 0x41B5B,		0,		0,		kRomRangeTypePaletteGroup },		// Koopa Beach
+																		{ 0x41675,		0,		0,		kRomRangeTypePaletteGroup },		// Bowser Castle
+																		{ 0x41D0B,		0,		0,		kRomRangeTypePaletteGroup },		// Rainbow Road
 																};
 
 // Common Tile Offset 
 
-static const RomRange kRomRangeTileCommon						=		{ 0x40000,		757,	757,	kRomRangeTypeCompressedData };
+static const RomRange kRomRangeTileCommon						=		{ 0x40000,		1458,	1458,	kRomRangeTypeCompressedData };
 
 //
 

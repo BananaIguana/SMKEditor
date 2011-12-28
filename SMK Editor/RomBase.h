@@ -12,6 +12,7 @@
 
 @class RomObjPaletteGroup;
 @class RomObjTileGroup;
+@class RomObjTheme;
 
 typedef enum kRomHandle
 {
@@ -68,9 +69,20 @@ typedef enum kRomHandle
 	kRomHandlePaletteGroupBowserCastle,
 	kRomHandlePaletteGroupRainbowRoad,
 
-	//	
+	// Tilesets
 	
 	kRomHandleDataTileSetCommon,
+
+	// Tileset Groups
+
+	kRomHandleTilesetGroupGhostValley,		// must be sequential with 'kRomTheme'
+	kRomHandleTilesetGroupMarioCircuit,
+	kRomHandleTilesetGroupDonutPlains,
+	kRomHandleTilesetGroupChocoIsland,
+	kRomHandleTilesetGroupVanillaLake,
+	kRomHandleTilesetGroupKoopaBeach,
+	kRomHandleTilesetGroupBowserCastle,
+	kRomHandleTilesetGroupRainbowRoad,
 
 	// End
 
@@ -101,6 +113,7 @@ typedef enum kRomHandle
 
 // Custom
 
--(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)handle paletteGroup:(RomObjPaletteGroup*)paletteGroup;
+-(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)tileGroupHandle paletteGroup:(RomObjPaletteGroup*)paletteGroup;
+-(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 
 @end

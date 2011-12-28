@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "RomObj.h"
+#import "RomObjTileGroup.h"
 
-@interface RomObjTheme : RomObj
+@class RomObjTileGroup;
+@class RomObjPaletteGroup;
+
+@interface RomObjTheme : RomObjTileGroup
 {
-
+	RomObjTileGroup								*tileGroupCommon;
 }
+
+@property(nonatomic,retain) RomObjTileGroup		*tileGroupCommon;
+
+-(id)initWithRomData:(NSData*)tilesetGroupRomData range:(RomRange)range commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 
 @end

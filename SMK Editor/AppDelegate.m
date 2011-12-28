@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "RomEUR.h"
+#import "RomTypes.h"
 
 @implementation AppDelegate
 
@@ -80,16 +81,24 @@
 	NSLog( @"Battle Course			= %@", [eurRom objectFromHandle:kRomHandleTextBattleCourse] );
 	NSLog( @"Rainbow Road			= %@", [eurRom objectFromHandle:kRomHandleTextRainbowRoad] );
 	
-	NSLog( @"---------< PALETTE GROUP >---------" );
+	NSLog( @"---------< THEME >---------" );
+		
+	NSMutableArray *themeArray		= [[NSMutableArray alloc] initWithCapacity:kRomNumThemes];
 	
-	RomObjPaletteGroup *ghostValleyPaletteGroup			= [eurRom objectFromHandle:kRomHandlePaletteGroupGhostValley];
-	
-	NSLog( @"Desc = %@", ghostValleyPaletteGroup );
-	
-	NSLog( @"---------< TILE GROUP >---------" );
+	for( int i = 0; i < kRomNumThemes; ++i )
+	{
+		NSLog( @"Processing %@", RomThemeToString( i ) );
+		
+		RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
+				
+		RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
+		
+		RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
+		
+		[themeArray addObject:theme];
+	}	
 
-	RomObjTileGroup *commonTileSet						= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:ghostValleyPaletteGroup];
-
+	[themeArray release];
 	[eurRom release];
 	[rom release];
 }

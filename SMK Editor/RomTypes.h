@@ -24,4 +24,21 @@ typedef enum kRomTheme
 
 }kRomTheme;
 
+static inline NSString *RomThemeToString( kRomTheme theme )
+{
+	switch( theme )
+	{
+		case kRomThemeGhostValley :		{ return( @"Ghost Valley" );	}break;
+		case kRomThemeMarioCircuit :	{ return( @"Mario Circuit" );	}break;
+		case kRomThemeDonutPlains :		{ return( @"Donut Plains" );	}break;
+		case kRomThemeChocoIsland :		{ return( @"Choco Island" );	}break;
+		case kRomThemeVanillaLake :		{ return( @"Vanilla Lake" );	}break;
+		case kRomThemeKoopaBeach :		{ return( @"Koopa Beach" );		}break;
+		case kRomThemeBowserCastle :	{ return( @"Bowser Castle" );	}break;
+		case kRomThemeRainbowRoad :		{ return( @"Rainbow Road" );	}break;
+		
+		default :						{ return( @"Unknown" );			}		
+	}
+}
+
 #endif // _ROMTYPES_H_
