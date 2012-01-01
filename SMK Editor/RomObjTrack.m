@@ -69,7 +69,7 @@
 			RomObjTile *tile				= [buffer objectAtIndex:byte];
 			image							= tile.image;
 			
-			NSRect dst						= NSMakeRect( x * 8, y * 8, 8, 8 );
+			NSRect dst						= NSMakeRect( x * 8, 1024 - ( y * 8 ), 8, 8 );
 			NSRect src						= NSMakeRect( 0, 0, 8, 8 );
 			
 			[image drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1.0f];

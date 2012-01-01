@@ -128,7 +128,7 @@
 	self.themes								= themeArray;
 	self.tracks								= trackArray;
 	
-	self.trackView.track					= [trackArray objectAtIndex:1];
+	self.trackView.track					= [trackArray objectAtIndex:2];
 	[self.trackView setNeedsDisplay:YES];
 
 	[themeArray release];
