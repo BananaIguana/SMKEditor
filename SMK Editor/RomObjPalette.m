@@ -42,13 +42,13 @@
 	
 	unsigned char buffer[ 2 ];	
 	NSRange sourceRange;
-	
+
 	for( int i = 0; i < 16; ++i )
 	{
-		sourceRange				= NSMakeRange( i * 2, 2 );
+		sourceRange				= NSMakeRange( self.dataRange.range.location + ( i * 2 ), 2 );
 	
 		[self.data getBytes:buffer range:sourceRange];
-		
+				
 		NSColor *col			= [self colourFromData:buffer];
 		
 		[paletteColourArray addObject:col];

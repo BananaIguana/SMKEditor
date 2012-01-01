@@ -89,9 +89,7 @@ static const NSInteger kGroupSize			= 32;
 		NSNumber *paletteIndex				= [self.indexBuffer objectAtIndex:i];
 		RomObjPalette *palette				= [self.paletteGroup.paletteArray objectAtIndex:[paletteIndex intValue]];
 	
-		RomObjTile *tile					= [[RomObjTile alloc] initWithRomData:tilesetData range:range];
-
-		tile.palette						= palette;
+		RomObjTile *tile					= [[RomObjTile alloc] initWithRomData:tilesetData range:range palette:palette];
 		
 		[tilesetArray addObject:tile];
 				

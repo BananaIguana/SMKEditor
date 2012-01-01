@@ -11,5 +11,6 @@
 @interface NSData (Decompressor)
 
 -(NSData*)decompressRange:(NSRange)range;
+-(NSData*)decompressTrackRange:(NSRange)range;
 
 @end

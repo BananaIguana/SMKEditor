@@ -13,6 +13,7 @@
 @class RomObjPaletteGroup;
 @class RomObjTileGroup;
 @class RomObjTheme;
+@class RomObjTrack;
 
 typedef enum kRomHandle
 {
@@ -47,7 +48,7 @@ typedef enum kRomHandle
 	
 	// Track Strings
 	
-	kRomHandleTextGhostValley,				// must be sequential with 'kRomTheme'
+	kRomHandleTextGhostValley,					// must be sequential with 'kRomTheme'
 	kRomHandleTextMarioCircuit,
 	kRomHandleTextDohnutPlains,
 	kRomHandleTextChocoIsland,
@@ -60,7 +61,7 @@ typedef enum kRomHandle
 	
 	// Palette Groups
 	
-	kRomHandlePaletteGroupGhostValley,		// must be sequential with 'kRomTheme'
+	kRomHandlePaletteGroupGhostValley,			// must be sequential with 'kRomTheme'
 	kRomHandlePaletteGroupMarioCircuit,
 	kRomHandlePaletteGroupDonutPlains,
 	kRomHandlePaletteGroupChocoIsland,
@@ -75,7 +76,7 @@ typedef enum kRomHandle
 
 	// Tileset Groups
 
-	kRomHandleTilesetGroupGhostValley,		// must be sequential with 'kRomTheme'
+	kRomHandleTilesetGroupGhostValley,			// must be sequential with 'kRomTheme'
 	kRomHandleTilesetGroupMarioCircuit,
 	kRomHandleTilesetGroupDonutPlains,
 	kRomHandleTilesetGroupChocoIsland,
@@ -83,6 +84,33 @@ typedef enum kRomHandle
 	kRomHandleTilesetGroupKoopaBeach,
 	kRomHandleTilesetGroupBowserCastle,
 	kRomHandleTilesetGroupRainbowRoad,
+	
+	// Tracks
+
+	kRomHandleTrackMarioCircuit3,				// must be sequential with 'kRomTrack'
+	kRomHandleTrackGhostValley2,
+	kRomHandleTrackDohnutPlains2,
+	kRomHandleTrackBowserCastle2,
+	kRomHandleTrackVanillaLake2,
+	kRomHandleTrackRainbowRoad,
+	kRomHandleTrackKoopaBeach2,
+	kRomHandleTrackMarioCircuit1,
+	kRomHandleTrackGhostValley3,
+	kRomHandleTrackBowserCastle3,
+	kRomHandleTrackChocoIsland2,
+	kRomHandleTrackDohnutPlains3,
+	kRomHandleTrackVanillaLake1,
+	kRomHandleTrackKoopaBeach1,
+	kRomHandleTrackMarioCircuit4,
+	kRomHandleTrackMarioCircuit2,
+	kRomHandleTrackGhostValley1,
+	kRomHandleTrackBowserCastle1,
+	kRomHandleTrackChocoIsland1,
+	kRomHandleTrackDohnutPlains1,
+	kRomHandleTrackBattleCourse3,
+	kRomHandleTrackBattleCourse4,
+	kRomHandleTrackBattleCourse1,
+	kRomHandleTrackBattleCourse2,
 
 	// End
 
@@ -94,10 +122,12 @@ typedef enum kRomHandle
 {
 	NSData				*data;
 	NSDictionary		*romDict;
+	NSArray				*romTrackThemeMappingArray;
 }
 
 @property(nonatomic,retain) NSData				*data;
 @property(nonatomic,retain) NSDictionary		*romDict;
+@property(nonatomic,retain) NSArray				*romTrackThemeMappingArray;
 
 -(id)initWithData:(NSData*)romData;
 
@@ -115,5 +145,6 @@ typedef enum kRomHandle
 
 -(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)tileGroupHandle paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 -(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
+-(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme;
 
 @end

@@ -8,16 +8,28 @@
 
 #import "AppDelegate.h"
 
+#import "RomObjTheme.h"
+#import "RomObjTileGroup.h"
+#import "RomObjTile.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
+#import "SMKTrackView.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize imageTest = _imageTest;
+@synthesize button = _button;
+@synthesize trackView = _trackView;
+
+@synthesize themes;
+@synthesize tracks;
 
 -(void)dealloc
 {
 	[_window release];
+	[themes release];
+	[tracks release];
 
     [super dealloc];
 }
@@ -83,31 +95,75 @@
 	
 	NSLog( @"---------< THEME >---------" );
 		
-	NSMutableArray *themeArray		= [[NSMutableArray alloc] initWithCapacity:kRomNumThemes];
+	NSMutableArray *themeArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumThemes];
 	
 	for( int i = 0; i < kRomNumThemes; ++i )
 	{
-		NSLog( @"Processing %@", RomThemeToString( i ) );
+		NSLog( @"Processing [THEME] %@", RomThemeToString( i ) );
 		
 		RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
-				
+		
 		RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
 		
 		RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
-		
+
 		[themeArray addObject:theme];
-	}	
+	}
+	
+	NSMutableArray *trackArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
+	
+	for( int i = 0; i < kRomNumTracks; ++i )
+	{
+		NSLog( @"Processing [TRACK] %@", RomTrackToString( i ) );
+		
+		NSNumber *index						= [eurRom.romTrackThemeMappingArray objectAtIndex:i];
+		
+		RomObjTheme *theme					= [themeArray objectAtIndex:[index unsignedIntValue]];
+	
+		RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme];
+		
+		[trackArray addObject:track];
+	}
+	
+	self.themes								= themeArray;
+	self.tracks								= trackArray;
+	
+	self.trackView.track					= [trackArray objectAtIndex:1];
+	[self.trackView setNeedsDisplay:YES];
 
 	[themeArray release];
+	[trackArray release];
 	[eurRom release];
 	[rom release];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+-(void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
 	// Insert code here to initialize your application
 		
 	[self test];
+}
+
+-(IBAction)buttonPressed:(id)sender
+{
+	RomObjTheme *theme						= [self.themes objectAtIndex:kRomThemeRainbowRoad];
+	
+	RomObjTileGroup *tileGroup				= theme.tileGroupCommon;
+//	RomObjTileGroup *tileGroup				= theme;
+	
+	static int i = 0;
+	
+	RomObjTile *tile						= [tileGroup.tilesetBuffer objectAtIndex:i];
+	
+	i++;
+	
+	i %= [tileGroup.tilesetBuffer count];
+	
+	[self.imageTest setImage:tile.image];
+	
+	NSButton *button						= (NSButton*)sender;
+	
+	[button setTitle:[NSString stringWithFormat:@"%d/%d", i, [tileGroup.tilesetBuffer count]]];
 }
 
 @end

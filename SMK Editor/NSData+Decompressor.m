@@ -49,20 +49,20 @@
 	
 	NSInteger destinationPosition = 0, sourcePosition = 0;
 	unsigned char cmd;
-	
+
 	while( ( cmd = sourceData[ sourcePosition++ ] ) != 0xFF )
 	{
 		unsigned char ctrl = (unsigned char)( ( cmd & 0xE0 ) >> 5 );
 		NSInteger count;
 		
-		if( ctrl == NSDATA_DECOMPRESSOR_COMMAND_EXTEND ) 
+		if( ( ctrl != NSDATA_DECOMPRESSOR_COMMAND_EXTEND ) && ( cmd < 0xE0 ) )
 		{
-			ctrl = (unsigned char)( ( cmd & 0x1C ) >> 2 );
-			count = ( ( ( ( cmd & 0x3 ) << 8 ) & 0xFF00 ) | ( ( sourceData[ sourcePosition++ ] ) & 0xFF ) );
+			count = ( cmd & 0x1F );
 		}
 		else
 		{
-			count = ( cmd & 0x1F );
+			ctrl = (unsigned char)( ( cmd & 0x1C ) >> 2 );
+			count = ( ( ( ( cmd & 0x3 ) << 8 ) & 0xFF00 ) | ( ( sourceData[ sourcePosition++ ] ) & 0xFF ) );
 		}
 		
 		count++;
@@ -172,6 +172,17 @@
 	NSData *returnData = [NSData dataWithBytes:decompressionBuffer length:destinationPosition];
 
 	return( returnData );
+}
+
+-(NSData*)decompressTrackRange:(NSRange)range
+{
+	NSData *decompressedData			= [self decompressRange:range];
+
+	NSRange newRange					= NSMakeRange( 0, decompressedData.length );
+
+	NSData *trackData					= [decompressedData decompressRange:newRange];
+	
+	return( trackData );
 }
 
 @end

@@ -70,9 +70,49 @@ static const RomRange kRomRangePaletteGroup[ kRomNumThemes ]	= {
 
 // Common Tile Offset 
 
-static const RomRange kRomRangeTileCommon						=		{ 0x40000,		1458,	1458,	kRomRangeTypeCompressedData };
+static const RomRange kRomRangeTileCommon						=		{ 0x40000,		1428,	1248,	kRomRangeTypeCompressedData };
 
-//
+// Theme Tile Offset 
+
+static const RomRange kRomRangeTileset[ kRomNumThemes ]			= {
+																		{ 0x60189,		921,	921,	kRomRangeTypeCompressedData },
+																		{ 0x481C9,		3489,	3489,	kRomRangeTypeCompressedData },
+																		{ 0x50000,		3141,	3141,	kRomRangeTypeCompressedData },
+																		{ 0x78000,		2667,	2667,	kRomRangeTypeCompressedData },
+																		{ 0x014EE,		2654,	2654,	kRomRangeTypeCompressedData },
+																		{ 0x51636,		2445,	2445,	kRomRangeTypeCompressedData },
+																		{ 0x48F6A,		3250,	3250,	kRomRangeTypeCompressedData },
+																		{ 0x41EBB,		276,	276,	kRomRangeTypeCompressedData },
+																};
+
+// Tracks
+
+static const RomRange kRomRangeTracks[ kRomNumTracks ]			= {
+																		{ 0x68000,		3372,	3372,	kRomRangeTypeTrack },
+																		{ 0x7E821,		1306,	1306,	kRomRangeTypeTrack },
+																		{ 0x6A823,		5957,	5957,	kRomRangeTypeTrack },
+																		{ 0x7C527,		4312,	4312,	kRomRangeTypeTrack },
+																		{ 0x6BF68,		41880,	4188,	kRomRangeTypeTrack },
+																		{ 0x3EAD1,		1326,	1326,	kRomRangeTypeTrack },
+																		{ 0x3D551,		5504,	5504,	kRomRangeTypeTrack },
+																		{ 0x68D2C,		2047,	2047,	kRomRangeTypeTrack },
+																		{ 0x6A245,		1502,	1502,	kRomRangeTypeTrack },
+																		{ 0x7D5FF,		4642,	4642,	kRomRangeTypeTrack },
+																		{ 0x6CFC4,		4586,	4586,	kRomRangeTypeTrack },
+																		{ 0x78A6B,		5910,	5910,	kRomRangeTypeTrack },
+																		{ 0x3103C,		3907,	3907,	kRomRangeTypeTrack },
+																		{ 0x6E1AE,		4484,	4484,	kRomRangeTypeTrack },
+																		{ 0x6952B,		3354,	3354,	kRomRangeTypeTrack },
+																		{ 0x50C45,		2545,	2545,	kRomRangeTypeTrack },
+																		{ 0x6F5BF,		1204,	1204,	kRomRangeTypeTrack },
+																		{ 0x7B825,		3330,	3330,	kRomRangeTypeTrack },
+																		{ 0x77251,		3501,	3501,	kRomRangeTypeTrack },
+																		{ 0x7A181,		5796,	5796,	kRomRangeTypeTrack },
+																		{ 0x214EE,		631,	631,	kRomRangeTypeTrack },
+																		{ 0x7ED3B,		1106,	1106,	kRomRangeTypeTrack },
+																		{ 0x6F338,		647,	647,	kRomRangeTypeTrack },
+																		{ 0x21765,		798,	798,	kRomRangeTypeTrack },
+																};
 
 @implementation RomEUR
 
@@ -121,20 +161,39 @@ static const RomRange kRomRangeTileCommon						=		{ 0x40000,		1458,	1458,	kRomRa
 		// Common Tile Offset
 
 		[NSValue valueWithRomRange:kRomRangeTileCommon],					[NSNumber numberWithUnsignedInt:kRomHandleDataTileSetCommon],
-
+				
 		nil];
 
 	// Theme based handles
 		
 	for( kRomTheme eTheme = 0; eTheme < kRomNumThemes; ++eTheme )
 	{
+		// Theme text
+
 		kRomHandle handleThemeText			= kRomHandleTextGhostValley + eTheme;
 		
 		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTextTheme[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemeText]];
+
+		// Theme Tilesets
 		
+		kRomHandle handleThemeTileset		= kRomHandleTilesetGroupGhostValley + eTheme;
+		
+		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTileset[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemeTileset]];
+		
+		// Theme Palettes
+
 		kRomHandle handleThemePalette		= kRomHandlePaletteGroupGhostValley + eTheme;
 
 		[dictionary setObject:[NSValue valueWithRomRange:kRomRangePaletteGroup[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemePalette]];
+	}
+	
+	// Track handles
+	
+	for( kRomTrack eTrack = 0; eTrack < kRomNumTracks; ++eTrack )
+	{
+		kRomHandle handleTrack				= kRomHandleTrackMarioCircuit3 + eTrack;
+		
+		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTracks[ eTrack ]] forKey:[NSNumber numberWithUnsignedInt:handleTrack]];
 	}
 
 	return( dictionary );

@@ -8,8 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SMKTrackView;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+{
+	NSArray *themes;
+}
+
+@property(nonatomic,retain) NSArray *themes;
+@property(nonatomic,retain) NSArray *tracks;
 
 @property(retain) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSImageView *imageTest;
+@property (assign) IBOutlet NSButton *button;
+@property (assign) IBOutlet SMKTrackView *trackView;
 
 @end

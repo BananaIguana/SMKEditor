@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2359EBE414781D6300E6CA39 /* RomObjTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2359EBE314781D6300E6CA39 /* RomObjTile.m */; };
 		3C0BB1C41408782700D12DDA /* RomBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0BB1C31408782700D12DDA /* RomBase.m */; };
+		3C40302E14B04FE700CEB708 /* SMKTrackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40302D14B04FE600CEB708 /* SMKTrackView.m */; };
+		3C40DC5414AEBFDB00EB296F /* RomObjTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40DC5314AEBFDB00EB296F /* RomObjTrack.m */; };
 		3C6A5288146E1D87007D4BF3 /* RomObjPaletteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A5287146E1D87007D4BF3 /* RomObjPaletteGroup.m */; };
 		3C6A528C146E1E1B007D4BF3 /* RomObjPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A528B146E1E1B007D4BF3 /* RomObjPalette.m */; };
 		3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B13140874B200A46814 /* Cocoa.framework */; };
@@ -31,6 +33,10 @@
 		2359EBE314781D6300E6CA39 /* RomObjTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjTile.m; sourceTree = "<group>"; };
 		3C0BB1C21408782700D12DDA /* RomBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomBase.h; sourceTree = "<group>"; };
 		3C0BB1C31408782700D12DDA /* RomBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomBase.m; sourceTree = "<group>"; };
+		3C40302C14B04FE600CEB708 /* SMKTrackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKTrackView.h; sourceTree = "<group>"; };
+		3C40302D14B04FE600CEB708 /* SMKTrackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKTrackView.m; sourceTree = "<group>"; };
+		3C40DC5214AEBFDA00EB296F /* RomObjTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjTrack.h; sourceTree = "<group>"; };
+		3C40DC5314AEBFDB00EB296F /* RomObjTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjTrack.m; sourceTree = "<group>"; };
 		3C4F9A19146F7D1A0055796F /* RomTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomTypes.h; sourceTree = "<group>"; };
 		3C6A5286146E1D87007D4BF3 /* RomObjPaletteGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjPaletteGroup.h; sourceTree = "<group>"; };
 		3C6A5287146E1D87007D4BF3 /* RomObjPaletteGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjPaletteGroup.m; sourceTree = "<group>"; };
@@ -92,6 +98,15 @@
 			name = ROM;
 			sourceTree = "<group>";
 		};
+		3C40303014B04FEE00CEB708 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				3C40302D14B04FE600CEB708 /* SMKTrackView.m */,
+				3C40302C14B04FE600CEB708 /* SMKTrackView.h */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
 		3C904B04140874B200A46814 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +138,7 @@
 		3C904B19140874B200A46814 /* SMK Editor */ = {
 			isa = PBXGroup;
 			children = (
+				3C40303014B04FEE00CEB708 /* GUI */,
 				3C0BB1C0140877F900D12DDA /* ROM */,
 				3C904B26140874B200A46814 /* AppDelegate.m */,
 				3C904B25140874B200A46814 /* AppDelegate.h */,
@@ -181,6 +197,8 @@
 				3CC563771469D933005FBADC /* RomObjText.h */,
 				3CC5637B1469DA0D005FBADC /* RomObj.m */,
 				3CC5637A1469DA0D005FBADC /* RomObj.h */,
+				3C40DC5314AEBFDB00EB296F /* RomObjTrack.m */,
+				3C40DC5214AEBFDA00EB296F /* RomObjTrack.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -262,6 +280,8 @@
 				3C6A5288146E1D87007D4BF3 /* RomObjPaletteGroup.m in Sources */,
 				3C6A528C146E1E1B007D4BF3 /* RomObjPalette.m in Sources */,
 				2359EBE414781D6300E6CA39 /* RomObjTile.m in Sources */,
+				3C40DC5414AEBFDB00EB296F /* RomObjTrack.m in Sources */,
+				3C40302E14B04FE700CEB708 /* SMKTrackView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

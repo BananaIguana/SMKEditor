@@ -13,12 +13,16 @@
 #import "RomObjTileGroup.h"
 #import "RomObjPaletteGroup.h"
 #import "RomObjTheme.h"
+#import "RomObjTrack.h"
 #import "NSValue+Rom.h"
+
+static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 0, 5, 1, 0, 6, 3, 2, 4, 5, 1, 1, 0, 6, 3, 2, 4, 1, 2, 5 };
 
 @implementation RomBase
 
 @synthesize data;
 @synthesize romDict;
+@synthesize romTrackThemeMappingArray;
 
 -(id)initWithData:(NSData*)romData
 {
@@ -26,8 +30,23 @@
 	
 	if( self )
 	{
-		self.romDict							= [self offsetDictionary];
-		self.data								= romData;
+		self.romDict								= [self offsetDictionary];
+		self.data									= romData;
+		
+		int mappingItems							= ( sizeof( kRomTrackThemeMapping ) / sizeof( int ) );
+		
+		NSMutableArray *array						= [[NSMutableArray alloc] initWithCapacity:mappingItems];
+		
+		for( int i = 0; i < mappingItems; ++i )
+		{
+			NSNumber *num							= [NSNumber numberWithUnsignedInt:kRomTrackThemeMapping[ i ]];
+		
+			[array insertObject:num atIndex:i];
+		}
+		
+		self.romTrackThemeMappingArray				= array;
+		
+		[array release];
 	}
 	
 	return( self );
@@ -39,15 +58,15 @@
 	{
 		case kRomRangeTypeString :
 			{
-				NSRange nsRange					= range.range;
+				NSRange nsRange						= range.range;
 				
 				char charStore[ nsRange.length ];
 				
 				[self.data getBytes:charStore range:nsRange];
 
-				charStore[ nsRange.length ]		= 0;
+				charStore[ nsRange.length ]			= 0;
 				
-				NSString *string				= [NSString stringWithCString:charStore encoding:NSStringEncodingConversionAllowLossy];
+				NSString *string					= [NSString stringWithCString:charStore encoding:NSStringEncodingConversionAllowLossy];
 				
 				return( string );
 			
@@ -59,7 +78,7 @@
 				
 				[self.data getBytes:&charValue range:range.range];
 
-				NSNumber *numValue				= [NSNumber numberWithUnsignedChar:charValue];
+				NSNumber *numValue					= [NSNumber numberWithUnsignedChar:charValue];
 				
 				return( numValue );
 			
@@ -67,7 +86,7 @@
 			
 		case kRomRangeTypeEncodedString :
 			{
-				RomObjText *text				= [[[RomObjText alloc] initWithRomData:self.data range:range] autorelease];
+				RomObjText *text					= [[[RomObjText alloc] initWithRomData:self.data range:range] autorelease];
 				
 				return( text );
 			
@@ -75,7 +94,7 @@
 			
 		case kRomRangeTypeTileGroup :
 			{
-				NSAssert( 0, @"You must call 'tileGroupFromRomRange'." );
+				NSAssert( 0, @"You must call 'tileGroupFromHandle'." );
 				
 				return( nil );
 			
@@ -83,9 +102,17 @@
 			
 		case kRomRangeTypePaletteGroup :
 			{
-				RomObjPaletteGroup *group		= [[[RomObjPaletteGroup alloc] initWithRomData:self.data range:range] autorelease];
+				RomObjPaletteGroup *group			= [[[RomObjPaletteGroup alloc] initWithRomData:self.data range:range] autorelease];
 				
 				return( group );
+			
+			}break;
+			
+		case kRomRangeTypeTrack :
+			{
+				NSAssert( 0, @"You must call 'trackFromHandle'." );
+			
+				return( nil );
 			
 			}break;
 		
@@ -98,58 +125,68 @@
 
 -(NSNumber*)keyFromHandle:(kRomHandle)handle
 {
-	NSNumber *key = [NSNumber numberWithUnsignedInt:handle];
+	NSNumber *key									= [NSNumber numberWithUnsignedInt:handle];
 	
 	return( key );
 }
 
 -(RomRange)romRangeFromKey:(NSNumber*)key
 {
-	NSValue *value			= [self.romDict objectForKey:key];
+	NSValue *value									= [self.romDict objectForKey:key];
 	
-	RomRange romRange		= [value romRangeValue];
+	RomRange romRange								= [value romRangeValue];
 	
 	return( romRange );
 }
 
 -(RomRange)romRangeFromHandle:(kRomHandle)handle
 {
-	NSNumber *key			= [self keyFromHandle:handle];
+	NSNumber *key									= [self keyFromHandle:handle];
 	
 	return( [self romRangeFromKey:key] );	
 }
 
 -(id)objectFromHandle:(kRomHandle)handle
 {
-	RomRange romRange		= [self romRangeFromHandle:handle];
+	RomRange romRange								= [self romRangeFromHandle:handle];
 	
-	id obj					= [self objectFromRange:romRange];
+	id obj											= [self objectFromRange:romRange];
 	
 	return( obj );	
 }
 
 -(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)tileGroupHandle paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
-	RomRange romRange		= [self romRangeFromHandle:tileGroupHandle];
+	RomRange romRange								= [self romRangeFromHandle:tileGroupHandle];
 	
-	RomObjTileGroup *obj	= [[[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup] autorelease];
+	RomObjTileGroup *obj							= [[[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup] autorelease];
 	
 	return( obj );
 }
 
 -(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
-	RomRange romRange		= [self romRangeFromHandle:tileGroupHandle];
+	RomRange romRange								= [self romRangeFromHandle:tileGroupHandle];
 		
-	RomObjTheme *theme		= [[[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup] autorelease];
+	RomObjTheme *theme								= [[[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup] autorelease];
 	
 	return( theme );
+}
+
+-(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme
+{
+	RomRange romRange								= [self romRangeFromHandle:trackHandle];
+	
+	RomObjTrack *track								= [[[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme] autorelease];
+	
+	return( track );
 }
 
 -(void)dealloc
 {
 	[data release];
 	[romDict release];
+	[romTrackThemeMappingArray release];
 
 	[super dealloc];
 }
