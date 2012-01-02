@@ -10,11 +10,30 @@
 
 @class RomObjTrack;
 
+typedef enum TrackViewOperationMode
+{
+	TrackViewOperationModeNone,
+	TrackViewOperationModeRequestTranslate,
+	TrackViewOperationModeRequestZoom,
+	TrackViewOperationModeTranslating,
+	TrackViewOperationModeZooming,
+	
+	TrackViewNumOperationModes,
+
+}TrackViewOperationMode;
+
 @interface SMKTrackView : NSView
 {
-	RomObjTrack *track;
+	RomObjTrack					*track;
+	TrackViewOperationMode		mode;
+
+	NSPoint						trans;
+	float						scale;
+	float						scaleSource;
+	NSPoint						currentPoint;
 }
 
-@property(nonatomic,retain) RomObjTrack *track;
+@property(nonatomic,retain)				RomObjTrack						*track;
+@property(nonatomic,readonly,assign)	TrackViewOperationMode			mode;
 
 @end

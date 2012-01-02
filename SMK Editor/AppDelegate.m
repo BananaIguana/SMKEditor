@@ -11,6 +11,7 @@
 #import "RomObjTheme.h"
 #import "RomObjTileGroup.h"
 #import "RomObjTile.h"
+#import "RomObjTrack.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "SMKTrackView.h"
@@ -21,6 +22,8 @@
 @synthesize imageTest = _imageTest;
 @synthesize button = _button;
 @synthesize trackView = _trackView;
+@synthesize testWindow = _testWindow;
+@synthesize paletteWindow = _paletteWindow;
 
 @synthesize themes;
 @synthesize tracks;
@@ -122,6 +125,8 @@
 	
 		RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme];
 		
+		[track setTrackType:i];
+		
 		[trackArray addObject:track];
 	}
 	
@@ -142,6 +147,8 @@
 	// Insert code here to initialize your application
 		
 	[self test];
+
+	[self.window setTracks:self.tracks];
 }
 
 -(IBAction)buttonPressed:(id)sender
@@ -164,6 +171,11 @@
 	NSButton *button						= (NSButton*)sender;
 	
 	[button setTitle:[NSString stringWithFormat:@"%d/%d", i, [tileGroup.tilesetBuffer count]]];
+}
+
+-(IBAction)buttonWindow:(id)sender
+{
+	[self.paletteWindow makeKeyAndOrderFront:self];
 }
 
 @end

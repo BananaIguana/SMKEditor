@@ -17,30 +17,50 @@
 
 @synthesize theme = _theme;
 @synthesize trackData;
+@synthesize image;
+@synthesize imageBitmap;
+@synthesize trackType;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme
 {
-	self = [super initWithRomData:romData range:range];
+	self = [super init];
 	
 	if( self )
 	{
-		self.theme = theme;
+		self.data			= romData;
+		self.dataRange		= range;
+		self.theme			= theme;
+		
+		[self setup];
 	}
-	
+
 	return( self );
 }
 
 -(void)setup
 {
-	self.trackData						= [self.data decompressTrackRange:self.dataRange.range];
+	self.trackData							= [self.data decompressTrackRange:self.dataRange.range];
 	
 	NSAssert( self.trackData.length == ( 128 * 128 ), @"Unexpected track size decompressed." );
-}
-
--(void)draw
-{
+	
+	NSBitmapImageRep *bitmap				= [[NSBitmapImageRep alloc]
+	
+		initWithBitmapDataPlanes:nil
+		pixelsWide:1024
+		pixelsHigh:1024
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:(1024 * 4)
+		bitsPerPixel:32];
+		
 	RomObjTileGroup *tileGroupCommon		= self.theme.tileGroupCommon;
 	RomObjTileGroup *tileGroupTheme			= self.theme;
+
+	[NSGraphicsContext saveGraphicsState];
+	[NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap]];
 
 	int index								= 0;
 
@@ -49,7 +69,7 @@
 		for( int x = 0; x < 128; x++ )
 		{
 			unsigned char byte;
-			NSImage *image;
+			NSImage *imageTile;
 			
 			[self.trackData getBytes:&byte range:NSMakeRange( index, 1 )];
 			
@@ -67,22 +87,48 @@
 			byte							%= [buffer count];
 
 			RomObjTile *tile				= [buffer objectAtIndex:byte];
-			image							= tile.image;
+			imageTile						= tile.image;
 			
-			NSRect dst						= NSMakeRect( x * 8, 1024 - ( y * 8 ), 8, 8 );
+			NSRect dst						= NSMakeRect( x * 8, 1016 - ( y * 8 ), 8, 8 );
 			NSRect src						= NSMakeRect( 0, 0, 8, 8 );
-			
-			[image drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1.0f];
+					
+			[imageTile drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1.0f];
 
 			index++;		
 		}	
 	}
+	
+	[NSGraphicsContext restoreGraphicsState];
+	
+	CGImageRef ref									= [bitmap CGImage];
+
+	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 1024, 1024 )];
+	
+	self.image										= im;
+	self.imageBitmap								= bitmap;
+	
+	[im release];
+		
+	[bitmap release];	
+}
+
+-(void)draw:(NSRect)rect
+{
+	NSRect r = NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
+	[image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
+}
+
+-(NSString*)description
+{
+	return( RomTrackToString( trackType ) );
 }
 
 -(void)dealloc
 {
 	[_theme release];
 	[trackData release];
+	[image  release];
+	[imageBitmap release];
 
 	[super dealloc];
 }
