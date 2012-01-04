@@ -102,7 +102,7 @@
 
 -(void)drawTile:(RomObjTile*)tile atX:(int)x y:(int)y
 {
-	NSPoint point						= NSMakePoint( x, 1016.0f - 0 );
+	NSPoint point						= NSMakePoint( x, 1016.0f - y );
 	
 	NSRect rect							= NSMakeRect( 0.0f, 0.0f, 8.0f, 8.0f );
 
@@ -238,7 +238,7 @@
 			case 16 :
 			case 17 :
 			case 18 :
-			case 19 :	{		[self draw22:&item startIndex:44];				}break;
+			case 19 :	{		[self draw22:&item startIndex:58];				}break;			// Oil slick
 			case 20 :
 			case 21 :
 			case 22 :
