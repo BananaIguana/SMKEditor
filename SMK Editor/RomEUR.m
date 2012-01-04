@@ -114,6 +114,35 @@ static const RomRange kRomRangeTracks[ kRomNumTracks ]			= {
 																		{ 0x21765,		798,	798,	kRomRangeTypeTrack },
 																};
 
+// Overlays
+
+static const RomRange kRomRangeOverlays[ kRomNumTracks ]		= {
+																		{ 0x5D000,		90,		128,	kRomRangeTypeTrack },
+																		{ 0x5D080,		105,	128,	kRomRangeTypeTrack },
+																		{ 0x5D100,		81,		128,	kRomRangeTypeTrack },
+																		{ 0x5D180,		90,		128,	kRomRangeTypeTrack },
+																		{ 0x5D200,		87,		128,	kRomRangeTypeTrack },
+																		{ 0x5D280,		108,	128,	kRomRangeTypeTrack },
+																		{ 0x5D300,		75,		128,	kRomRangeTypeTrack },
+																		{ 0x5D380,		63,		128,	kRomRangeTypeTrack },
+																		{ 0x5D400,		87,		128,	kRomRangeTypeTrack },
+																		{ 0x5D480,		96,		128,	kRomRangeTypeTrack },
+																		{ 0x5D500,		66,		128,	kRomRangeTypeTrack },
+																		{ 0x5D580,		81,		128,	kRomRangeTypeTrack },
+																		{ 0x5D600,		78,		128,	kRomRangeTypeTrack },
+																		{ 0x5D680,		93,		128,	kRomRangeTypeTrack },
+																		{ 0x5D700,		81,		128,	kRomRangeTypeTrack },
+																		{ 0x5D780,		96,		128,	kRomRangeTypeTrack },
+																		{ 0x5D800,		84,		128,	kRomRangeTypeTrack },
+																		{ 0x5D880,		84,		128,	kRomRangeTypeTrack },
+																		{ 0x5D900,		87,		128,	kRomRangeTypeTrack },
+																		{ 0x5D980,		90,		128,	kRomRangeTypeTrack },
+																		{ 0x5DB00,		105,	128,	kRomRangeTypeTrack },
+																		{ 0x5DB80,		105,	128,	kRomRangeTypeTrack },
+																		{ 0x5DA00,		120,	128,	kRomRangeTypeTrack },
+																		{ 0x5DA80,		99,		128,	kRomRangeTypeTrack },
+																};
+
 @implementation RomEUR
 
 -(void)dealloc
@@ -194,6 +223,10 @@ static const RomRange kRomRangeTracks[ kRomNumTracks ]			= {
 		kRomHandle handleTrack				= kRomHandleTrackMarioCircuit3 + eTrack;
 		
 		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTracks[ eTrack ]] forKey:[NSNumber numberWithUnsignedInt:handleTrack]];
+		
+		kRomHandle handleOverlay			= kRomHandleOverlayMarioCircuit3 + eTrack;
+		
+		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeOverlays[ eTrack ]] forKey:[NSNumber numberWithUnsignedInt:handleOverlay]];
 	}
 
 	return( dictionary );

@@ -14,6 +14,7 @@
 #import "RomObjPaletteGroup.h"
 #import "RomObjTheme.h"
 #import "RomObjTrack.h"
+#import "RomObjOverlay.h"
 #import "NSValue+Rom.h"
 
 static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 0, 5, 1, 0, 6, 3, 2, 4, 5, 1, 1, 0, 6, 3, 2, 4, 1, 2, 5 };
@@ -173,13 +174,22 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 0, 5, 1, 0,
 	return( theme );
 }
 
--(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme
+-(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay
 {
 	RomRange romRange								= [self romRangeFromHandle:trackHandle];
 	
-	RomObjTrack *track								= [[[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme] autorelease];
+	RomObjTrack *track								= [[[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme overlay:overlay] autorelease];
 	
 	return( track );
+}
+
+-(RomObjOverlay*)overlayItemFromHandle:(kRomHandle)overlayItemHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup
+{
+	RomRange romRange								= [self romRangeFromHandle:overlayItemHandle];
+	
+	RomObjOverlay *overlayItem						= [[[RomObjOverlay alloc] initWithRomData:self.data range:romRange tileset:commonTileGroup] autorelease];
+	
+	return( overlayItem );
 }
 
 -(void)dealloc

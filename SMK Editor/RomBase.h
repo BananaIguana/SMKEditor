@@ -14,6 +14,7 @@
 @class RomObjTileGroup;
 @class RomObjTheme;
 @class RomObjTrack;
+@class RomObjOverlay;
 
 typedef enum kRomHandle
 {
@@ -111,6 +112,33 @@ typedef enum kRomHandle
 	kRomHandleTrackBattleCourse4,
 	kRomHandleTrackBattleCourse1,
 	kRomHandleTrackBattleCourse2,
+	
+	// Track Overlay
+	
+	kRomHandleOverlayMarioCircuit3,				// must be sequential with 'kRomTrack'
+	kRomHandleOverlayGhostValley2,
+	kRomHandleOverlayDohnutPlains2,
+	kRomHandleOverlayBowserCastle2,
+	kRomHandleOverlayVanillaLake2,
+	kRomHandleOverlayRainbowRoad,
+	kRomHandleOverlayKoopaBeach2,
+	kRomHandleOverlayMarioCircuit1,
+	kRomHandleOverlayGhostValley3,
+	kRomHandleOverlayBowserCastle3,
+	kRomHandleOverlayChocoIsland2,
+	kRomHandleOverlayDohnutPlains3,
+	kRomHandleOverlayVanillaLake1,
+	kRomHandleOverlayKoopaBeach1,
+	kRomHandleOverlayMarioCircuit4,
+	kRomHandleOverlayMarioCircuit2,
+	kRomHandleOverlayGhostValley1,
+	kRomHandleOverlayBowserCastle1,
+	kRomHandleOverlayChocoIsland1,
+	kRomHandleOverlayDohnutPlains1,
+	kRomHandleOverlayBattleCourse3,
+	kRomHandleOverlayBattleCourse4,
+	kRomHandleOverlayBattleCourse1,
+	kRomHandleOverlayBattleCourse2,
 
 	// End
 
@@ -145,6 +173,7 @@ typedef enum kRomHandle
 
 -(RomObjTileGroup*)tileGroupFromHandle:(kRomHandle)tileGroupHandle paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 -(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
--(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme;
+-(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay;
+-(RomObjOverlay*)overlayItemFromHandle:(kRomHandle)overlayItemHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup;
 
 @end

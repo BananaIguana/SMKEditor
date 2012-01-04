@@ -10,6 +10,7 @@
 #import "RomObjTileGroup.h"
 #import "RomObjTile.h"
 #import "RomObjTheme.h"
+#import "RomObjOverlay.h"
 
 #import "NSData+Decompressor.h"
 
@@ -20,8 +21,9 @@
 @synthesize image;
 @synthesize imageBitmap;
 @synthesize trackType;
+@synthesize overlay;
 
--(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme
+-(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme overlay:(RomObjOverlay*)trackOverlay
 {
 	self = [super init];
 	
@@ -30,6 +32,7 @@
 		self.data			= romData;
 		self.dataRange		= range;
 		self.theme			= theme;
+		self.overlay		= trackOverlay;
 		
 		[self setup];
 	}
@@ -116,6 +119,10 @@
 {
 	NSRect r = NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
 	[image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
+	
+	RomObjOverlay *o								= self.overlay;
+	
+	[o draw:r];
 }
 
 -(NSString*)description
@@ -129,6 +136,7 @@
 	[trackData release];
 	[image  release];
 	[imageBitmap release];
+	[overlay release];
 
 	[super dealloc];
 }

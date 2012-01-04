@@ -122,8 +122,10 @@
 		NSNumber *index						= [eurRom.romTrackThemeMappingArray objectAtIndex:i];
 		
 		RomObjTheme *theme					= [themeArray objectAtIndex:[index unsignedIntValue]];
+		
+		RomObjOverlay *overlay				= [eurRom overlayItemFromHandle:( kRomHandleOverlayMarioCircuit3 + i ) commonTileGroup:theme.tileGroupCommon];
 	
-		RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme];
+		RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme trackOverlay:overlay];
 		
 		[track setTrackType:i];
 		

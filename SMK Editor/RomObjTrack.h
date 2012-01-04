@@ -10,6 +10,7 @@
 #import "RomTypes.h"
 
 @class RomObjTheme;
+@class RomObjOverlay;
 
 @interface RomObjTrack : RomObj
 {
@@ -18,6 +19,7 @@
 	NSImage				*image;
 	NSBitmapImageRep	*imageBitmap;
 	kRomTrack			trackType;
+	RomObjOverlay		*overlay;
 }
 
 @property(nonatomic,retain) RomObjTheme			*theme;
@@ -25,8 +27,9 @@
 @property(nonatomic,retain) NSImage				*image;
 @property(nonatomic,retain) NSBitmapImageRep	*imageBitmap;
 @property(nonatomic,assign) kRomTrack			trackType;
+@property(nonatomic,retain) RomObjOverlay		*overlay;
 
--(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme;
+-(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme overlay:(RomObjOverlay*)trackOverlay;
 -(void)draw:(NSRect)rect;
 -(NSString*)description;
 
