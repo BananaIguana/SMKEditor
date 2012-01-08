@@ -140,6 +140,10 @@ typedef enum kRomHandle
 	kRomHandleOverlayBattleCourse1,
 	kRomHandleOverlayBattleCourse2,
 
+	// Karts
+	
+	kRomHandleKartMario,						// must be sequential with 'kRomKart'
+
 	// End
 
 	kRomNumHandles,

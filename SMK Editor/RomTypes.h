@@ -55,6 +55,14 @@ typedef enum kRomTrack
 	
 }kRomTrack;
 
+typedef enum kRomKart
+{
+	kRomKartMario,					// Index 0 - Mario
+	
+	kRomNumKarts,
+
+}kRomKart;
+
 static inline NSString *RomThemeToString( kRomTheme theme )
 {
 	switch( theme )
@@ -96,12 +104,22 @@ static inline NSString *RomTrackToString( kRomTrack track )
 		case kRomTrackBowserCastle1 :		{ return( @"Bowser Castle 1" );		}break;
 		case kRomTrackChocoIsland1 :		{ return( @"Choco Island 1" );		}break;
 		case kRomTrackDohnutPlains1 :		{ return( @"Donut Plains 1" );		}break;
-		case kRomTrackBattleCourse3 :		{ return( @"Battle Course 1" );		}break;
-		case kRomTrackBattleCourse4 :		{ return( @"Battle Course 2" );		}break;
-		case kRomTrackBattleCourse1 :		{ return( @"Battle Course 3" );		}break;
-		case kRomTrackBattleCourse2 :		{ return( @"Battle Course 4" );		}break;
+		case kRomTrackBattleCourse3 :		{ return( @"Battle Course 3" );		}break;
+		case kRomTrackBattleCourse4 :		{ return( @"Battle Course 4" );		}break;
+		case kRomTrackBattleCourse1 :		{ return( @"Battle Course 1" );		}break;
+		case kRomTrackBattleCourse2 :		{ return( @"Battle Course 2" );		}break;
 		
 		default :							{ return( @"Unknown" );				}		
+	}
+}
+
+static inline NSString *RomKartToString( kRomKart kart )
+{
+	switch( kart )
+	{
+		case kRomKartMario :				{ return( @"Mario" );				}break;
+		
+		default :							{ return( @"Unknown" );				}
 	}
 }
 

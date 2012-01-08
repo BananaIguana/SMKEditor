@@ -20,6 +20,7 @@ typedef enum kRomRangeType
 	kRomRangeTypeTileGroup,
 	kRomRangeTypeTile,
 	kRomRangeTypeTrack,
+	kRomRangeTypeKart,
 	
 	kRomRangeNumTypes,
 	

@@ -14,10 +14,13 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
 	NSArray										*themes;
+	NSArray										*tracks;
+	NSArray										*karts;
 }
 
 @property(nonatomic,retain) NSArray				*themes;
 @property(nonatomic,retain) NSArray				*tracks;
+@property(nonatomic,retain) NSArray				*karts;
 
 @property(retain) IBOutlet TrackEditorWindow	*window;
 @property(assign) IBOutlet NSImageView			*imageTest;

@@ -10,6 +10,10 @@
 
 #import "RomRange.h"
 
+// REF	:	http://datacrystal.romhacking.net/wiki/Super_Mario_Kart:ROM_map
+//		:	http://www.gdward.plus.com/site/gaming/docs/smk.txt
+//		:	http://www.snesmaps.com/maps/SuperMarioKart/SuperMarioKartMapSelect.html
+
 @interface RomObj : NSObject
 {
 	NSData			*data;

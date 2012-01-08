@@ -12,6 +12,7 @@
 #import "RomObjTileGroup.h"
 #import "RomObjTile.h"
 #import "RomObjTrack.h"
+#import "RomObjKart.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "SMKTrackView.h"
@@ -27,12 +28,14 @@
 
 @synthesize themes;
 @synthesize tracks;
+@synthesize karts;
 
 -(void)dealloc
 {
 	[_window release];
 	[themes release];
 	[tracks release];
+	[karts release];
 
     [super dealloc];
 }
@@ -132,8 +135,20 @@
 		[trackArray addObject:track];
 	}
 	
+	NSMutableArray *kartArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumKarts];
+	
+	for( int i = 0; i < kRomNumKarts; ++i )
+	{
+		NSLog( @"Processing [KART] %@", RomKartToString( i ) );
+		
+		RomObjKart *kart					= [eurRom objectFromHandle:( kRomHandleKartMario + i )];
+		
+		[kartArray addObject:kart];		
+	}	
+	
 	self.themes								= themeArray;
 	self.tracks								= trackArray;
+	self.karts								= kartArray;
 	
 	self.trackView.track					= [trackArray objectAtIndex:2];
 	[self.trackView setNeedsDisplay:YES];

@@ -15,9 +15,10 @@
 #import "RomObjTheme.h"
 #import "RomObjTrack.h"
 #import "RomObjOverlay.h"
+#import "RomObjKart.h"
 #import "NSValue+Rom.h"
 
-static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 0, 5, 1, 0, 6, 3, 2, 4, 5, 1, 1, 0, 6, 3, 2, 4, 1, 2, 5 };
+static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0, 6, 3, 2, 4, 5, 1, 1, 0, 6, 3, 2, 4, 1, 2, 5 };
 
 @implementation RomBase
 
@@ -114,6 +115,14 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 0, 5, 1, 0,
 				NSAssert( 0, @"You must call 'trackFromHandle'." );
 			
 				return( nil );
+			
+			}break;
+		
+		case kRomRangeTypeKart :
+			{
+				RomObjKart *kart					= [[[RomObjKart alloc] initWithRomData:self.data range:range] autorelease];
+				
+				return( kart );
 			
 			}break;
 		
