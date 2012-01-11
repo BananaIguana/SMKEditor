@@ -120,9 +120,9 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 		
 		case kRomRangeTypeKart :
 			{
-				RomObjKart *kart					= [[[RomObjKart alloc] initWithRomData:self.data range:range] autorelease];
+				NSAssert( 0, @"You must call 'kartFromHandle'." );
 				
-				return( kart );
+				return( nil );
 			
 			}break;
 		
@@ -199,6 +199,15 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	RomObjOverlay *overlayItem						= [[[RomObjOverlay alloc] initWithRomData:self.data range:romRange tileset:commonTileGroup] autorelease];
 	
 	return( overlayItem );
+}
+
+-(RomObjKart*)kartFromHandle:(kRomHandle)kartHandle palette:(RomObjPalette*)palette
+{
+	RomRange romRange								= [self romRangeFromHandle:kartHandle];
+	
+	RomObjKart *kart								= [[[RomObjKart alloc] initWithRomData:self.data range:romRange palette:palette] autorelease];
+	
+	return( kart );
 }
 
 -(void)dealloc

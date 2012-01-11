@@ -146,7 +146,14 @@ static const RomRange kRomRangeOverlays[ kRomNumTracks ]		= {
 // Karts
 
 static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
-																		{ 0x02000,		0x6000,		0x6000,		kRomRangeTypeKart },
+																		{ 0x02000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Mario
+																		{ 0x12000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Bowser
+																		{ 0x22000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Princess
+																		{ 0x32000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Donkey Kong Jnr.
+																		{ 0x42000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Yoshi
+																		{ 0x4A000,		0x2000,		0x2000,		kRomRangeTypeKart },		// Luigi (special case - slightly more than 0x2000 in size, exact size to be determined)
+																		{ 0x52000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Koopa
+																		{ 0x62000,		0x6000,		0x6000,		kRomRangeTypeKart },		// Toad
 																};
 
 @implementation RomEUR

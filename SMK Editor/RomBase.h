@@ -15,6 +15,8 @@
 @class RomObjTheme;
 @class RomObjTrack;
 @class RomObjOverlay;
+@class RomObjKart;
+@class RomObjPalette;
 
 typedef enum kRomHandle
 {
@@ -179,5 +181,6 @@ typedef enum kRomHandle
 -(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 -(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay;
 -(RomObjOverlay*)overlayItemFromHandle:(kRomHandle)overlayItemHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup;
+-(RomObjKart*)kartFromHandle:(kRomHandle)kartHandle palette:(RomObjPalette*)palette;
 
 @end

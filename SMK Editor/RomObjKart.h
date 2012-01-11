@@ -12,6 +12,17 @@
 // 		:	http://mrclick.zophar.net/TilEd/download/consolegfx.txt
 //		:	http://wiki.superfamicom.org/snes/show/SNES+Sprites
 
+@class RomObjPalette;
+
 @interface RomObjKart : RomObj
+{
+	RomObjPalette		*_palette;
+	NSArray				*imageArray;
+}
+
+@property(nonatomic,retain) RomObjPalette	*palette;
+@property(nonatomic,retain) NSArray			*imageArray;
+
+-(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 
 @end

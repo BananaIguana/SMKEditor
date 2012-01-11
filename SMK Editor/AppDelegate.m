@@ -13,6 +13,8 @@
 #import "RomObjTile.h"
 #import "RomObjTrack.h"
 #import "RomObjKart.h"
+#import "RomObjPalette.h"
+#import "RomObjPaletteGroup.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "SMKTrackView.h"
@@ -141,7 +143,11 @@
 	{
 		NSLog( @"Processing [KART] %@", RomKartToString( i ) );
 		
-		RomObjKart *kart					= [eurRom objectFromHandle:( kRomHandleKartMario + i )];
+		RomObjTheme *t						= [themeArray objectAtIndex:0];
+		RomObjPaletteGroup *pg				= t.paletteGroup;
+		RomObjPalette *p					= [pg.paletteArray objectAtIndex:0];
+		
+		RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
 		
 		[kartArray addObject:kart];		
 	}	
@@ -166,33 +172,6 @@
 	[self test];
 
 	[self.window setTracks:self.tracks];
-}
-
--(IBAction)buttonPressed:(id)sender
-{
-	RomObjTheme *theme						= [self.themes objectAtIndex:kRomThemeRainbowRoad];
-	
-	RomObjTileGroup *tileGroup				= theme.tileGroupCommon;
-//	RomObjTileGroup *tileGroup				= theme;
-	
-	static int i = 0;
-	
-	RomObjTile *tile						= [tileGroup.tilesetBuffer objectAtIndex:i];
-	
-	i++;
-	
-	i %= [tileGroup.tilesetBuffer count];
-	
-	[self.imageTest setImage:tile.image];
-	
-	NSButton *button						= (NSButton*)sender;
-	
-	[button setTitle:[NSString stringWithFormat:@"%d/%d", i, [tileGroup.tilesetBuffer count]]];
-}
-
--(IBAction)buttonWindow:(id)sender
-{
-	[self.paletteWindow makeKeyAndOrderFront:self];
 }
 
 @end

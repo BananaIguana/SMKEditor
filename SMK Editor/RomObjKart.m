@@ -7,17 +7,94 @@
 //
 
 #import "RomObjKart.h"
+#import "RomObjPalette.h"
 
 @implementation RomObjKart
 
-+(unsigned short int)processBitplaneForMask:(unsigned int)mask plane1:(unsigned char)p1 plane2:(unsigned char)p2 plane3:(unsigned char)p3 plane4:(unsigned char)p4
+@synthesize palette = _palette;
+@synthesize imageArray;
+
+-(id)initWithRomData:(NSData*)romData range:(RomRange)range palette:(RomObjPalette*)palette
 {
-	unsigned short int ret				=	( ( p1 & mask ) << 0 ) |
-											( ( p2 & mask ) << 1 ) |
-											( ( p3 & mask ) << 2 ) |
-											( ( p4 & mask ) << 3 );
+	self = [super init];
+	
+	if( self )
+	{
+		self.data									= romData;
+		self.dataRange								= range;
+		self.palette								= palette;
+		
+		[self setup];
+	}
+
+	return( self );
+}
+
++(unsigned short int)processBitplaneForMask:(unsigned int)mask shift:(unsigned int)shift plane1:(unsigned char)p1 plane2:(unsigned char)p2 plane3:(unsigned char)p3 plane4:(unsigned char)p4
+{
+	unsigned short int ret							=	( ( ( p1 & mask ) >> shift ) << 0 ) |
+														( ( ( p2 & mask ) >> shift ) << 1 ) |
+														( ( ( p3 & mask ) >> shift ) << 2 ) |
+														( ( ( p4 & mask ) >> shift ) << 3 );
 											
 	return( ret );
+}
+
+-(NSImage*)imageFromTileData:(NSData*)tileData
+{
+	NSBitmapImageRep *bitmap						= [[NSBitmapImageRep alloc]
+	
+		initWithBitmapDataPlanes:nil
+		pixelsWide:8
+		pixelsHigh:8
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:(8 * 4)
+		bitsPerPixel:32];
+		
+	[bitmap autorelease];
+	
+	NSRange range									= NSMakeRange( 0, sizeof( unsigned int ) * 8 );
+
+	for( int y = 0; y < 8; y++ )
+	{	
+		unsigned int bytes[ 8 ];
+		
+		range.location								= y * sizeof( unsigned int ) * 8;
+
+		[tileData getBytes:bytes range:range];
+
+		for( int x = 0; x < 8; x++ )
+		{
+			NSUInteger bitmapColour[ 4 ];
+			
+			NSUInteger index						= (NSUInteger)bytes[ x ];	
+			
+			index									%= [self.palette.colour count];
+			
+			NSColor *paletteColour					= [self.palette.colour objectAtIndex:index];
+				
+			CGFloat red								= [paletteColour redComponent]; 
+			CGFloat green							= [paletteColour greenComponent]; 
+			CGFloat blue							= [paletteColour blueComponent]; 
+
+			bitmapColour[ 0 ]						= (NSUInteger)( red * 255.0f );
+			bitmapColour[ 1 ]						= (NSUInteger)( green * 255.0f );
+			bitmapColour[ 2 ]						= (NSUInteger)( blue * 255.0f );
+			bitmapColour[ 3 ]						= 255;
+
+			[bitmap setPixel:bitmapColour atX:x y:y];
+		}
+	}
+
+	CGImageRef ref									= [bitmap CGImage];
+
+	NSImage *im										= [[[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )] autorelease];
+	
+	return( im );	
 }
 
 //		Bytes
@@ -42,36 +119,52 @@
 
 -(NSData*)processTile:(unsigned char*)tile32bytes
 {
-	unsigned char *p					= tile32bytes;
-	unsigned int columnMask[ 8 ]		= { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
+	unsigned int columnMask[ 8 ]					= { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
+	unsigned int shift[ 8 ]							= { 7, 6, 5, 4, 3, 2, 1, 0 };
 
-	unsigned short int indexGrid[ 8 ][ 8 ];		// Row Major
-	unsigned int j;
+	unsigned int indexGrid[ 8 ][ 8 ];				// Row Major
+	unsigned int offsets[ 8 ][ 4 ]					= {
+														{ 0x00, 0x01, 0x10, 0x11 },
+														{ 0x02, 0x03, 0x12, 0x13 },
+														{ 0x04, 0x05, 0x14, 0x15 },
+														{ 0x06, 0x07, 0x16, 0x17 },
+														{ 0x08, 0x09, 0x18, 0x19 },
+														{ 0x0A, 0x0B, 0x1A, 0x1B },
+														{ 0x0C, 0x0D, 0x1C, 0x1D },
+														{ 0x0E, 0x0F, 0x1E, 0x1F },
+													};
 
-	for( int i = 0; i < 8; ++i )
+	for( int y = 0; y < 8; ++y )
 	{
-		j								= 0;
+		for( int x = 0; x < 8; ++x )
+		{
+			unsigned int m							= columnMask[ x ];
 
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x00 ] plane2:p[ 0x01 ] plane3:p[ 0x10 ] plane4:p[ 0x11 ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x02 ] plane2:p[ 0x03 ] plane3:p[ 0x12 ] plane4:p[ 0x13 ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x04 ] plane2:p[ 0x05 ] plane3:p[ 0x14 ] plane4:p[ 0x15 ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x06 ] plane2:p[ 0x07 ] plane3:p[ 0x16 ] plane4:p[ 0x17 ]];
+			unsigned int o1							= offsets[ y ][ 0 ];
+			unsigned int o2							= offsets[ y ][ 1 ];
+			unsigned int o3							= offsets[ y ][ 2 ];
+			unsigned int o4							= offsets[ y ][ 3 ];
 
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x08 ] plane2:p[ 0x09 ] plane3:p[ 0x18 ] plane4:p[ 0x19 ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x0A ] plane2:p[ 0x0B ] plane3:p[ 0x1A ] plane4:p[ 0x1B ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x0C ] plane2:p[ 0x0D ] plane3:p[ 0x1C ] plane4:p[ 0x1D ]];
-		indexGrid[ i ][ j++ ]			= [RomObjKart processBitplaneForMask:columnMask[ i ] plane1:p[ 0x0E ] plane2:p[ 0x0F ] plane3:p[ 0x1E ] plane4:p[ 0x1F ]];
+			unsigned int p1							= tile32bytes[ o1 ];
+			unsigned int p2							= tile32bytes[ o2 ];
+			unsigned int p3							= tile32bytes[ o3 ];
+			unsigned int p4							= tile32bytes[ o4 ];			
+
+			indexGrid[ y ][ x ]						= [RomObjKart processBitplaneForMask:m shift:shift[ x ] plane1:p1 plane2:p2 plane3:p3 plane4:p4];
+		}
 	}
-	
-	NSData *indexData					= [[[NSData alloc] initWithBytes:indexGrid length:( sizeof( unsigned short int ) * 8 * 8 )] autorelease];
-	
+
+	NSData *indexData								= [[[NSData alloc] initWithBytes:indexGrid length:( sizeof( unsigned int ) * 8 * 8 )] autorelease];
+		
 	return( indexData );
 }
 
 -(void)setup
 {
-	int i								= 0;
-	NSRange range						= self.dataRange.range;
+	int i											= 0;
+	NSRange range									= self.dataRange.range;
+	
+	NSMutableArray *array							= [[NSMutableArray alloc] init];
 	
 	while( i < range.length )
 	{
@@ -79,10 +172,26 @@
 		
 		[self.data getBytes:tile range:NSMakeRange( i + range.location, 32 )];
 		
-		[self processTile:tile];
+		NSData *tileData							= [self processTile:tile];
+		
+		NSImage *image								= [self imageFromTileData:tileData];
+		
+		[array addObject:image];
 
-		i								+= 32;
+		i											+= 32;
 	}
+
+	self.imageArray									= array;
+
+	[array release];
+}
+
+-(void)dealloc
+{
+	[_palette release];
+	[imageArray release];
+
+	[super dealloc];
 }
 
 @end

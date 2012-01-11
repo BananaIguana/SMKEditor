@@ -11,14 +11,14 @@
 
 typedef enum kRomTheme
 {
-	kRomThemeGhostValley,			// 0
-	kRomThemeMarioCircuit,			// 1
-	kRomThemeDonutPlains,			// 2
-	kRomThemeChocoIsland,			// 3
-	kRomThemeVanillaLake,			// 4
-	kRomThemeKoopaBeach,			// 5
-	kRomThemeBowserCastle,			// 6
-	kRomThemeRainbowRoad,			// 7
+	kRomThemeGhostValley,			// Index 0
+	kRomThemeMarioCircuit,			// Index 1
+	kRomThemeDonutPlains,			// Index 2
+	kRomThemeChocoIsland,			// Index 3
+	kRomThemeVanillaLake,			// Index 4
+	kRomThemeKoopaBeach,			// Index 5
+	kRomThemeBowserCastle,			// Index 6
+	kRomThemeRainbowRoad,			// Index 7
 	
 	kRomNumThemes
 
@@ -57,7 +57,14 @@ typedef enum kRomTrack
 
 typedef enum kRomKart
 {
-	kRomKartMario,					// Index 0 - Mario
+	kRomKartMario,					// Index 0
+	kRomKartBowser,					// Index 1
+	kRomKartPrincess,				// Index 2
+	kRomKartKong,					// Index 3
+	kRomKartYoshi,					// Index 4
+	kRomKartLuigi,					// Index 5
+	kRomKartKoopa,					// Index 6
+	kRomKartToad,					// Index 7
 	
 	kRomNumKarts,
 
@@ -118,6 +125,13 @@ static inline NSString *RomKartToString( kRomKart kart )
 	switch( kart )
 	{
 		case kRomKartMario :				{ return( @"Mario" );				}break;
+		case kRomKartBowser :				{ return( @"Bowser" );				}break;
+		case kRomKartPrincess :				{ return( @"Princess" );			}break;
+		case kRomKartKong :					{ return( @"Kong" );				}break;
+		case kRomKartYoshi :				{ return( @"Yoshi" );				}break;
+		case kRomKartLuigi :				{ return( @"Luigi" );				}break;
+		case kRomKartKoopa :				{ return( @"Koopa" );				}break;
+		case kRomKartToad :					{ return( @"Toad" );				}break;
 		
 		default :							{ return( @"Unknown" );				}
 	}
