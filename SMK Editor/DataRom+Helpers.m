@@ -1,15 +1,12 @@
 //
-//  AppDelegate.m
+//  DataRom+Helpers.m
 //  SMK Editor
 //
-//  Created by Ian Sidor on 27/08/2011.
-//  Copyright (c) 2011 Banana Iguana. All rights reserved.
+//  Created by Ian Sidor on 30/01/2012.
+//  Copyright (c) 2012 Banana Iguana. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
-
-#import "AppDelegate.h"
-
+#import "DataRom+Helpers.h"
 #import "RomObjTheme.h"
 #import "RomObjTileGroup.h"
 #import "RomObjTile.h"
@@ -19,49 +16,15 @@
 #import "RomObjPaletteGroup.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
-#import "SMKTrackView.h"
-#import "ImportWindowController.h"
-#import "DataRomManager.h"
-#import "DataRomTransformer.h"
+#import "RomEUR.h"
 
-@implementation AppDelegate
+@implementation DataRom (Helpers)
 
-@synthesize window = _window;
-@synthesize imageTest = _imageTest;
-@synthesize button = _button;
-@synthesize trackView = _trackView;
-@synthesize testWindow = _testWindow;
-@synthesize paletteWindow = _paletteWindow;
-
-@synthesize themes;
-@synthesize tracks;
-@synthesize karts;
-
--(void)dealloc
+-(RomBase*)extract
 {
-	[_window release];
-	[themes release];
-	[tracks release];
-	[karts release];
-
-    [super dealloc];
-}
-
--(void)test
-{
-	NSUserDefaults *defaults			= [NSUserDefaults standardUserDefaults];
-
-	NSString *romFile					= [defaults stringForKey:@"rom"];
-	
-	NSAssert( romFile, @"Setup your rom path as a command line arg. \"-rom <path_to_rom>\"" );
-
-	NSData *rom							= [[NSData alloc] initWithContentsOfFile:romFile];
-
-	NSAssert( rom, @"Failed to load ROM" );
-			
-	// Fake it as european.
+	// Fake it as european for now...
 		
-	RomEUR *eurRom						= [[RomEUR alloc] initWithData:rom];
+	RomEUR *eurRom						= [[[RomEUR alloc] initWithData:self.rom] autorelease];
 	
 	// Output data to test
 	
@@ -156,47 +119,15 @@
 		
 		[kartArray addObject:kart];		
 	}	
-	
-	self.themes								= themeArray;
-	self.tracks								= trackArray;
-	self.karts								= kartArray;
-	
-	self.trackView.track					= [trackArray objectAtIndex:2];
-	[self.trackView setNeedsDisplay:YES];
+
+	eurRom.themes							= themeArray;
+	eurRom.tracks							= trackArray;
+	eurRom.karts							= kartArray;
 
 	[themeArray release];
 	[trackArray release];
-	[eurRom release];
-	[rom release];
+	[kartArray release];
+	
+	return( eurRom );
 }
-
--(void)applicationDidFinishLaunching:(NSNotification*)aNotification
-{
-	// Insert code here to initialize your application
-
-	{
-		DataRomNameTransformer *transformer = [[DataRomNameTransformer alloc] init];
-		
-		[NSValueTransformer setValueTransformer:transformer forName:@"DataRomNameTransformer"];
-		
-		[transformer release];
-	}
-
-	{
-		DataRomIconTransformer *transformer = [[DataRomIconTransformer alloc] init];
-		
-		[NSValueTransformer setValueTransformer:transformer forName:@"DataRomIconTransformer"];
-		
-		[transformer release];
-	}
-		
-//	[self test];
-
-//	[self.window setTracks:self.tracks];
-		
-	ImportWindowController *ctrl			= [[ImportWindowController alloc] initWithTrackWindow:self.window];
-
-	[ctrl showWindow:nil];
-}
-
 @end

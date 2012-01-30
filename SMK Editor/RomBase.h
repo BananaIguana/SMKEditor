@@ -157,11 +157,19 @@ typedef enum kRomHandle
 	NSData				*data;
 	NSDictionary		*romDict;
 	NSArray				*romTrackThemeMappingArray;
+	
+	NSArray				*themes;
+	NSArray				*tracks;
+	NSArray				*karts;
 }
 
 @property(nonatomic,retain) NSData				*data;
 @property(nonatomic,retain) NSDictionary		*romDict;
 @property(nonatomic,retain) NSArray				*romTrackThemeMappingArray;
+
+@property(nonatomic,retain) NSArray				*themes;
+@property(nonatomic,retain) NSArray				*tracks;
+@property(nonatomic,retain) NSArray				*karts;
 
 -(id)initWithData:(NSData*)romData;
 

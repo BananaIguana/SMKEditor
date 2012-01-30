@@ -26,6 +26,10 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 @synthesize romDict;
 @synthesize romTrackThemeMappingArray;
 
+@synthesize themes;
+@synthesize tracks;
+@synthesize karts;
+
 -(id)initWithData:(NSData*)romData
 {
 	self = [super init];
@@ -215,6 +219,10 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	[data release];
 	[romDict release];
 	[romTrackThemeMappingArray release];
+	
+	[themes release];
+	[tracks release];
+	[karts release];
 
 	[super dealloc];
 }
