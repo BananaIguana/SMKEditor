@@ -165,6 +165,8 @@
 	[self.trackWindow makeKeyAndOrderFront:nil];
 	
 	RomBase *romBase = [rom extract];
+	
+	[self.trackWindow setTracks:romBase.tracks];
 
 	self.trackWindow.trackView.track			= [romBase.tracks objectAtIndex:2];
 	[self.trackWindow.trackView setNeedsDisplay:YES];

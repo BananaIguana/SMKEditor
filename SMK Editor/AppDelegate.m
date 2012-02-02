@@ -192,7 +192,7 @@
 		
 //	[self test];
 
-//	[self.window setTracks:self.tracks];
+//	
 		
 	ImportWindowController *ctrl			= [[ImportWindowController alloc] initWithTrackWindow:self.window];
 

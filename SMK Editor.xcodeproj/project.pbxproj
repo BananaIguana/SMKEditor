@@ -13,6 +13,7 @@
 		3C40302E14B04FE700CEB708 /* SMKTrackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40302D14B04FE600CEB708 /* SMKTrackView.m */; };
 		3C40DC5414AEBFDB00EB296F /* RomObjTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40DC5314AEBFDB00EB296F /* RomObjTrack.m */; };
 		3C4E6F0214B7694000035A8C /* RomObjKart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E6F0114B7694000035A8C /* RomObjKart.m */; };
+		3C5C1B0B14D6334F001039D6 /* ToolWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5C1B0A14D6334F001039D6 /* ToolWindow.xib */; };
 		3C6063AC14D2008F0080E64A /* DataRom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6063AB14D2008F0080E64A /* DataRom.m */; };
 		3C6095F614B145EB00355751 /* TrackEditorWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6095F514B145EB00355751 /* TrackEditorWindow.m */; };
 		3C647CE714D6067D005AC9A7 /* ImportDeleteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C647CE614D6067D005AC9A7 /* ImportDeleteWindowController.m */; };
@@ -20,6 +21,8 @@
 		3C676EAF14B58DCC007BB414 /* ImportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C676EAE14B58DCC007BB414 /* ImportWindow.m */; };
 		3C6A5288146E1D87007D4BF3 /* RomObjPaletteGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A5287146E1D87007D4BF3 /* RomObjPaletteGroup.m */; };
 		3C6A528C146E1E1B007D4BF3 /* RomObjPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A528B146E1E1B007D4BF3 /* RomObjPalette.m */; };
+		3C881F0614D88B530096F949 /* ProcessWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C881F0514D88B530096F949 /* ProcessWindow.xib */; };
+		3C881F0B14D88E3E0096F949 /* ProcessingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C881F0A14D88E3E0096F949 /* ProcessingWindow.m */; };
 		3C89D8ED14C8C1B000BD8522 /* SMK.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C89D8EB14C8C1B000BD8522 /* SMK.xcdatamodeld */; };
 		3C89D8F014C8C99300BD8522 /* DataRomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89D8EF14C8C99300BD8522 /* DataRomManager.m */; };
 		3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B13140874B200A46814 /* Cocoa.framework */; };
@@ -60,13 +63,14 @@
 		3C4E6F0014B7694000035A8C /* RomObjKart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjKart.h; sourceTree = "<group>"; };
 		3C4E6F0114B7694000035A8C /* RomObjKart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjKart.m; sourceTree = "<group>"; };
 		3C4F9A19146F7D1A0055796F /* RomTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomTypes.h; sourceTree = "<group>"; };
+		3C5C1B0A14D6334F001039D6 /* ToolWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolWindow.xib; sourceTree = "<group>"; };
 		3C6063AA14D2008F0080E64A /* DataRom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRom.h; sourceTree = "<group>"; };
 		3C6063AB14D2008F0080E64A /* DataRom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRom.m; sourceTree = "<group>"; };
 		3C6095F414B145EB00355751 /* TrackEditorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackEditorWindow.h; sourceTree = "<group>"; };
 		3C6095F514B145EB00355751 /* TrackEditorWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackEditorWindow.m; sourceTree = "<group>"; };
 		3C647CE514D6067D005AC9A7 /* ImportDeleteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportDeleteWindowController.h; sourceTree = "<group>"; };
 		3C647CE614D6067D005AC9A7 /* ImportDeleteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportDeleteWindowController.m; sourceTree = "<group>"; };
-		3C647CEE14D61A2F005AC9A7 /* DataRom+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "DataRom+Helpers.h"; sourceTree = "<group>"; };
+		3C647CEE14D61A2F005AC9A7 /* DataRom+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DataRom+Helpers.h"; sourceTree = "<group>"; };
 		3C647CEF14D61A2F005AC9A7 /* DataRom+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DataRom+Helpers.m"; sourceTree = "<group>"; };
 		3C676EAD14B58DCC007BB414 /* ImportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportWindow.h; sourceTree = "<group>"; };
 		3C676EAE14B58DCC007BB414 /* ImportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWindow.m; sourceTree = "<group>"; };
@@ -74,6 +78,9 @@
 		3C6A5287146E1D87007D4BF3 /* RomObjPaletteGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjPaletteGroup.m; sourceTree = "<group>"; };
 		3C6A528A146E1E1B007D4BF3 /* RomObjPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjPalette.h; sourceTree = "<group>"; };
 		3C6A528B146E1E1B007D4BF3 /* RomObjPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjPalette.m; sourceTree = "<group>"; };
+		3C881F0514D88B530096F949 /* ProcessWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProcessWindow.xib; sourceTree = "<group>"; };
+		3C881F0914D88E3E0096F949 /* ProcessingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessingWindow.h; sourceTree = "<group>"; };
+		3C881F0A14D88E3E0096F949 /* ProcessingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessingWindow.m; sourceTree = "<group>"; };
 		3C89D8EC14C8C1B000BD8522 /* SMK.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SMK.xcdatamodel; sourceTree = "<group>"; };
 		3C89D8EE14C8C99300BD8522 /* DataRomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRomManager.h; sourceTree = "<group>"; };
 		3C89D8EF14C8C99300BD8522 /* DataRomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRomManager.m; sourceTree = "<group>"; };
@@ -155,6 +162,38 @@
 			name = GUI;
 			sourceTree = "<group>";
 		};
+		3C5C1B0614D6308B001039D6 /* Import Window */ = {
+			isa = PBXGroup;
+			children = (
+				3C647CE314D60653005AC9A7 /* Delete Comfirmation */,
+				3C676EAE14B58DCC007BB414 /* ImportWindow.m */,
+				3C676EAD14B58DCC007BB414 /* ImportWindow.h */,
+				3CF4085314C4BC9800F92E60 /* ImportWindow.xib */,
+				3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */,
+				3CF4085D14C4C82B00F92E60 /* ImportWindowTableRowView.h */,
+				3C037EA014C629DD00B4F148 /* ImportWindowController.m */,
+				3C037E9F14C629DD00B4F148 /* ImportWindowController.h */,
+			);
+			name = "Import Window";
+			sourceTree = "<group>";
+		};
+		3C5C1B0814D6309C001039D6 /* Track Editor */ = {
+			isa = PBXGroup;
+			children = (
+				3C6095F514B145EB00355751 /* TrackEditorWindow.m */,
+				3C6095F414B145EB00355751 /* TrackEditorWindow.h */,
+			);
+			name = "Track Editor";
+			sourceTree = "<group>";
+		};
+		3C5C1B0914D63316001039D6 /* Tool Window */ = {
+			isa = PBXGroup;
+			children = (
+				3C5C1B0A14D6334F001039D6 /* ToolWindow.xib */,
+			);
+			name = "Tool Window";
+			sourceTree = "<group>";
+		};
 		3C6095F214B1187B00355751 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,16 +206,10 @@
 		3C6095F314B1193B00355751 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
-				3C647CE314D60653005AC9A7 /* Delete Comfirmation */,
-				3C6095F514B145EB00355751 /* TrackEditorWindow.m */,
-				3C6095F414B145EB00355751 /* TrackEditorWindow.h */,
-				3C676EAE14B58DCC007BB414 /* ImportWindow.m */,
-				3C676EAD14B58DCC007BB414 /* ImportWindow.h */,
-				3CF4085314C4BC9800F92E60 /* ImportWindow.xib */,
-				3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */,
-				3CF4085D14C4C82B00F92E60 /* ImportWindowTableRowView.h */,
-				3C037EA014C629DD00B4F148 /* ImportWindowController.m */,
-				3C037E9F14C629DD00B4F148 /* ImportWindowController.h */,
+				3C881F0814D88E1B0096F949 /* Processing Window */,
+				3C5C1B0914D63316001039D6 /* Tool Window */,
+				3C5C1B0814D6309C001039D6 /* Track Editor */,
+				3C5C1B0614D6308B001039D6 /* Import Window */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -200,6 +233,16 @@
 				3C647CEE14D61A2F005AC9A7 /* DataRom+Helpers.h */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		3C881F0814D88E1B0096F949 /* Processing Window */ = {
+			isa = PBXGroup;
+			children = (
+				3C881F0A14D88E3E0096F949 /* ProcessingWindow.m */,
+				3C881F0914D88E3E0096F949 /* ProcessingWindow.h */,
+				3C881F0514D88B530096F949 /* ProcessWindow.xib */,
+			);
+			name = "Processing Window";
 			sourceTree = "<group>";
 		};
 		3C89D8E914C8C19A00BD8522 /* CoreData */ = {
@@ -388,6 +431,8 @@
 				3CD9059714C792840018B80B /* jap_flag_256.png in Resources */,
 				3CD9059814C792840018B80B /* usa_flag_256.png in Resources */,
 				3CA38A5B14D4E6A300FB277B /* ImportDeleteWindow.xib in Resources */,
+				3C5C1B0B14D6334F001039D6 /* ToolWindow.xib in Resources */,
+				3C881F0614D88B530096F949 /* ProcessWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +471,7 @@
 				3CA38A5814D4E68B00FB277B /* ImportDeleteWindow.m in Sources */,
 				3C647CE714D6067D005AC9A7 /* ImportDeleteWindowController.m in Sources */,
 				3C647CF014D61A2F005AC9A7 /* DataRom+Helpers.m in Sources */,
+				3C881F0B14D88E3E0096F949 /* ProcessingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
