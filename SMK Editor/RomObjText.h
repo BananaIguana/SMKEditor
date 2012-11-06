@@ -15,7 +15,7 @@
 	NSString *text;
 }
 
-@property(nonatomic,retain) NSString *text;
+@property(retain) NSString *text;
 
 -(void)setup;
 

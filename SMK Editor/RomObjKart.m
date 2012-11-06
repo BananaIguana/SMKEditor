@@ -75,7 +75,7 @@
 			
 			index									%= [self.palette.colour count];
 			
-			NSColor *paletteColour					= [self.palette.colour objectAtIndex:index];
+			NSColor *paletteColour					= (self.palette.colour)[index];
 				
 			CGFloat red								= [paletteColour redComponent]; 
 			CGFloat green							= [paletteColour greenComponent]; 

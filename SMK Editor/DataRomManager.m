@@ -97,7 +97,7 @@ static DataRomManager *gDataRomManager = nil;
 	
 	NSSortDescriptor *sort			= [[[NSSortDescriptor alloc] initWithKey:@"dateUpdated" ascending:YES] autorelease];
 
-	[request setSortDescriptors:[NSArray arrayWithObject:sort]];	
+	[request setSortDescriptors:@[sort]];	
 	[request setEntity:desc];
 	
 	NSError *error;

@@ -20,7 +20,7 @@
 {
 	NSInteger index = [self.trackSelector indexOfSelectedItem];
 
-	self.trackView.track = [self.trackArray objectAtIndex:index];
+	self.trackView.track = (self.trackArray)[index];
 	
 	[self.trackView setNeedsDisplay:YES];
 }

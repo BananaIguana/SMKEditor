@@ -33,8 +33,8 @@ typedef struct OverlayItem
 	NSArray					*overlayItems;
 }
 
-@property(nonatomic,retain) RomObjTileGroup		*tileset;
-@property(nonatomic,retain) NSArray				*overlayItems;
+@property(retain) RomObjTileGroup		*tileset;
+@property(retain) NSArray				*overlayItems;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range tileset:(RomObjTileGroup*)commonTileset;
 -(void)draw:(NSRect)rect;

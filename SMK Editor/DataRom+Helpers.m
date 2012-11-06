@@ -92,9 +92,9 @@
 	{
 		NSLog( @"Processing [TRACK] %@", RomTrackToString( i ) );
 		
-		NSNumber *index						= [eurRom.romTrackThemeMappingArray objectAtIndex:i];
+		NSNumber *index						= (eurRom.romTrackThemeMappingArray)[i];
 		
-		RomObjTheme *theme					= [themeArray objectAtIndex:[index unsignedIntValue]];
+		RomObjTheme *theme					= themeArray[[index unsignedIntValue]];
 		
 		RomObjOverlay *overlay				= [eurRom overlayItemFromHandle:( kRomHandleOverlayMarioCircuit3 + i ) commonTileGroup:theme.tileGroupCommon];
 	
@@ -111,9 +111,9 @@
 	{
 		NSLog( @"Processing [KART] %@", RomKartToString( i ) );
 		
-		RomObjTheme *t						= [themeArray objectAtIndex:0];
+		RomObjTheme *t						= themeArray[0];
 		RomObjPaletteGroup *pg				= t.paletteGroup;
-		RomObjPalette *p					= [pg.paletteArray objectAtIndex:0];
+		RomObjPalette *p					= (pg.paletteArray)[0];
 		
 		RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
 		

@@ -20,8 +20,8 @@
 	RomRange		dataRange;
 }
 
-@property(nonatomic,retain) NSData		*data;
-@property(nonatomic,assign) RomRange	dataRange;
+@property(retain) NSData		*data;
+@property(assign) RomRange		dataRange;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range;
 -(void)setup;

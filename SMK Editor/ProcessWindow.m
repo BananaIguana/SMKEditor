@@ -1,13 +1,14 @@
 //
-//  ProcessingWindow.m
+//  ProcessWindow.m
 //  SMK Editor
 //
 //  Created by Ian Sidor on 31/01/2012.
 //  Copyright (c) 2012 Banana Iguana. All rights reserved.
 //
 
-#import "ProcessingWindow.h"
+#import "ProcessWindow.h"
 
-@implementation ProcessingWindow
+@implementation ProcessWindow
+
 
 @end

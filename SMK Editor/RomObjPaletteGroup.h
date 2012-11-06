@@ -13,6 +13,6 @@
 	NSArray *paletteArray;
 }
 
-@property(nonatomic,retain) NSArray *paletteArray;
+@property(retain) NSArray *paletteArray;
 
 @end

@@ -20,8 +20,8 @@
 	NSArray				*imageArray;
 }
 
-@property(nonatomic,retain) RomObjPalette	*palette;
-@property(nonatomic,retain) NSArray			*imageArray;
+@property(retain) RomObjPalette		*palette;
+@property(retain) NSArray			*imageArray;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

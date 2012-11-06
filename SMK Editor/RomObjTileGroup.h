@@ -17,9 +17,9 @@
 	RomObjPaletteGroup		*_paletteGroup;
 }
 
-@property(nonatomic,retain) NSArray					*indexBuffer;
-@property(nonatomic,retain) NSArray					*tilesetBuffer;
-@property(nonatomic,retain) RomObjPaletteGroup		*paletteGroup;
+@property(retain) NSArray					*indexBuffer;
+@property(retain) NSArray					*tilesetBuffer;
+@property(retain) RomObjPaletteGroup		*paletteGroup;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 

@@ -45,7 +45,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 		
 		for( int i = 0; i < mappingItems; ++i )
 		{
-			NSNumber *num							= [NSNumber numberWithUnsignedInt:kRomTrackThemeMapping[ i ]];
+			NSNumber *num							= @(kRomTrackThemeMapping[ i ]);
 		
 			[array insertObject:num atIndex:i];
 		}
@@ -84,7 +84,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 				
 				[self.data getBytes:&charValue range:range.range];
 
-				NSNumber *numValue					= [NSNumber numberWithUnsignedChar:charValue];
+				NSNumber *numValue					= @(charValue);
 				
 				return( numValue );
 			
@@ -146,7 +146,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 
 -(RomRange)romRangeFromKey:(NSNumber*)key
 {
-	NSValue *value									= [self.romDict objectForKey:key];
+	NSValue *value									= (self.romDict)[key];
 	
 	RomRange romRange								= [value romRangeValue];
 	

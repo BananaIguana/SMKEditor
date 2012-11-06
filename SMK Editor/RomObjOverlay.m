@@ -113,10 +113,10 @@
 {
 	NSArray *tilesetBuffer				= self.tileset.tilesetBuffer;
 	
-	RomObjTile *tl						= [tilesetBuffer objectAtIndex:( startIndex + 0 )];
-	RomObjTile *tr						= [tilesetBuffer objectAtIndex:( startIndex + 1 )];
-	RomObjTile *bl						= [tilesetBuffer objectAtIndex:( startIndex + 2 )];
-	RomObjTile *br						= [tilesetBuffer objectAtIndex:( startIndex + 3 )];
+	RomObjTile *tl						= tilesetBuffer[( startIndex + 0 )];
+	RomObjTile *tr						= tilesetBuffer[( startIndex + 1 )];
+	RomObjTile *bl						= tilesetBuffer[( startIndex + 2 )];
+	RomObjTile *br						= tilesetBuffer[( startIndex + 3 )];
 
 	[self drawTile:tl atX:( ( item->tileX + 0 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tr atX:( ( item->tileX + 1 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
@@ -128,9 +128,9 @@
 {
 	NSArray *tilesetBuffer				= self.tileset.tilesetBuffer;
 
-	RomObjTile *l						= [tilesetBuffer objectAtIndex:( startIndex + 0 )];
-	RomObjTile *m						= [tilesetBuffer objectAtIndex:( startIndex + 1 )];
-	RomObjTile *r						= [tilesetBuffer objectAtIndex:( startIndex + 2 )];
+	RomObjTile *l						= tilesetBuffer[( startIndex + 0 )];
+	RomObjTile *m						= tilesetBuffer[( startIndex + 1 )];
+	RomObjTile *r						= tilesetBuffer[( startIndex + 2 )];
 
 	[self drawTile:l atX:( ( item->tileX + 0 ) * 8 ) y:( item->tileY * 8 )];
 	[self drawTile:m atX:( ( item->tileX + 1 ) * 8 ) y:( item->tileY * 8 )];
@@ -141,9 +141,9 @@
 {
 	NSArray *tilesetBuffer				= self.tileset.tilesetBuffer;
 
-	RomObjTile *t						= [tilesetBuffer objectAtIndex:( startIndex + 0 )];
-	RomObjTile *m						= [tilesetBuffer objectAtIndex:( startIndex + 1 )];
-	RomObjTile *b						= [tilesetBuffer objectAtIndex:( startIndex + 2 )];
+	RomObjTile *t						= tilesetBuffer[( startIndex + 0 )];
+	RomObjTile *m						= tilesetBuffer[( startIndex + 1 )];
+	RomObjTile *b						= tilesetBuffer[( startIndex + 2 )];
 
 	[self drawTile:t atX:( item->tileX * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:m atX:( item->tileX * 8 ) y:( ( item->tileY + 1 ) * 8 )];
@@ -152,7 +152,7 @@
 
 -(void)draw55Plus:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
@@ -163,7 +163,7 @@
 	
 -(void)draw55Cross:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 0 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 4 ) * 8 ) y:( ( item->tileY + 4 ) * 8 )];
@@ -174,7 +174,7 @@
 	
 -(void)draw55Slash:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 4 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
@@ -183,7 +183,7 @@
 	
 -(void)draw55Backslash:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 0 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
@@ -192,7 +192,7 @@
 
 -(void)draw55Horizontal:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 0 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
@@ -201,7 +201,7 @@
 
 -(void)draw55Vertical:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 0 ) * 8 )];
 	[self drawTile:tile atX:( ( item->tileX + 2 ) * 8 ) y:( ( item->tileY + 2 ) * 8 )];
@@ -210,7 +210,7 @@
 
 -(void)drawSingle:(OverlayItem*)item startIndex:(int)startIndex
 {
-	RomObjTile *tile					= [self.tileset.tilesetBuffer objectAtIndex:startIndex];
+	RomObjTile *tile					= (self.tileset.tilesetBuffer)[startIndex];
 
 	[self drawTile:tile atX:( item->tileX * 8 ) y:( item->tileY * 8 )];
 }

@@ -21,8 +21,8 @@
 	NSImage					*image;
 }
 
-@property(nonatomic,retain) RomObjPalette	*palette;
-@property(nonatomic,retain) NSImage			*image;
+@property(retain) RomObjPalette		*palette;
+@property(retain) NSImage			*image;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

@@ -66,7 +66,7 @@ static const NSInteger kGroupSize			= 32;
 	{
 		unsigned char currentIndex			= ( buffer[ i ] >> 4 ) & 0xFF;
 		
-		NSNumber *index						= [NSNumber numberWithUnsignedChar:currentIndex];
+		NSNumber *index						= @(currentIndex);
 		
 		[indexArray addObject:index];
 	}
@@ -86,8 +86,8 @@ static const NSInteger kGroupSize			= 32;
 	{
 		RomRange range						= RomRangeMake( kRomRangeTypeTile, i * kGroupSize, kGroupSize );
 	
-		NSNumber *paletteIndex				= [self.indexBuffer objectAtIndex:i];
-		RomObjPalette *palette				= [self.paletteGroup.paletteArray objectAtIndex:[paletteIndex intValue]];
+		NSNumber *paletteIndex				= (self.indexBuffer)[i];
+		RomObjPalette *palette				= (self.paletteGroup.paletteArray)[[paletteIndex intValue]];
 	
 		RomObjTile *tile					= [[RomObjTile alloc] initWithRomData:tilesetData range:range palette:palette];
 		

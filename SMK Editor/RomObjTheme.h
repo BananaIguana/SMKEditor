@@ -18,7 +18,7 @@
 	RomObjTileGroup								*tileGroupCommon;
 }
 
-@property(nonatomic,retain) RomObjTileGroup		*tileGroupCommon;
+@property(retain) RomObjTileGroup				*tileGroupCommon;
 
 -(id)initWithRomData:(NSData*)tilesetGroupRomData range:(RomRange)range commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 

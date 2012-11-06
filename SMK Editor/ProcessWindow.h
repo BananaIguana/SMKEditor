@@ -1,5 +1,5 @@
 //
-//  ProcessingWindow.h
+//  ProcessWindow.h
 //  SMK Editor
 //
 //  Created by Ian Sidor on 31/01/2012.
@@ -8,6 +8,6 @@
 
 #import <AppKit/AppKit.h>
 
-@interface ProcessingWindow : NSWindow
+@interface ProcessWindow : NSWindow
 
 @end

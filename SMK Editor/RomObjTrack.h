@@ -22,12 +22,12 @@
 	RomObjOverlay		*overlay;
 }
 
-@property(nonatomic,retain) RomObjTheme			*theme;
-@property(nonatomic,retain) NSData				*trackData;
-@property(nonatomic,retain) NSImage				*image;
-@property(nonatomic,retain) NSBitmapImageRep	*imageBitmap;
-@property(nonatomic,assign) kRomTrack			trackType;
-@property(nonatomic,retain) RomObjOverlay		*overlay;
+@property(retain) RomObjTheme			*theme;
+@property(retain) NSData				*trackData;
+@property(retain) NSImage				*image;
+@property(retain) NSBitmapImageRep		*imageBitmap;
+@property(assign) kRomTrack				trackType;
+@property(retain) RomObjOverlay			*overlay;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme overlay:(RomObjOverlay*)trackOverlay;
 -(void)draw:(NSRect)rect;

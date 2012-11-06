@@ -67,7 +67,7 @@
 		{
 			unsigned char index						= indexBuffer[ x ][ y ];
 			
-			NSColor *paletteColour					= [self.palette.colour objectAtIndex:(NSUInteger)index];
+			NSColor *paletteColour					= (self.palette.colour)[(NSUInteger)index];
 			
 			CGFloat red								= [paletteColour redComponent]; 
 			CGFloat green							= [paletteColour greenComponent]; 

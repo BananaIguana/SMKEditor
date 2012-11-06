@@ -23,7 +23,7 @@
 
 static NSGradient *gradientWithTargetColor(NSColor *targetColor)
 {
-    NSArray *colors = [NSArray arrayWithObjects:[targetColor colorWithAlphaComponent:0], targetColor, targetColor, [targetColor colorWithAlphaComponent:0], nil];
+    NSArray *colors = @[[targetColor colorWithAlphaComponent:0], targetColor, targetColor, [targetColor colorWithAlphaComponent:0]];
 
     const CGFloat locations[4] = { 0.0, 0.35, 0.65, 1.0 };
 

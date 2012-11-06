@@ -214,19 +214,19 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 
 		kRomHandle handleThemeText			= kRomHandleTextGhostValley + eTheme;
 		
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTextTheme[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemeText]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleThemeText]] = [NSValue valueWithRomRange:kRomRangeTextTheme[ eTheme ]];
 
 		// Theme Tilesets
 		
 		kRomHandle handleThemeTileset		= kRomHandleTilesetGroupGhostValley + eTheme;
 		
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTileset[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemeTileset]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleThemeTileset]] = [NSValue valueWithRomRange:kRomRangeTileset[ eTheme ]];
 		
 		// Theme Palettes
 
 		kRomHandle handleThemePalette		= kRomHandlePaletteGroupGhostValley + eTheme;
 
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangePaletteGroup[ eTheme ]] forKey:[NSNumber numberWithUnsignedInt:handleThemePalette]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleThemePalette]] = [NSValue valueWithRomRange:kRomRangePaletteGroup[ eTheme ]];
 	}
 	
 	// Track handles
@@ -235,11 +235,11 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 	{
 		kRomHandle handleTrack				= kRomHandleTrackMarioCircuit3 + eTrack;
 		
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeTracks[ eTrack ]] forKey:[NSNumber numberWithUnsignedInt:handleTrack]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleTrack]] = [NSValue valueWithRomRange:kRomRangeTracks[ eTrack ]];
 		
 		kRomHandle handleOverlay			= kRomHandleOverlayMarioCircuit3 + eTrack;
 		
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeOverlays[ eTrack ]] forKey:[NSNumber numberWithUnsignedInt:handleOverlay]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleOverlay]] = [NSValue valueWithRomRange:kRomRangeOverlays[ eTrack ]];
 	}
 	
 	// Kart handles
@@ -248,7 +248,7 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 	{
 		kRomHandle handleKart				= kRomHandleKartMario + eKart;
 		
-		[dictionary setObject:[NSValue valueWithRomRange:kRomRangeKarts[ eKart ]] forKey:[NSNumber numberWithUnsignedInt:handleKart]];
+		dictionary[[NSNumber numberWithUnsignedInt:handleKart]] = [NSValue valueWithRomRange:kRomRangeKarts[ eKart ]];
 	}
 
 	return( dictionary );

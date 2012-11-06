@@ -13,6 +13,7 @@
 #import "TrackEditorWindow.h"
 #import "RomBase.h"
 #import "SMKTrackView.h"
+#import "ProcessWindowController.h"
 
 @implementation ImportWindow
 
@@ -95,7 +96,7 @@
 	
 	if( self.selectedTableIndex != -1 )
 	{	
-		DataRom *rom				= [self.dataRom objectAtIndex:self.selectedTableIndex];
+		DataRom *rom				= (self.dataRom)[self.selectedTableIndex];
 		
 		[self.labelProjectName setStringValue:rom.name];
 		[self.labelCreated setStringValue:[rom.dateImported description]];
@@ -129,7 +130,7 @@
 	[openPanel setResolvesAliases:YES];
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setShowsHiddenFiles:NO];
-	[openPanel setAllowedFileTypes:[NSArray arrayWithObjects:@"smc", nil]];
+	[openPanel setAllowedFileTypes:@[@"smc"]];
 	
 	[openPanel beginSheetModalForWindow:self completionHandler:^( NSInteger result ){
 		
@@ -160,16 +161,14 @@
 
 -(IBAction)clickedOpen:(NSButton*)sender
 {
-	DataRom *rom = [self.dataRom objectAtIndex:self.selectedTableIndex];
+	DataRom *rom = (self.dataRom)[self.selectedTableIndex];
 
-	[self.trackWindow makeKeyAndOrderFront:nil];
+	ProcessWindowController *ctrl = [[ProcessWindowController alloc] initWithWindowNibName:@"ProcessWindow"];
 	
-	RomBase *romBase = [rom extract];
+	ctrl.rom = rom;
+	ctrl.trackEditor = self.trackWindow;
 	
-	[self.trackWindow setTracks:romBase.tracks];
-
-	self.trackWindow.trackView.track			= [romBase.tracks objectAtIndex:2];
-	[self.trackWindow.trackView setNeedsDisplay:YES];
+	[[ctrl window] makeKeyAndOrderFront:nil];	
 	
 	[self orderOut:nil];
 }
@@ -210,7 +209,7 @@
 
 -(id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)tableColumn row:(NSInteger)row
 {
-	DataRom *data = [self.dataRom objectAtIndex:row];
+	DataRom *data = (self.dataRom)[row];
 	
 	NSImage *image;
 	

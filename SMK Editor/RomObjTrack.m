@@ -89,7 +89,7 @@
 			
 			byte							%= [buffer count];
 
-			RomObjTile *tile				= [buffer objectAtIndex:byte];
+			RomObjTile *tile				= buffer[byte];
 			imageTile						= tile.image;
 			
 			NSRect dst						= NSMakeRect( x * 8, 1016.0f - ( y * 8 ), 8, 8 );
