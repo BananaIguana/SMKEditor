@@ -12,10 +12,6 @@
 
 @implementation TrackEditorWindow
 
-@synthesize trackSelector;
-@synthesize trackArray;
-@synthesize trackView;
-
 -(IBAction)trackSelectorChanged:(id)sender
 {
 	NSInteger index = [self.trackSelector indexOfSelectedItem];
@@ -37,15 +33,6 @@
 
 	[self.trackSelector removeAllItems];
 	[self.trackSelector addItemsWithTitles:trackNameArray];
-
-	[trackNameArray release];
-}
-
--(void)dealloc
-{
-	[trackArray release];
-
-	[super dealloc];
 }
 
 @end

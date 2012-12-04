@@ -9,10 +9,7 @@
 #import "RomObj.h"
 
 @interface RomObjPaletteGroup : RomObj
-{
-	NSArray *paletteArray;
-}
 
-@property(retain) NSArray *paletteArray;
+@property(strong) NSArray *paletteArray;
 
 @end

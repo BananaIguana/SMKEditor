@@ -12,8 +12,6 @@
 
 @implementation RomObjPalette
 
-@synthesize colour;
-
 -(NSColor*)colourFromData:(unsigned char[2])twoBytes
 {
 	unsigned int lobyte			= twoBytes[ 0 ];
@@ -55,13 +53,11 @@
 	}
 	
 	self.colour					= paletteColourArray;
-
-	[paletteColourArray release];	
 }
 
 -(NSString*)description
 {
-	NSMutableString *desc		= [NSMutableString stringWithFormat:@"Palette 0x%08X", self];
+	NSMutableString *desc		= [NSMutableString stringWithFormat:@"Palette 0x%08X", (int)self];
 	
 	[self.colour enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
 	
@@ -69,7 +65,7 @@
 		
 		NSColor *col			= (NSColor*)obj;
 
-		[desc appendFormat:@"\n--> Colour Index %02u : R-%03d G-%03d B-%03d A-%03d",
+		[desc appendFormat:@"\n--> Colour Index %02lu : R-%03d G-%03d B-%03d A-%03d",
 		
 			idx,
 			(int)( [col redComponent]		* 255.0f ),
@@ -81,11 +77,5 @@
 	return( desc );
 }
 
--(void)dealloc
-{
-	[colour release];
-
-	[super dealloc];
-}
 
 @end

@@ -15,12 +15,8 @@
 //		:	http://www.snesmaps.com/maps/SuperMarioKart/SuperMarioKartMapSelect.html
 
 @interface RomObj : NSObject
-{
-	NSData			*data;
-	RomRange		dataRange;
-}
 
-@property(retain) NSData		*data;
+@property(strong) NSData		*data;
 @property(assign) RomRange		dataRange;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range;

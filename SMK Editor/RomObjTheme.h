@@ -14,11 +14,8 @@
 @class RomObjPaletteGroup;
 
 @interface RomObjTheme : RomObjTileGroup
-{
-	RomObjTileGroup								*tileGroupCommon;
-}
 
-@property(retain) RomObjTileGroup				*tileGroupCommon;
+@property(strong) RomObjTileGroup				*tileGroupCommon;
 
 -(id)initWithRomData:(NSData*)tilesetGroupRomData range:(RomRange)range commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 

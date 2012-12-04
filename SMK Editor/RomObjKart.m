@@ -11,9 +11,6 @@
 
 @implementation RomObjKart
 
-@synthesize palette = _palette;
-@synthesize imageArray;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range palette:(RomObjPalette*)palette
 {
 	self = [super init];
@@ -54,9 +51,7 @@
 		colorSpaceName:NSDeviceRGBColorSpace
 		bytesPerRow:(8 * 4)
 		bitsPerPixel:32];
-		
-	[bitmap autorelease];
-	
+
 	NSRange range									= NSMakeRange( 0, sizeof( unsigned int ) * 8 );
 
 	for( int y = 0; y < 8; y++ )
@@ -92,7 +87,7 @@
 
 	CGImageRef ref									= [bitmap CGImage];
 
-	NSImage *im										= [[[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )] autorelease];
+	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )];
 	
 	return( im );	
 }
@@ -154,7 +149,7 @@
 		}
 	}
 
-	NSData *indexData								= [[[NSData alloc] initWithBytes:indexGrid length:( sizeof( unsigned int ) * 8 * 8 )] autorelease];
+	NSData *indexData								= [[NSData alloc] initWithBytes:indexGrid length:( sizeof( unsigned int ) * 8 * 8 )];
 		
 	return( indexData );
 }
@@ -183,15 +178,7 @@
 
 	self.imageArray									= array;
 
-	[array release];
 }
 
--(void)dealloc
-{
-	[_palette release];
-	[imageArray release];
-
-	[super dealloc];
-}
 
 @end

@@ -15,13 +15,9 @@
 @class RomObjPalette;
 
 @interface RomObjKart : RomObj
-{
-	RomObjPalette		*_palette;
-	NSArray				*imageArray;
-}
 
-@property(retain) RomObjPalette		*palette;
-@property(retain) NSArray			*imageArray;
+@property(strong) RomObjPalette		*palette;
+@property(strong) NSArray			*imageArray;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

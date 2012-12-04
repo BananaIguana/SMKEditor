@@ -9,13 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @class TrackEditorWindow;
+@class ImportWindow;
 
 @interface ImportWindowController : NSWindowController
-{
-	TrackEditorWindow *_trackWindow;
-}
 
-@property(retain) TrackEditorWindow *trackWindow;
+@property(strong) TrackEditorWindow		*trackWindow;
+@property(strong) ImportWindow			*importWindow;
 
 -(id)initWithTrackWindow:(TrackEditorWindow*)window;
 

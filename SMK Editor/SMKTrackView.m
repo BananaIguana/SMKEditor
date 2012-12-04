@@ -16,9 +16,6 @@
 
 @implementation SMKTrackView
 
-@synthesize track;
-@synthesize mode;
-
 -(id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -190,16 +187,9 @@
 
 	[identityXform concat];
 
-	[track draw:dirtyRect];
+	[self.track draw:dirtyRect];
 	
 	[context restoreGraphicsState];
-}
-
--(void)dealloc
-{
-	[track release];
-
-	[super dealloc];
 }
 
 @end

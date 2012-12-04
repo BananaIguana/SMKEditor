@@ -12,20 +12,20 @@
 
 @interface ImportWindow : NSWindow <NSTableViewDelegate, NSTableViewDataSource>
 
-@property(assign) IBOutlet NSTableView		*tableView;
-@property(retain) NSArray					*dataRom;
+@property(weak) IBOutlet NSTableView		*tableView;
+@property(strong) NSArray					*dataRom;
 
 @property(assign) NSInteger					selectedTableIndex;
 
-@property(assign) IBOutlet NSTextField		*labelProjectName;
-@property(assign) IBOutlet NSTextField		*labelCreated;
-@property(assign) IBOutlet NSTextField		*labelUpdated;
+@property(weak) IBOutlet NSTextField		*labelProjectName;
+@property(weak) IBOutlet NSTextField		*labelCreated;
+@property(weak) IBOutlet NSTextField		*labelUpdated;
 
-@property(assign) IBOutlet NSButton			*buttonImport;
-@property(assign) IBOutlet NSButton			*buttonClone;
-@property(assign) IBOutlet NSButton			*buttonDelete;
-@property(assign) IBOutlet NSButton			*buttonOpen;
+@property(weak) IBOutlet NSButton			*buttonImport;
+@property(weak) IBOutlet NSButton			*buttonClone;
+@property(weak) IBOutlet NSButton			*buttonDelete;
+@property(weak) IBOutlet NSButton			*buttonOpen;
 
-@property(retain) TrackEditorWindow			*trackWindow;
+@property(strong) TrackEditorWindow			*trackWindow;
 
 @end

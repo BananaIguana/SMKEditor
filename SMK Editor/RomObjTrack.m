@@ -16,13 +16,6 @@
 
 @implementation RomObjTrack
 
-@synthesize theme = _theme;
-@synthesize trackData;
-@synthesize image;
-@synthesize imageBitmap;
-@synthesize trackType;
-@synthesize overlay;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme overlay:(RomObjOverlay*)trackOverlay
 {
 	self = [super init];
@@ -109,16 +102,12 @@
 	
 	self.image										= im;
 	self.imageBitmap								= bitmap;
-	
-	[im release];
-		
-	[bitmap release];	
 }
 
 -(void)draw:(NSRect)rect
 {
 	NSRect r = NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
-	[image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
+	[self.image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
 	
 	RomObjOverlay *o								= self.overlay;
 	
@@ -127,18 +116,7 @@
 
 -(NSString*)description
 {
-	return( RomTrackToString( trackType ) );
-}
-
--(void)dealloc
-{
-	[_theme release];
-	[trackData release];
-	[image  release];
-	[imageBitmap release];
-	[overlay release];
-
-	[super dealloc];
+	return( RomTrackToString( self.trackType ) );
 }
 
 @end

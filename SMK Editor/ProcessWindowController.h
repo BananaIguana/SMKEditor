@@ -7,21 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <CoreData/CoreData.h>
 
 #import "TrackEditorWindow.h"
 #import "DataRom.h"
 #import "RomBase.h"
 
 @interface ProcessWindowController : NSWindowController
-{
-	DataRom											*rom;
-	TrackEditorWindow								*trackEditor;
-	RomBase											*romBase;
-}
 
-@property(retain) DataRom							*rom;
-@property(retain) TrackEditorWindow					*trackEditor;
-@property(assign) IBOutlet NSProgressIndicator		*progress;
-@property(retain) RomBase							*romBase;
+@property(strong) NSManagedObjectID					*romID;
+@property(strong) TrackEditorWindow					*trackEditor;
+@property(weak) IBOutlet NSProgressIndicator		*progress;
+@property(strong) RomBase							*romBase;
 
 @end

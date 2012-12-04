@@ -16,10 +16,7 @@
 
 @implementation ImportWindowTableRowView
 
-
 @dynamic mouseInside;
-
-@synthesize trackingArea;
 
 static NSGradient *gradientWithTargetColor(NSColor *targetColor)
 {
@@ -27,15 +24,15 @@ static NSGradient *gradientWithTargetColor(NSColor *targetColor)
 
     const CGFloat locations[4] = { 0.0, 0.35, 0.65, 1.0 };
 
-    return [[[NSGradient alloc] initWithColors:colors atLocations:locations colorSpace:[NSColorSpace sRGBColorSpace]] autorelease];
+    return [[NSGradient alloc] initWithColors:colors atLocations:locations colorSpace:[NSColorSpace sRGBColorSpace]];
 }
 
 
 -(void)setMouseInside:(BOOL)value
 {
-	if( mouseInside != value )
+	if( _mouseInside != value )
 	{
-		mouseInside = value;
+		_mouseInside = value;
 		
 		[self setNeedsDisplay:YES];
     }
@@ -43,7 +40,7 @@ static NSGradient *gradientWithTargetColor(NSColor *targetColor)
 
 -(BOOL)mouseInside
 {
-    return( mouseInside );
+    return( _mouseInside );
 }
 
 -(void)drawBackgroundInRect:(NSRect)dirtyRect
@@ -80,7 +77,7 @@ static NSGradient *gradientWithTargetColor(NSColor *targetColor)
 	
 	[self ensureTrackingArea];
 	
-    if( ![[self trackingAreas] containsObject:trackingArea] )
+    if( ![[self trackingAreas] containsObject:self.trackingArea] )
 	{
 		[self addTrackingArea:self.trackingArea];
 	}
@@ -96,11 +93,5 @@ static NSGradient *gradientWithTargetColor(NSColor *targetColor)
     self.mouseInside = NO;
 }
 
--(void)dealloc
-{
-	[trackingArea release];
-
-	[super dealloc];
-}
 
 @end

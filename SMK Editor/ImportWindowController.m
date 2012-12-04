@@ -12,19 +12,17 @@
 
 @implementation ImportWindowController
 
-@synthesize trackWindow;
-
 -(id)initWithTrackWindow:(TrackEditorWindow*)window
 {
 	self = [super initWithWindowNibName:@"ImportWindow"];
 	
 	if( self )
 	{
-		self.trackWindow				= window;
+		self.trackWindow					= window;
 		
-		ImportWindow *importWindow		= (ImportWindow*)[self window];
+		self.importWindow					= (ImportWindow*)[self window];
 		
-		importWindow.trackWindow		= window;
+		self.importWindow.trackWindow		= window;
 	}
 	
 	return( self );

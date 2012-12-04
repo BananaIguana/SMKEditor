@@ -22,14 +22,6 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 
 @implementation RomBase
 
-@synthesize data;
-@synthesize romDict;
-@synthesize romTrackThemeMappingArray;
-
-@synthesize themes;
-@synthesize tracks;
-@synthesize karts;
-
 -(id)initWithData:(NSData*)romData
 {
 	self = [super init];
@@ -50,9 +42,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 			[array insertObject:num atIndex:i];
 		}
 		
-		self.romTrackThemeMappingArray				= array;
-		
-		[array release];
+		self.romTrackThemeMappingArray				= [NSArray arrayWithArray:array];
 	}
 	
 	return( self );
@@ -92,7 +82,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 			
 		case kRomRangeTypeEncodedString :
 			{
-				RomObjText *text					= [[[RomObjText alloc] initWithRomData:self.data range:range] autorelease];
+				RomObjText *text					= [[RomObjText alloc] initWithRomData:self.data range:range];
 				
 				return( text );
 			
@@ -108,7 +98,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 			
 		case kRomRangeTypePaletteGroup :
 			{
-				RomObjPaletteGroup *group			= [[[RomObjPaletteGroup alloc] initWithRomData:self.data range:range] autorelease];
+				RomObjPaletteGroup *group			= [[RomObjPaletteGroup alloc] initWithRomData:self.data range:range];
 				
 				return( group );
 			
@@ -173,7 +163,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 {
 	RomRange romRange								= [self romRangeFromHandle:tileGroupHandle];
 	
-	RomObjTileGroup *obj							= [[[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup] autorelease];
+	RomObjTileGroup *obj							= [[RomObjTileGroup alloc] initWithRomData:self.data range:romRange paletteGroup:paletteGroup];
 	
 	return( obj );
 }
@@ -182,7 +172,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 {
 	RomRange romRange								= [self romRangeFromHandle:tileGroupHandle];
 		
-	RomObjTheme *theme								= [[[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup] autorelease];
+	RomObjTheme *theme								= [[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup];
 	
 	return( theme );
 }
@@ -191,7 +181,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 {
 	RomRange romRange								= [self romRangeFromHandle:trackHandle];
 	
-	RomObjTrack *track								= [[[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme overlay:overlay] autorelease];
+	RomObjTrack *track								= [[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme overlay:overlay];
 	
 	return( track );
 }
@@ -200,7 +190,7 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 {
 	RomRange romRange								= [self romRangeFromHandle:overlayItemHandle];
 	
-	RomObjOverlay *overlayItem						= [[[RomObjOverlay alloc] initWithRomData:self.data range:romRange tileset:commonTileGroup] autorelease];
+	RomObjOverlay *overlayItem						= [[RomObjOverlay alloc] initWithRomData:self.data range:romRange tileset:commonTileGroup];
 	
 	return( overlayItem );
 }
@@ -209,23 +199,11 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 {
 	RomRange romRange								= [self romRangeFromHandle:kartHandle];
 	
-	RomObjKart *kart								= [[[RomObjKart alloc] initWithRomData:self.data range:romRange palette:palette] autorelease];
+	RomObjKart *kart								= [[RomObjKart alloc] initWithRomData:self.data range:romRange palette:palette];
 	
 	return( kart );
 }
 
--(void)dealloc
-{
-	[data release];
-	[romDict release];
-	[romTrackThemeMappingArray release];
-	
-	[themes release];
-	[tracks release];
-	[karts release];
-
-	[super dealloc];
-}
 
 -(NSDictionary*)offsetDictionary
 {

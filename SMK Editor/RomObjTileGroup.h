@@ -11,15 +11,10 @@
 @class RomObjPaletteGroup;
 
 @interface RomObjTileGroup : RomObj
-{
-	NSArray					*indexBuffer;
-	NSArray					*tilesetBuffer;
-	RomObjPaletteGroup		*_paletteGroup;
-}
 
-@property(retain) NSArray					*indexBuffer;
-@property(retain) NSArray					*tilesetBuffer;
-@property(retain) RomObjPaletteGroup		*paletteGroup;
+@property(strong) NSArray					*indexBuffer;
+@property(strong) NSArray					*tilesetBuffer;
+@property(strong) RomObjPaletteGroup		*paletteGroup;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 

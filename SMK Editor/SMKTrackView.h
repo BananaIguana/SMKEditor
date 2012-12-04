@@ -24,16 +24,13 @@ typedef enum TrackViewOperationMode
 
 @interface SMKTrackView : NSView
 {
-	RomObjTrack					*track;
-	TrackViewOperationMode		mode;
-
 	NSPoint						trans;
 	float						scale;
 	float						scaleSource;
 	NSPoint						currentPoint;
 }
 
-@property(nonatomic,retain)				RomObjTrack						*track;
+@property(nonatomic,strong)				RomObjTrack						*track;
 @property(nonatomic,readonly,assign)	TrackViewOperationMode			mode;
 
 @end

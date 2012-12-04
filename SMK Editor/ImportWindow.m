@@ -17,18 +17,6 @@
 
 @implementation ImportWindow
 
-@synthesize tableView;
-@synthesize dataRom;
-@synthesize selectedTableIndex;
-@synthesize labelProjectName;
-@synthesize labelCreated;
-@synthesize labelUpdated;
-@synthesize buttonImport;
-@synthesize buttonClone;
-@synthesize buttonDelete;
-@synthesize buttonOpen;
-@synthesize trackWindow;
-
 -(void)commonSetup
 {
 	self.dataRom					= [[DataRomManager sharedInstance] queryRomEntries];
@@ -83,12 +71,6 @@
 	return( self );
 }
 
--(void)dealloc
-{
-	[dataRom release];
-
-	[super dealloc];
-}
 
 -(IBAction)onTableViewEvent:(NSTableView*)sender
 {
@@ -161,12 +143,12 @@
 
 -(IBAction)clickedOpen:(NSButton*)sender
 {
-	DataRom *rom = (self.dataRom)[self.selectedTableIndex];
+	DataRom *rom						= (self.dataRom)[self.selectedTableIndex];
 
-	ProcessWindowController *ctrl = [[ProcessWindowController alloc] initWithWindowNibName:@"ProcessWindow"];
+	ProcessWindowController *ctrl		= [[ProcessWindowController alloc] initWithWindowNibName:@"ProcessWindow"];
 	
-	ctrl.rom = rom;
-	ctrl.trackEditor = self.trackWindow;
+	ctrl.romID							= rom.objectID;
+	ctrl.trackEditor					= self.trackWindow;
 	
 	[[ctrl window] makeKeyAndOrderFront:nil];	
 	

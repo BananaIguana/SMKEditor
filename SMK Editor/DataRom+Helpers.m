@@ -17,6 +17,7 @@
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "RomEUR.h"
+#import "RomBase+Info.h"
 
 @implementation DataRom (Helpers)
 
@@ -24,7 +25,7 @@
 {
 	// Fake it as european for now...
 		
-	RomEUR *eurRom						= [[[RomEUR alloc] initWithData:self.rom] autorelease];
+	RomEUR *eurRom						= [[RomEUR alloc] initWithData:self.rom];
 	
 	// Output data to test
 	
@@ -35,6 +36,7 @@
 	NSLog( @"Rom Size				= %@", [eurRom objectFromHandle:kRomHandleRomSizeOffset] );
 	NSLog( @"Ram Size				= %@", [eurRom objectFromHandle:kRomHandleRamSizeOffset] );
 	NSLog( @"Destination Code		= %@", [eurRom objectFromHandle:kRomHandleDestinationCodeOffset] );
+	NSLog( @"License Code			= %@", [eurRom objectFromHandle:kRomHandleLicenseeCodeOffset] );
 	NSLog( @"Mask Rom Version		= %@", [eurRom objectFromHandle:kRomHandleMaskRomVerOffset] );
 	NSLog( @"Complement Check Low	= %@", [eurRom objectFromHandle:kRomHandleComplementCheckLowOffset] );
 	NSLog( @"Complement Check High	= %@", [eurRom objectFromHandle:kRomHandleComplementCheckHighOffset] );
@@ -49,6 +51,10 @@
 	NSLog( @"Expansion Ram Size		= %@", [eurRom objectFromHandle:kRomHandleExpansionRamSizeOffset] );
 	NSLog( @"Special Version		= %@", [eurRom objectFromHandle:kRomHandleSpecialVersionOffset] );
 	NSLog( @"Cartridge Type Sub		= %@", [eurRom objectFromHandle:kRomHandleCartridgeTypeSubNumOffset] );
+
+	NSLog( @"---------< EXTENSIONS >---------" );
+	
+	NSLog( @"Country				= %@", [eurRom country] );
 	
 	NSLog( @"---------< CUP STRINGS >---------" );
 
@@ -78,9 +84,9 @@
 		NSLog( @"Processing [THEME] %@", RomThemeToString( i ) );
 		
 		RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
-		
+			
 		RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
-		
+			
 		RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
 
 		[themeArray addObject:theme];
@@ -124,10 +130,29 @@
 	eurRom.tracks							= trackArray;
 	eurRom.karts							= kartArray;
 
-	[themeArray release];
-	[trackArray release];
-	[kartArray release];
 	
 	return( eurRom );
 }
+
++(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context
+{
+	NSEntityDescription *desc							= [NSEntityDescription entityForName:@"DataRom" inManagedObjectContext:context];
+	
+	NSFetchRequest *request								= [[NSFetchRequest alloc] init];
+	
+	[request setEntity:desc];
+	
+	NSError *error = nil;
+	NSArray *array										= [context executeFetchRequest:request error:&error];
+
+	return( [array objectAtIndex:0] );
+		
+//
+//	NSManagedObject *object					= [context objectWithID:romID];
+//	
+//	NSAssert( [object isKindOfClass:[DataRom class]], @"Unexpected class tyoe." );
+//
+//	return( (DataRom*)object );
+}
+
 @end

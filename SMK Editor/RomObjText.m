@@ -12,8 +12,6 @@
 
 @implementation RomObjText
 
-@synthesize text;
-
 -(void)decodeCharacter:(char*)character
 {
 	switch( *character )
@@ -96,13 +94,6 @@
 -(NSString*)description
 {
 	return( self.text );
-}
-
--(void)dealloc
-{
-	[text release];
-
-	[super dealloc];
 }
 
 @end

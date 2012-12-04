@@ -12,11 +12,11 @@
 
 @interface DataRom : NSManagedObject
 
-@property (nonatomic, retain) NSDate * dateImported;
-@property (nonatomic, retain) NSDate * dateUpdated;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * region;
-@property (nonatomic, retain) NSData * rom;
-@property (nonatomic, retain) id icon;
+@property (nonatomic, strong) NSDate * dateImported;
+@property (nonatomic, strong) NSDate * dateUpdated;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSNumber * region;
+@property (nonatomic, strong) NSData * rom;
+@property (nonatomic, strong) id icon;
 
 @end

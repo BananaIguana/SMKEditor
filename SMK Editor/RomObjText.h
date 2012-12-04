@@ -11,11 +11,8 @@
 #import "RomObj.h"
 
 @interface RomObjText : RomObj
-{
-	NSString *text;
-}
 
-@property(retain) NSString *text;
+@property(strong) NSString *text;
 
 -(void)setup;
 

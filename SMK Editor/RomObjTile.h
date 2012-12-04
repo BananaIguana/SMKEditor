@@ -14,15 +14,11 @@
 
 @interface RomObjTile : RomObj
 {
-	RomObjPalette			*_palette;
-	
-	unsigned char			indexBuffer[ 8 ][ 8 ];
-	
-	NSImage					*image;
+	unsigned char					indexBuffer[ 8 ][ 8 ];
 }
 
-@property(retain) RomObjPalette		*palette;
-@property(retain) NSImage			*image;
+@property(strong) RomObjPalette		*palette;
+@property(strong) NSImage			*image;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

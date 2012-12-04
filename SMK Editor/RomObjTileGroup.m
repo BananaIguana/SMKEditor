@@ -21,10 +21,6 @@ static const NSInteger kGroupSize			= 32;
 
 @implementation RomObjTileGroup
 
-@synthesize indexBuffer;
-@synthesize tilesetBuffer;
-@synthesize paletteGroup					= _paletteGroup;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range paletteGroup:(RomObjPaletteGroup*)paletteGroup
 {
 	self = [super init];
@@ -72,8 +68,6 @@ static const NSInteger kGroupSize			= 32;
 	}
 
 	self.indexBuffer = indexArray;
-
-	[indexArray release];
 }
 
 -(void)createTileset:(NSData*)tilesetData
@@ -93,21 +87,9 @@ static const NSInteger kGroupSize			= 32;
 		
 		[tilesetArray addObject:tile];
 				
-		[tile release];
 	}
 	
-	self.tilesetBuffer						= tilesetArray;
-	
-	[tilesetArray release];
-}
-
--(void)dealloc
-{
-	[indexBuffer release];
-	[tilesetBuffer release];
-	[_paletteGroup release];
-
-	[super dealloc];
+	self.tilesetBuffer						= tilesetArray;	
 }
 
 @end

@@ -10,13 +10,11 @@
 #import "RomBase.h"
 #import "DataRom+Helpers.h"
 #import "SMKTrackView.h"
+#import "DataRomManager.h"
+
+//#define THREADED_PROCESSING
 
 @implementation ProcessWindowController
-
-@synthesize rom;
-@synthesize trackEditor;
-@synthesize progress;
-@synthesize romBase;
 
 -(void)windowDidLoad
 {
@@ -24,7 +22,7 @@
 	
 	[self.progress startAnimation:nil];
 	
-#if 0
+#ifdef THREADED_PROCESSING
 	NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(doIt:) object:self];
 	
 	[thread start];
@@ -35,7 +33,7 @@
 
 -(void)finishThread
 {
-	[self.trackEditor setTracks:romBase.tracks];
+	[self.trackEditor setTracks:self.romBase.tracks];
 
 	self.trackEditor.trackView.track			= (self.romBase.tracks)[2];
 	[self.trackEditor.trackView setNeedsDisplay:YES];
@@ -46,21 +44,19 @@
 
 -(void)doIt:(ProcessWindowController*)var
 {
-	self.romBase = [self.rom extract];
-
-	[NSThread sleepForTimeInterval:1.0f];
+#ifdef THREADED_PROCESSING
+	NSManagedObjectContext *context				= [DataRomManager sharedInstance].context;
+#else
+	NSManagedObjectContext *context				= [[DataRomManager sharedInstance] threadedContext];
+#endif
+	DataRom *rom								= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
 	
-	[self.progress setMinValue:0.0f];
-	[self.progress setMaxValue:10.0f];
-	[self.progress setIndeterminate:NO];
+	// If you are running threaded, you can prove the contents of the rom data is fine with the below line.
 
-	for( int i = 0; i < 100; ++i )
-	{
-		[NSThread sleepForTimeInterval:0.015f];
-
-		[self.progress incrementBy:0.1f];
-	}
-	
+//	NSLog( @"%@", rom.rom );
+		
+	self.romBase								= [rom extract];
+		
 	[self performSelectorOnMainThread:@selector(finishThread) withObject:nil waitUntilDone:NO];
 }
 

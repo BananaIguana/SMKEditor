@@ -11,11 +11,8 @@
 #import "RomObj.h"
 
 @interface RomObjPalette : RomObj
-{
-	NSArray		*colour;
-}
 
-@property(retain) NSArray			*colour;
+@property(strong) NSArray			*colour;
 
 -(NSString*)description;
 

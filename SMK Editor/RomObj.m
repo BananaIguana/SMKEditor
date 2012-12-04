@@ -10,9 +10,6 @@
 
 @implementation RomObj
 
-@synthesize data;
-@synthesize dataRange;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range
 {
 	self = [super init];
@@ -31,13 +28,6 @@
 -(void)setup
 {
 	NSAssert( nil, @"Override this function." );
-}
-
--(void)dealloc
-{
-	[data release];
-
-	[super dealloc];
 }
 
 @end

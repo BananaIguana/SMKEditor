@@ -27,6 +27,7 @@ typedef enum kRomHandle
 	kRomHandleRomSizeOffset,
 	kRomHandleRamSizeOffset,
 	kRomHandleDestinationCodeOffset,
+	kRomHandleLicenseeCodeOffset,
 	kRomHandleMaskRomVerOffset,
 	kRomHandleComplementCheckLowOffset,
 	kRomHandleComplementCheckHighOffset,
@@ -153,23 +154,14 @@ typedef enum kRomHandle
 }kRomHandle;
 
 @interface RomBase : NSObject
-{
-	NSData				*data;
-	NSDictionary		*romDict;
-	NSArray				*romTrackThemeMappingArray;
-	
-	NSArray				*themes;
-	NSArray				*tracks;
-	NSArray				*karts;
-}
 
-@property(retain) NSData				*data;
-@property(retain) NSDictionary			*romDict;
-@property(retain) NSArray				*romTrackThemeMappingArray;
+@property(strong) NSData				*data;
+@property(strong) NSDictionary			*romDict;
+@property(strong) NSArray				*romTrackThemeMappingArray;
 
-@property(retain) NSArray				*themes;
-@property(retain) NSArray				*tracks;
-@property(retain) NSArray				*karts;
+@property(strong) NSArray				*themes;
+@property(strong) NSArray				*tracks;
+@property(strong) NSArray				*karts;
 
 -(id)initWithData:(NSData*)romData;
 

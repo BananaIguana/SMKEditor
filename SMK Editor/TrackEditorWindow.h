@@ -11,13 +11,10 @@
 @class SMKTrackView;
 
 @interface TrackEditorWindow : NSWindow
-{
-	NSArray *trackArray;
-}
 
-@property(assign)				IBOutlet NSPopUpButton		*trackSelector;
-@property(nonatomic,retain)		NSArray						*trackArray;
-@property(assign)				IBOutlet SMKTrackView		*trackView;
+@property(weak)				IBOutlet NSPopUpButton		*trackSelector;
+@property(nonatomic,strong)		NSArray						*trackArray;
+@property(weak)				IBOutlet SMKTrackView		*trackView;
 
 -(void)setTracks:(NSArray*)tracks;
 

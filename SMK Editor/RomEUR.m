@@ -18,6 +18,7 @@ static const RomRange kRomRangeCartridgeTypeOffset				=		{ 0xFFD6,		1,			1,			kR
 static const RomRange kRomRangeRomSizeOffset					=		{ 0xFFD7,		1,			1,			kRomRangeTypeUnsignedChar };
 static const RomRange kRomRangeRamSizeOffset					=		{ 0xFFD8,		1,			1,			kRomRangeTypeUnsignedChar };
 static const RomRange kRomRangeDestinationCodeOffset			=		{ 0xFFD9,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeLicenseeCode						=		{ 0xFFDA,		1,			1,			kRomRangeTypeUnsignedChar };
 static const RomRange kRomRangeMaskRomVerOffset					=		{ 0xFFDB,		1,			1,			kRomRangeTypeUnsignedChar };
 static const RomRange kRomRangeComplementCheckLowOffset			=		{ 0xFFDC,		1,			1,			kRomRangeTypeUnsignedChar };
 static const RomRange kRomRangeComplementCheckHighOffset		=		{ 0xFFDD,		1,			1,			kRomRangeTypeUnsignedChar };
@@ -158,11 +159,6 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 
 @implementation RomEUR
 
--(void)dealloc
-{
-	[super dealloc];
-}
-
 -(NSDictionary*)offsetDictionary
 {
 	NSMutableDictionary *dictionary	= [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -174,6 +170,7 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 		[NSValue valueWithRomRange:kRomRangeRomSizeOffset],					[NSNumber numberWithUnsignedInt:kRomHandleRomSizeOffset],
 		[NSValue valueWithRomRange:kRomRangeRamSizeOffset],					[NSNumber numberWithUnsignedInt:kRomHandleRamSizeOffset],
 		[NSValue valueWithRomRange:kRomRangeDestinationCodeOffset],			[NSNumber numberWithUnsignedInt:kRomHandleDestinationCodeOffset],
+		[NSValue valueWithRomRange:kRomRangeLicenseeCode],					[NSNumber numberWithUnsignedInt:kRomHandleLicenseeCodeOffset],
 		[NSValue valueWithRomRange:kRomRangeMaskRomVerOffset],				[NSNumber numberWithUnsignedInt:kRomHandleMaskRomVerOffset],
 		[NSValue valueWithRomRange:kRomRangeComplementCheckLowOffset],		[NSNumber numberWithUnsignedInt:kRomHandleComplementCheckLowOffset],
 		[NSValue valueWithRomRange:kRomRangeComplementCheckHighOffset],		[NSNumber numberWithUnsignedInt:kRomHandleComplementCheckHighOffset],

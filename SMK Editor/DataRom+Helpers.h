@@ -14,4 +14,6 @@
 
 -(RomBase*)extract;
 
++(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context;
+
 @end

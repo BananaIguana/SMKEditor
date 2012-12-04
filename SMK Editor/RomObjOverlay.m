@@ -34,9 +34,6 @@
 
 @implementation RomObjOverlay
 
-@synthesize tileset;
-@synthesize overlayItems;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range tileset:(RomObjTileGroup*)commonTileset
 {
 	self = [super init];
@@ -276,14 +273,6 @@
 				}
 		}
 	}];
-}
-
--(void)dealloc
-{
-	[tileset release];
-	[overlayItems release];
-
-	[super dealloc];
 }
 
 @end

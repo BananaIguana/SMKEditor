@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DataRom.h"
+#import "Singleton.h"
 
 typedef enum kDataRomRegion
 {
@@ -22,13 +23,15 @@ typedef enum kDataRomRegion
 
 @interface DataRomManager : NSObject
 
-@property(retain) NSManagedObjectContext			*context;
-@property(retain) NSManagedObjectModel				*model;
-@property(retain) NSPersistentStoreCoordinator		*storeCoordinator;
+@property(strong) NSManagedObjectContext			*context;
+@property(strong) NSManagedObjectModel				*model;
+@property(strong) NSPersistentStoreCoordinator		*storeCoordinator;
 
-+(DataRomManager*)sharedInstance;
+SINGLETON_INTERFACE( DataRomManager );
 
 -(NSArray*)queryRomEntries;
 -(NSManagedObject*)insertRomEntry:(NSURL*)url;
+
+-(NSManagedObjectContext*)threadedContext;
 
 @end

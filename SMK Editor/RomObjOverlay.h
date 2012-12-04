@@ -28,13 +28,9 @@ typedef struct OverlayItem
 @end
 
 @interface RomObjOverlay : RomObj
-{
-	RomObjTileGroup			*tileset;
-	NSArray					*overlayItems;
-}
 
-@property(retain) RomObjTileGroup		*tileset;
-@property(retain) NSArray				*overlayItems;
+@property(strong) RomObjTileGroup		*tileset;
+@property(strong) NSArray				*overlayItems;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range tileset:(RomObjTileGroup*)commonTileset;
 -(void)draw:(NSRect)rect;

@@ -10,9 +10,9 @@
 
 @interface ImportWindowTableRowView : NSTableRowView
 {
-	BOOL							mouseInside;
+	BOOL							_mouseInside;
 }
 
-@property(retain) NSTrackingArea	*trackingArea;
+@property(strong) NSTrackingArea	*trackingArea;
 
 @end

@@ -11,9 +11,6 @@
 
 @implementation RomObjTile
 
-@synthesize palette = _palette;
-@synthesize image;
-
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range palette:(RomObjPalette*)palette
 {
 	self = [super init];
@@ -89,18 +86,6 @@
 	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )];
 	
 	self.image										= im;
-	
-	[im release];
-	
-	[bitmap release];
-}
-
--(void)dealloc
-{
-	[_palette release];
-	[image release];
-
-	[super dealloc];
 }
 
 @end
