@@ -6,7 +6,7 @@ This vision for this project is to create an editing suite for the SNES version 
 ROM
 -------------------------
 
-In order to use this application, you'll need a ROM image & due to legal issues, I cannot package the application with the necessary ROM image(s).
+In order to use this application, you'll need a ROM image & due to legal issues, I cannot package the application with the necessary ROM image(s) on GitHub. You can download a ROM [here](http://www.bananaiguana.com/share/smk_eur.smc) but you must note the [legal issues](http://en.wikipedia.org/wiki/ROM_image).
 
 The current version depends on an SMC headered European ROM image. There are plans to support all ROM versions after the 1st milestone release of the application.
 
