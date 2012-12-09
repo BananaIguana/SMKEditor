@@ -150,7 +150,7 @@
 //
 //	NSManagedObject *object					= [context objectWithID:romID];
 //	
-//	NSAssert( [object isKindOfClass:[DataRom class]], @"Unexpected class tyoe." );
+//	NSAssert( [object isKindOfClass:[DataRom class]], @"Unexpected class type." );
 //
 //	return( (DataRom*)object );
 }

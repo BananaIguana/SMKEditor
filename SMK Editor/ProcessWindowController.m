@@ -54,6 +54,9 @@
 	// If you are running threaded, you can prove the contents of the rom data is fine with the below line.
 
 //	NSLog( @"%@", rom.rom );
+
+	// Again if threaded, the extract method below will fail in NSData+Decompressor.m at the top of function 'decompressRange'. The log function
+	// at the top of the decompress method doesn't output which suggests that the NSData object is junk at that point it calls the function.
 		
 	self.romBase								= [rom extract];
 		
