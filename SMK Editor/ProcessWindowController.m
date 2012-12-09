@@ -12,7 +12,7 @@
 #import "SMKTrackView.h"
 #import "DataRomManager.h"
 
-//#define THREADED_PROCESSING
+#define THREADED_PROCESSING
 
 @implementation ProcessWindowController
 
@@ -45,9 +45,9 @@
 -(void)doIt:(ProcessWindowController*)var
 {
 #ifdef THREADED_PROCESSING
-	NSManagedObjectContext *context				= [DataRomManager sharedInstance].context;
-#else
 	NSManagedObjectContext *context				= [[DataRomManager sharedInstance] threadedContext];
+#else
+	NSManagedObjectContext *context				= [DataRomManager sharedInstance].context;
 #endif
 	DataRom *rom								= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
 	
