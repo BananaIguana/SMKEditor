@@ -146,6 +146,13 @@ typedef enum kRomHandle
 	// Karts
 	
 	kRomHandleKartMario,						// must be sequential with 'kRomKart'
+	kRomHandleKartBowser,
+	kRomHandleKartPrincess,
+	kRomHandleKartKong,
+	kRomHandleKartYoshi,
+	kRomHandleKartLuigi,
+	kRomHandleKartKoopa,
+	kRomHandleKartToad,
 
 	// End
 

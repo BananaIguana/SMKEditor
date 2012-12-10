@@ -34,9 +34,12 @@
 -(void)finishThread
 {
 	[self.trackEditor setTracks:self.romBase.tracks];
-
-	self.trackEditor.trackView.track			= (self.romBase.tracks)[2];
-	[self.trackEditor.trackView setNeedsDisplay:YES];
+	
+	if( [self.romBase.tracks count] >= 2 )
+	{
+		self.trackEditor.trackView.track			= (self.romBase.tracks)[2];
+		[self.trackEditor.trackView setNeedsDisplay:YES];
+	}
 	
 	[self.trackEditor makeKeyAndOrderFront:nil];
 	[self.window orderOut:nil];
@@ -57,10 +60,36 @@
 
 	// Again if threaded, the extract method below will fail in NSData+Decompressor.m at the top of function 'decompressRange'. The log function
 	// at the top of the decompress method doesn't output which suggests that the NSData object is junk at that point it calls the function.
+	
+	// Update to the above, performing the 'setup' method of RomObj.m on the main thread then we avoid the EXC_BAD_ACCESS issue.
 		
-	self.romBase								= [rom extract];
+	self.romBase								= [rom extractWithDelegate:self];
 		
 	[self performSelectorOnMainThread:@selector(finishThread) withObject:nil waitUntilDone:NO];
+}
+
+#pragma mark -
+#pragma mark DataRomExtractionProtocol
+
+-(void)notifyExtractedObject:(id)obj
+{
+	[self.progress setIndeterminate:NO];
+	[self.progress setUsesThreadedAnimation:YES];
+	[self.progress incrementBy:1.0];
+	
+	// The below text string value doesn't work too well due to the main thread doing all the work.
+
+	NSString *processingString					= [NSString stringWithFormat:@"Processing - %@", obj];
+
+	[self.textProgress setStringValue:processingString];
+	
+	NSLog( @"Processing [%@] - %@", [obj class], obj );
+}
+
+-(void)notifyExtractionSteps:(NSUInteger)steps
+{
+	[self.progress setMinValue:0.0];
+	[self.progress setMaxValue:(double)steps];
 }
 
 @end

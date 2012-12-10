@@ -17,10 +17,16 @@
 	
 	if( self )
 	{
-		self.tileGroupCommon = commonTileGroup;	
+		self.tileGroupCommon		= commonTileGroup;
+		self.themeType				= kRomNumThemes;		// Initialise as invalid.
 	}
 	
 	return( self );
+}
+
+-(NSString*)description
+{
+	return( RomThemeToString( self.themeType ) );
 }
 
 @end

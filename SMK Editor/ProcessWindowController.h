@@ -12,12 +12,14 @@
 #import "TrackEditorWindow.h"
 #import "DataRom.h"
 #import "RomBase.h"
+#import "DataRom+Helpers.h"
 
-@interface ProcessWindowController : NSWindowController
+@interface ProcessWindowController : NSWindowController <DataRomExtractionProtocol>
 
 @property(strong) NSManagedObjectID					*romID;
 @property(strong) TrackEditorWindow					*trackEditor;
 @property(weak) IBOutlet NSProgressIndicator		*progress;
 @property(strong) RomBase							*romBase;
+@property(weak) IBOutlet NSTextField				*textProgress;
 
 @end

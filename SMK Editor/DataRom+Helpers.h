@@ -10,9 +10,19 @@
 
 @class RomBase;
 
+@protocol DataRomExtractionProtocol <NSObject>
+
+@optional
+
+-(void)notifyExtractionSteps:(NSUInteger)steps;
+-(void)notifyExtractedObject:(id)obj;
+
+@end
+
 @interface DataRom (Helpers)
 
 -(RomBase*)extract;
+-(RomBase*)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate;
 
 +(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context;
 

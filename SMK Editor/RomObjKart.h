@@ -7,6 +7,7 @@
 //
 
 #import "RomObj.h"
+#import "RomTypes.h"
 
 // Ref	:	http://smwc.hostzi.com/SMWiki/wiki/SNES_4BPP_file_format.html
 // 		:	http://mrclick.zophar.net/TilEd/download/consolegfx.txt
@@ -18,6 +19,7 @@
 
 @property(strong) RomObjPalette		*palette;
 @property(strong) NSArray			*imageArray;
+@property(assign) kRomKart			kartType;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

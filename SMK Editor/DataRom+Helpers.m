@@ -14,15 +14,28 @@
 #import "RomObjKart.h"
 #import "RomObjPalette.h"
 #import "RomObjPaletteGroup.h"
+#import "RomObjOverlay.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "RomEUR.h"
 #import "RomBase+Info.h"
 
+#define DELEGATE_NOTIFY( obj )		{\
+										if( [delegate respondsToSelector:@selector(notifyExtractedObject:)] )\
+										{\
+											[delegate notifyExtractedObject:obj];\
+										}\
+									}
+
 @implementation DataRom (Helpers)
 
--(RomBase*)extract
+-(RomBase*)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate
 {
+	if( [delegate respondsToSelector:@selector(notifyExtractionSteps:)] )
+	{
+		[delegate notifyExtractionSteps:( kRomNumThemes + kRomNumTracks + kRomNumKarts )];
+	}
+
 	// Fake it as european for now...
 		
 	RomEUR *eurRom						= [[RomEUR alloc] initWithData:self.rom];
@@ -76,28 +89,26 @@
 	NSLog( @"Rainbow Road			= %@", [eurRom objectFromHandle:kRomHandleTextRainbowRoad] );
 	
 	NSLog( @"---------< THEME >---------" );
-		
+	
 	NSMutableArray *themeArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumThemes];
 	
 	for( int i = 0; i < kRomNumThemes; ++i )
 	{
-		NSLog( @"Processing [THEME] %@", RomThemeToString( i ) );
-		
 		RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
-			
+
 		RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
-			
+
 		RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
 
 		[themeArray addObject:theme];
+		
+		DELEGATE_NOTIFY( theme );
 	}
 	
 	NSMutableArray *trackArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
 	
 	for( int i = 0; i < kRomNumTracks; ++i )
 	{
-		NSLog( @"Processing [TRACK] %@", RomTrackToString( i ) );
-		
 		NSNumber *index						= (eurRom.romTrackThemeMappingArray)[i];
 		
 		RomObjTheme *theme					= themeArray[[index unsignedIntValue]];
@@ -109,29 +120,35 @@
 		[track setTrackType:i];
 		
 		[trackArray addObject:track];
+
+		DELEGATE_NOTIFY( track );
 	}
 	
 	NSMutableArray *kartArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumKarts];
 	
 	for( int i = 0; i < kRomNumKarts; ++i )
 	{
-		NSLog( @"Processing [KART] %@", RomKartToString( i ) );
-		
 		RomObjTheme *t						= themeArray[0];
 		RomObjPaletteGroup *pg				= t.paletteGroup;
 		RomObjPalette *p					= (pg.paletteArray)[0];
 		
 		RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
-		
-		[kartArray addObject:kart];		
-	}	
+
+		[kartArray addObject:kart];
+
+		DELEGATE_NOTIFY( kart );
+	}
 
 	eurRom.themes							= themeArray;
 	eurRom.tracks							= trackArray;
 	eurRom.karts							= kartArray;
-
 	
 	return( eurRom );
+}
+
+-(RomBase*)extract
+{
+	return( [self extractWithDelegate:nil] );
 }
 
 +(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context

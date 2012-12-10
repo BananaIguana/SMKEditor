@@ -174,6 +174,10 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 		
 	RomObjTheme *theme								= [[RomObjTheme alloc] initWithRomData:self.data range:romRange commonTileGroup:commonTileGroup paletteGroup:paletteGroup];
 	
+	theme.themeType									= (kRomTheme)( tileGroupHandle - kRomHandleTilesetGroupGhostValley );
+	
+	NSAssert( ( ( theme.themeType >= kRomThemeGhostValley ) && ( theme.themeType <= kRomThemeRainbowRoad ) ), @"Invalid theme, check kRomTheme runs sequentially with kRomHandle" );
+
 	return( theme );
 }
 
@@ -182,6 +186,10 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	RomRange romRange								= [self romRangeFromHandle:trackHandle];
 	
 	RomObjTrack *track								= [[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme overlay:overlay];
+	
+	track.trackType									= (kRomTrack)( trackHandle - kRomHandleTrackMarioCircuit3 );
+
+	NSAssert( ( ( track.trackType >= kRomTrackMarioCircuit3 ) && ( track.trackType <= kRomTrackBattleCourse2 ) ), @"Invalid theme, check kRomTrack runs sequentially with kRomHandle" );
 	
 	return( track );
 }
@@ -201,6 +209,10 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	
 	RomObjKart *kart								= [[RomObjKart alloc] initWithRomData:self.data range:romRange palette:palette];
 	
+	kart.kartType									= (kRomKart)( kartHandle - kRomHandleKartMario );
+	
+	NSAssert( ( ( kart.kartType >= kRomKartMario ) && ( kart.kartType <= kRomKartToad ) ), @"Invalid theme, check kRomKart runs sequentially with kRomHandle" );
+
 	return( kart );
 }
 

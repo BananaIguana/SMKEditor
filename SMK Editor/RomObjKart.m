@@ -20,6 +20,7 @@
 		self.data									= romData;
 		self.dataRange								= range;
 		self.palette								= palette;
+		self.kartType								= kRomNumKarts;		// Initialise as invalid.
 		
 		[self setup];
 	}
@@ -177,8 +178,11 @@
 	}
 
 	self.imageArray									= array;
-
 }
 
+-(NSString*)description
+{
+	return( RomKartToString( self.kartType ) );
+}
 
 @end

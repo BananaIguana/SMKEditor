@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "RomObjTileGroup.h"
+#import "RomTypes.h"
 
 @class RomObjTileGroup;
 @class RomObjPaletteGroup;
@@ -16,6 +17,7 @@
 @interface RomObjTheme : RomObjTileGroup
 
 @property(strong) RomObjTileGroup				*tileGroupCommon;
+@property(assign) kRomTheme						themeType;
 
 -(id)initWithRomData:(NSData*)tilesetGroupRomData range:(RomRange)range commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 
