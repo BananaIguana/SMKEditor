@@ -15,6 +15,7 @@
 #import "RomObjTheme.h"
 #import "RomObjTrack.h"
 #import "RomObjOverlay.h"
+#import "RomObjAIData.h"
 #import "RomObjKart.h"
 #import "NSValue+Rom.h"
 
@@ -112,6 +113,15 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 			
 			}break;
 		
+		case kRomRangeTypeAIZone :
+		case kRomRangeTypeAITarget :
+			{
+				NSAssert( 0, @"You must call 'aiDataFromHandle'." );
+				
+				return( nil );
+			
+			}break;
+		
 		case kRomRangeTypeKart :
 			{
 				NSAssert( 0, @"You must call 'kartFromHandle'." );
@@ -137,6 +147,8 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 -(RomRange)romRangeFromKey:(NSNumber*)key
 {
 	NSValue *value									= (self.romDict)[key];
+
+	NSAssert( [value isKindOfClass:[NSValue class]], @"Unexpected class type acquired from handle. You may need to customise the acquisition of the object." );
 	
 	RomRange romRange								= [value romRangeValue];
 	
@@ -203,6 +215,26 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	return( overlayItem );
 }
 
+-(RomObjAIData*)aiDataFromHandle:(kRomHandle)aiDataHande
+{
+	NSNumber *key									= [self keyFromHandle:aiDataHande];
+	
+	NSArray *array									= (self.romDict)[key];
+	
+	NSAssert( [array isKindOfClass:[NSArray class]], @"Unexpected class type acquired from handle." );
+	NSAssert( [array count] == 2, @"Unexpected data quantity in array." );
+	
+	NSValue *valueAIZone							= array[ 0 ];
+	NSValue *valueAITarget							= array[ 1 ];
+	
+	RomRange rangeAIZone							= [valueAIZone romRangeValue];
+	RomRange rangeAITarget							= [valueAITarget romRangeValue];
+	
+	RomObjAIData *aiData							= [[RomObjAIData alloc] initWithRomData:self.data zoneRange:rangeAIZone targetRange:rangeAITarget];
+	
+	return( aiData );
+}
+
 -(RomObjKart*)kartFromHandle:(kRomHandle)kartHandle palette:(RomObjPalette*)palette
 {
 	RomRange romRange								= [self romRangeFromHandle:kartHandle];
@@ -215,7 +247,6 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 
 	return( kart );
 }
-
 
 -(NSDictionary*)offsetDictionary
 {

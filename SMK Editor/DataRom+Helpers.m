@@ -15,6 +15,7 @@
 #import "RomObjPalette.h"
 #import "RomObjPaletteGroup.h"
 #import "RomObjOverlay.h"
+#import "RomObjAIData.h"
 #import "RomEUR.h"
 #import "RomTypes.h"
 #import "RomEUR.h"
@@ -33,7 +34,13 @@
 {
 	if( [delegate respondsToSelector:@selector(notifyExtractionSteps:)] )
 	{
-		[delegate notifyExtractionSteps:( kRomNumThemes + kRomNumTracks + kRomNumKarts )];
+		[delegate notifyExtractionSteps:(
+		
+			kRomNumThemes			+		// Themes
+			kRomNumTracks			+		// Tracks
+			kRomNumKarts			+		// Karts
+			kRomNumTrackGPTracks			// AI Data
+		)];
 	}
 
 	// Fake it as european for now...
@@ -122,6 +129,19 @@
 		[trackArray addObject:track];
 
 		DELEGATE_NOTIFY( track );
+	}
+	
+	NSMutableArray *aiArray					= [[NSMutableArray alloc] initWithCapacity:kRomNumTrackGPTracks];
+	
+	for( int i = 0; i < kRomNumAIData; ++i )
+	{
+		RomObjAIData *aiData				= [eurRom aiDataFromHandle:( kRomHandleAIDataMarioCircuit3 + i )];
+
+		[aiData setAiDataType:i];
+
+		[aiArray addObject:aiData];
+
+		DELEGATE_NOTIFY( aiData );
 	}
 	
 	NSMutableArray *kartArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumKarts];

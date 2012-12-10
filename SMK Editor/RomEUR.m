@@ -143,7 +143,53 @@ static const RomRange kRomRangeOverlays[ kRomNumTracks ]		= {
 																		{ 0x5DB00,		105,		0x80,		kRomRangeTypeTrack },
 																		{ 0x5DB80,		105,		0x80,		kRomRangeTypeTrack },
 																};
-																
+
+static const RomRange kRomRangeAIZone[ kRomNumTrackGPTracks ] = {
+																		{ 0x60526,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x606F3,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x6084E,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x6097D,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x60B84,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x60C6D,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x60DD2,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x60ECB,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x60FB4,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x6111D,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x612B6,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x6139F,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x614B0,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x61573,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x61692,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x617D9,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x618EC,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x619F1,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x61B0A,		100,		100,		kRomRangeTypeAIZone },
+																		{ 0x61BED,		100,		100,		kRomRangeTypeAIZone },
+																};
+
+static const RomRange kRomRangeAITarget[ kRomNumTrackGPTracks ] = {
+																		{ 0x6063F,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x607C7,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x6090B,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x60ABE,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x60C16,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x60D48,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x60E6E,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x60F5A,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61093,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x6121D,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61348,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61447,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61528,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61626,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x6175E,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61883,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x6198E,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61AA1,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61B96,		100,		100,		kRomRangeTypeAITarget },
+																		{ 0x61CA9,		100,		100,		kRomRangeTypeAITarget },
+																};
+
 // Karts
 
 static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
@@ -237,6 +283,18 @@ static const RomRange kRomRangeKarts[ kRomNumKarts ]			= {
 		kRomHandle handleOverlay			= kRomHandleOverlayMarioCircuit3 + eTrack;
 		
 		dictionary[[NSNumber numberWithUnsignedInt:handleOverlay]] = [NSValue valueWithRomRange:kRomRangeOverlays[ eTrack ]];
+	}
+	
+	// AI Data
+	
+	for( kRomAIData eAIData = 0; eAIData < kRomNumAIData; ++eAIData )
+	{
+		kRomHandle handleAIData				= kRomHandleAIDataMarioCircuit3 + eAIData;
+		
+		NSValue *valueZone					= [NSValue valueWithRomRange:kRomRangeAIZone[ eAIData ]];
+		NSValue *valueTarget				= [NSValue valueWithRomRange:kRomRangeAITarget[ eAIData ]];
+		
+		dictionary[[NSNumber numberWithUnsignedInt:handleAIData]] = @[ valueZone, valueTarget ];
 	}
 	
 	// Kart handles

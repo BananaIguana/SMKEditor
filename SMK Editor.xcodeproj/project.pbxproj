@@ -10,6 +10,7 @@
 		2359EBE414781D6300E6CA39 /* RomObjTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2359EBE314781D6300E6CA39 /* RomObjTile.m */; };
 		3C037EA114C629DD00B4F148 /* ImportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C037EA014C629DD00B4F148 /* ImportWindowController.m */; };
 		3C0BB1C41408782700D12DDA /* RomBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0BB1C31408782700D12DDA /* RomBase.m */; };
+		3C2EC60C16757960004BC8F5 /* RomObjAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EC60B16757960004BC8F5 /* RomObjAIData.m */; };
 		3C40302E14B04FE700CEB708 /* SMKTrackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40302D14B04FE600CEB708 /* SMKTrackView.m */; };
 		3C40DC5414AEBFDB00EB296F /* RomObjTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C40DC5314AEBFDB00EB296F /* RomObjTrack.m */; };
 		3C4E6F0214B7694000035A8C /* RomObjKart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4E6F0114B7694000035A8C /* RomObjKart.m */; };
@@ -58,6 +59,8 @@
 		3C037EA014C629DD00B4F148 /* ImportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWindowController.m; sourceTree = "<group>"; };
 		3C0BB1C21408782700D12DDA /* RomBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomBase.h; sourceTree = "<group>"; };
 		3C0BB1C31408782700D12DDA /* RomBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomBase.m; sourceTree = "<group>"; };
+		3C2EC60A1675795F004BC8F5 /* RomObjAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjAIData.h; sourceTree = "<group>"; };
+		3C2EC60B16757960004BC8F5 /* RomObjAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjAIData.m; sourceTree = "<group>"; };
 		3C40302C14B04FE600CEB708 /* SMKTrackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKTrackView.h; sourceTree = "<group>"; };
 		3C40302D14B04FE600CEB708 /* SMKTrackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKTrackView.m; sourceTree = "<group>"; };
 		3C40DC5214AEBFDA00EB296F /* RomObjTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomObjTrack.h; sourceTree = "<group>"; };
@@ -388,6 +391,8 @@
 				3CC9F87E14B2FDC4000AE6A4 /* RomObjOverlay.h */,
 				3C4E6F0114B7694000035A8C /* RomObjKart.m */,
 				3C4E6F0014B7694000035A8C /* RomObjKart.h */,
+				3C2EC60B16757960004BC8F5 /* RomObjAIData.m */,
+				3C2EC60A1675795F004BC8F5 /* RomObjAIData.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				3C881F0B14D88E3E0096F949 /* ProcessWindow.m in Sources */,
 				3CDF988814DF543800B29526 /* ProcessWindowController.m in Sources */,
 				3C8169AB166311F5002583D3 /* RomBase+Info.m in Sources */,
+				3C2EC60C16757960004BC8F5 /* RomObjAIData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

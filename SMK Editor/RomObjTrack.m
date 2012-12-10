@@ -113,10 +113,6 @@
 {
 	NSRect r = NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
 	[self.image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
-	
-	RomObjOverlay *o								= self.overlay;
-	
-	[o draw:r];
 }
 
 -(NSString*)description

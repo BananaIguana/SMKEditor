@@ -51,9 +51,40 @@ typedef enum kRomTrack
 	kRomTrackBattleCourse1,			// Index 22
 	kRomTrackBattleCourse2,			// Index 23
 	
-	kRomNumTracks
+	kRomNumTracks,
+	
+	kRomNumTrackBattleCourses		= kRomNumTracks - kRomTrackBattleCourse3,
+
+	kRomNumTrackGPTracks			= kRomNumTracks - kRomNumTrackBattleCourses,
 	
 }kRomTrack;
+
+typedef enum kRomAIData
+{
+	kRomAIDataMarioCircuit3,		// Index 00 - Flower Cup Race 5
+	kRomAIDataGhostValley2,			// Index 01 - Flower Cup Race 2
+	kRomAIDataDohnutPlains2,		// Index 02 - Flower Cup Race 3
+	kRomAIDataBowserCastle2,		// Index 03 - Flower Cup Race 4
+	kRomAIDataVanillaLake2,			// Index 04 - Special Cup Race 4
+	kRomAIDataRainbowRoad,			// Index 05 - Special Cup Race 5
+	kRomAIDataKoopaBeach2,			// Index 06 - Special Cup Race 2
+	kRomAIDataMarioCircuit1,		// Index 07 - Mushroom Cup Race 1
+	kRomAIDataGhostValley3,			// Index 08 - Special Cup Race 3
+	kRomAIDataBowserCastle3,		// Index 09 - Star Cup Race 4
+	kRomAIDataChocoIsland2,			// Index 10 - Star Cup Race 2
+	kRomAIDataDohnutPlains3,		// Index 11 - Special Cup Race 1
+	kRomAIDataVanillaLake1,			// Index 12 - Star Cup Race 3
+	kRomAIDataKoopaBeach1,			// Index 13 - Star Cup Race 1
+	kRomAIDataMarioCircuit4,		// Index 14 - Star Cup Race 5
+	kRomAIDataMarioCircuit2,		// Index 15 - Mushroom Cup Race 5
+	kRomAIDataGhostValley1,			// Index 16 - Mushroom Cup Race 3
+	kRomAIDataBowserCastle1,		// Index 17 - Mushroom Cup Race 4
+	kRomAIDataChocoIsland1,			// Index 18 - Flower Cup Race 1
+	kRomAIDataDohnutPlains1,		// Index 19 - Mushroom Cup Race 2
+	
+	kRomNumAIData,
+
+}kRomAIData;
 
 typedef enum kRomKart
 {

@@ -28,11 +28,26 @@
 	NSMutableArray *trackNameArray = [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
 	
 	[tracks enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
+
 		[trackNameArray addObject:[obj description]];
 	}];
 
 	[self.trackSelector removeAllItems];
 	[self.trackSelector addItemsWithTitles:trackNameArray];
+}
+
+-(IBAction)overlayButtonChanged:(NSButton*)sender
+{
+	BOOL toggle = ( sender.state == NSOnState ) ? YES : NO;
+	
+	[self.trackView setDrawOverlay:toggle];
+}
+
+-(IBAction)aiButtonChanged:(NSButton*)sender
+{
+	BOOL toggle = ( sender.state == NSOnState ) ? YES : NO;
+	
+	[self.trackView setDrawAI:toggle];
 }
 
 @end

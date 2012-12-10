@@ -17,6 +17,7 @@
 @class RomObjOverlay;
 @class RomObjKart;
 @class RomObjPalette;
+@class RomObjAIData;
 
 typedef enum kRomHandle
 {
@@ -143,6 +144,29 @@ typedef enum kRomHandle
 	kRomHandleOverlayBattleCourse1,
 	kRomHandleOverlayBattleCourse2,
 
+	// AI Data
+	
+	kRomHandleAIDataMarioCircuit3,				// must be sequential with 'kRomAIZone'
+	kRomHandleAIDataGhostValley2,
+	kRomHandleAIDataDohnutPlains2,
+	kRomHandleAIDataBowserCastle2,
+	kRomHandleAIDataVanillaLake2,
+	kRomHandleAIDataRainbowRoad,
+	kRomHandleAIDataKoopaBeach2,
+	kRomHandleAIDataMarioCircuit1,
+	kRomHandleAIDataGhostValley3,
+	kRomHandleAIDataBowserCastle3,
+	kRomHandleAIDataChocoIsland2,
+	kRomHandleAIDataDohnutPlains3,
+	kRomHandleAIDataVanillaLake1,
+	kRomHandleAIDataKoopaBeach1,
+	kRomHandleAIDataMarioCircuit4,
+	kRomHandleAIDataMarioCircuit2,
+	kRomHandleAIDataGhostValley1,
+	kRomHandleAIDataBowserCastle1,
+	kRomHandleAIDataChocoIsland1,
+	kRomHandleAIDataDohnutPlains1,
+
 	// Karts
 	
 	kRomHandleKartMario,						// must be sequential with 'kRomKart'
@@ -188,6 +212,7 @@ typedef enum kRomHandle
 -(RomObjTheme*)themeFromHandle:(kRomHandle)tileGroupHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup paletteGroup:(RomObjPaletteGroup*)paletteGroup;
 -(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay;
 -(RomObjOverlay*)overlayItemFromHandle:(kRomHandle)overlayItemHandle commonTileGroup:(RomObjTileGroup*)commonTileGroup;
+-(RomObjAIData*)aiDataFromHandle:(kRomHandle)aiDataHande;
 -(RomObjKart*)kartFromHandle:(kRomHandle)kartHandle palette:(RomObjPalette*)palette;
 
 @end

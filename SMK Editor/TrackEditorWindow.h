@@ -12,9 +12,11 @@
 
 @interface TrackEditorWindow : NSWindow
 
-@property(weak)				IBOutlet NSPopUpButton		*trackSelector;
-@property(nonatomic,strong)		NSArray						*trackArray;
-@property(weak)				IBOutlet SMKTrackView		*trackView;
+@property(weak) IBOutlet		NSPopUpButton		*trackSelector;
+@property(weak) IBOutlet		SMKTrackView		*trackView;
+@property(strong)				NSArray				*trackArray;
+@property(weak) IBOutlet		NSButton			*checkOverlay;
+@property(weak) IBOutlet		NSButton			*checkAI;
 
 -(void)setTracks:(NSArray*)tracks;
 

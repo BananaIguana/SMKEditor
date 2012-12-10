@@ -8,13 +8,19 @@
 
 #import "SMKTrackView.h"
 #import "RomObjTrack.h"
+#import "RomObjOverlay.h"
 #import "TrackEditorWindow.h"
 
 @interface SMKTrackView()
-@property(nonatomic,readwrite,assign) TrackViewOperationMode mode;
+
+@property(atomic,readwrite,assign) TrackViewOperationMode mode;
+
 @end
 
 @implementation SMKTrackView
+
+@dynamic drawOverlay;
+@dynamic drawAI;
 
 -(id)initWithFrame:(NSRect)frame
 {
@@ -27,6 +33,9 @@
 		scale								= 1.0f;
 		scaleSource							= 1024.0f;
 		trans								= NSMakePoint( 0.0f, 0.0f );
+		
+		self.drawOverlay					= YES;
+		self.drawAI							= NO;
     }
     
     return( self );
@@ -187,9 +196,50 @@
 
 	[identityXform concat];
 
+	// Draw Track
+
 	[self.track draw:dirtyRect];
+
+	// Draw Overlay
 	
+	if( self.drawOverlay )
+	{
+		RomObjOverlay *o						= self.track.overlay;
+		NSRect r								= NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
+		[o draw:r];
+	}
+
 	[context restoreGraphicsState];
+}
+
+-(void)setDrawOverlay:(BOOL)on
+{
+	@synchronized( self )
+	{
+		_drawOverlay						= on;
+
+		[self setNeedsDisplay:YES];
+	}
+}
+
+-(void)setDrawAI:(BOOL)on
+{
+	@synchronized( self )
+	{
+		_drawAI								= on;
+		
+		[self setNeedsDisplay:YES];
+	}
+}
+
+-(BOOL)drawOverlay
+{
+	return( _drawOverlay );
+}
+
+-(BOOL)drawAI
+{
+	return( _drawAI );
 }
 
 @end

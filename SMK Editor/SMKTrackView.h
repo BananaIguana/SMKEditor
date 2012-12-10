@@ -28,9 +28,13 @@ typedef enum TrackViewOperationMode
 	float						scale;
 	float						scaleSource;
 	NSPoint						currentPoint;
+	BOOL						_drawOverlay;
+	BOOL						_drawAI;
 }
 
-@property(nonatomic,strong)				RomObjTrack						*track;
-@property(nonatomic,readonly,assign)	TrackViewOperationMode			mode;
+@property(strong)				RomObjTrack						*track;
+@property(readonly,assign)		TrackViewOperationMode			mode;
+@property(assign)				BOOL							drawOverlay;
+@property(assign)				BOOL							drawAI;
 
 @end
