@@ -19,11 +19,7 @@
 		self.data			= romData;
 		self.dataRange		= range;
 		
-#if 0 // Temporary fix for theaded processing - I don't understand why setup has to be called on the main thread.
 		[self setup];
-#else
-		[self performSelectorOnMainThread:@selector(setup) withObject:nil waitUntilDone:YES];
-#endif
 	}
 	
 	return( self );

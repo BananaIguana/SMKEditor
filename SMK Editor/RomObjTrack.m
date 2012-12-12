@@ -28,11 +28,7 @@
 		self.overlay		= trackOverlay;
 		self.trackType		= kRomNumTracks;		// Initialise as invalid.
 
-#if 0 // Temporary fix for theaded processing - I don't understand why setup has to be called on the main thread.
 		[self setup];
-#else
-		[self performSelectorOnMainThread:@selector(setup) withObject:nil waitUntilDone:YES];
-#endif
 	}
 
 	return( self );

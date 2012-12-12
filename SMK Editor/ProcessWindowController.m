@@ -12,8 +12,6 @@
 #import "SMKTrackView.h"
 #import "DataRomManager.h"
 
-#define THREADED_PROCESSING
-
 @implementation ProcessWindowController
 
 -(void)windowDidLoad
@@ -22,13 +20,10 @@
 	
 	[self.progress startAnimation:nil];
 	
-#ifdef THREADED_PROCESSING
 	NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(doIt:) object:self];
 	
+	[thread setStackSize:( 1024 * 1024 * 4 )];	
 	[thread start];
-#else
-	[self performSelector:@selector(doIt:) withObject:self];
-#endif
 }
 
 -(void)finishThread
@@ -47,21 +42,9 @@
 
 -(void)doIt:(ProcessWindowController*)var
 {
-#ifdef THREADED_PROCESSING
 	NSManagedObjectContext *context				= [[DataRomManager sharedInstance] threadedContext];
-#else
-	NSManagedObjectContext *context				= [DataRomManager sharedInstance].context;
-#endif
+
 	DataRom *rom								= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
-	
-	// If you are running threaded, you can prove the contents of the rom data is fine with the below line.
-
-//	NSLog( @"%@", rom.rom );
-
-	// Again if threaded, the extract method below will fail in NSData+Decompressor.m at the top of function 'decompressRange'. The log function
-	// at the top of the decompress method doesn't output which suggests that the NSData object is junk at that point it calls the function.
-	
-	// Update to the above, performing the 'setup' method of RomObj.m on the main thread then we avoid the EXC_BAD_ACCESS issue.
 		
 	self.romBase								= [rom extractWithDelegate:self];
 		
