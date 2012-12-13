@@ -12,6 +12,12 @@
 #import "SMKTrackView.h"
 #import "DataRomManager.h"
 
+@interface ProcessWindowController()
+
+@property(assign) NSUInteger						currentExtraction;
+
+@end
+
 @implementation ProcessWindowController
 
 -(void)windowDidLoad
@@ -46,9 +52,7 @@
 
 	DataRom *rom								= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
 		
-	self.romBase								= [rom extractWithDelegate:self];
-		
-	[self performSelectorOnMainThread:@selector(finishThread) withObject:nil waitUntilDone:NO];
+	[rom extractWithDelegate:self];
 }
 
 #pragma mark -
@@ -73,6 +77,15 @@
 {
 	[self.progress setMinValue:0.0];
 	[self.progress setMaxValue:(double)steps];
+	
+	self.currentExtraction						= 0;
+}
+
+-(void)notifyExtractionComplete:(RomBase*)rom
+{
+	self.romBase								= rom;
+
+	[self finishThread];
 }
 
 @end

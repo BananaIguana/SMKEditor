@@ -83,9 +83,12 @@
 
 	CGImageRef ref									= [bitmap CGImage];
 
-	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )];
+	dispatch_sync( dispatch_get_main_queue(), ^{
 	
-	self.image										= im;
+		NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( 8, 8 )];
+	
+		self.image										= im;
+	});
 }
 
 @end

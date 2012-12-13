@@ -142,12 +142,12 @@
 		
 		if( bOk )
 		{
-			NSLog( @"[AI] : ---------------------------------------------------------" );
-			NSLog( @"[AI] : Type = %d", type );
-			NSLog( @"[AI] : X = %d : Y = %d", obj->boundX, obj->boundY );
-			NSLog( @"[AI] : W = %d : H = %d", obj->boundWidth, obj->boundHeight );
-			NSLog( @"[AI] : TX = %d : TY = %d", obj->targetX, obj->targetY );
-			NSLog( @"[AI] : Speed = %d", obj->speed );
+//			NSLog( @"[AI] : ---------------------------------------------------------" );
+//			NSLog( @"[AI] : Type = %d", type );
+//			NSLog( @"[AI] : X = %d : Y = %d", obj->boundX, obj->boundY );
+//			NSLog( @"[AI] : W = %d : H = %d", obj->boundWidth, obj->boundHeight );
+//			NSLog( @"[AI] : TX = %d : TY = %d", obj->targetX, obj->targetY );
+//			NSLog( @"[AI] : Speed = %d", obj->speed );
 		}
 	}];
 }

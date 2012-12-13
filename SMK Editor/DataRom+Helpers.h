@@ -16,13 +16,12 @@
 
 -(void)notifyExtractionSteps:(NSUInteger)steps;
 -(void)notifyExtractedObject:(id)obj;
-
+-(void)notifyExtractionComplete:(RomBase*)rom;
 @end
 
 @interface DataRom (Helpers)
 
--(RomBase*)extract;
--(RomBase*)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate;
+-(void)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate;
 
 +(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context;
 

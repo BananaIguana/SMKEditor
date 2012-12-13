@@ -18,8 +18,9 @@
 
 @property(strong) NSManagedObjectID					*romID;
 @property(strong) TrackEditorWindow					*trackEditor;
-@property(weak) IBOutlet NSProgressIndicator		*progress;
 @property(strong) RomBase							*romBase;
+
+@property(weak) IBOutlet NSProgressIndicator		*progress;
 @property(weak) IBOutlet NSTextField				*textProgress;
 
 @end

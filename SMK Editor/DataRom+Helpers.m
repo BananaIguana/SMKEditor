@@ -30,18 +30,21 @@
 
 @implementation DataRom (Helpers)
 
--(RomBase*)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate
+-(void)extractWithDelegate:(id<DataRomExtractionProtocol>)delegate
 {
-	if( [delegate respondsToSelector:@selector(notifyExtractionSteps:)] )
-	{
-		[delegate notifyExtractionSteps:(
-		
-			kRomNumThemes			+		// Themes
-			kRomNumTracks			+		// Tracks
-			kRomNumKarts			+		// Karts
-			kRomNumTrackGPTracks			// AI Data
-		)];
-	}
+	dispatch_async( dispatch_get_main_queue(), ^{
+
+		if( [delegate respondsToSelector:@selector(notifyExtractionSteps:)] )
+		{
+			[delegate notifyExtractionSteps:(
+				
+				kRomNumThemes			+		// Themes
+				kRomNumTracks			+		// Tracks
+				kRomNumKarts			+		// Karts
+				kRomNumTrackGPTracks			// AI Data
+			)];
+		}
+	});
 
 	// Fake it as european for now...
 		
@@ -99,76 +102,129 @@
 	
 	NSMutableArray *themeArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumThemes];
 	
+	dispatch_group_t group1					= dispatch_group_create();
+	
 	for( int i = 0; i < kRomNumThemes; ++i )
 	{
-		RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
+		[themeArray addObject:[NSNull null]];
 
-		RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
+		dispatch_group_async( group1, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
 
-		RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
+			RomObjPaletteGroup *paletteGroup	= [eurRom objectFromHandle:( kRomHandlePaletteGroupGhostValley + i )];
 
-		[themeArray addObject:theme];
-		
-		DELEGATE_NOTIFY( theme );
+			RomObjTileGroup *commonTileSet		= [eurRom tileGroupFromHandle:kRomHandleDataTileSetCommon paletteGroup:paletteGroup];
+
+			RomObjTheme *theme					= [eurRom themeFromHandle:( kRomHandleTilesetGroupGhostValley + i ) commonTileGroup:commonTileSet paletteGroup:paletteGroup];
+
+			@synchronized( themeArray )
+			{
+				[themeArray replaceObjectAtIndex:i withObject:theme];
+			}
+			
+			dispatch_async( dispatch_get_main_queue(), ^{
+
+				DELEGATE_NOTIFY( theme );
+			});
+		});
 	}
+	
+	dispatch_group_wait( group1, DISPATCH_TIME_FOREVER );
+	
+	dispatch_group_t group2					= dispatch_group_create();
 	
 	NSMutableArray *trackArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
 	
 	for( int i = 0; i < kRomNumTracks; ++i )
 	{
-		NSNumber *index						= (eurRom.romTrackThemeMappingArray)[i];
-		
-		RomObjTheme *theme					= themeArray[[index unsignedIntValue]];
-		
-		RomObjOverlay *overlay				= [eurRom overlayItemFromHandle:( kRomHandleOverlayMarioCircuit3 + i ) commonTileGroup:theme.tileGroupCommon];
-	
-		RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme trackOverlay:overlay];
-		
-		[track setTrackType:i];
-		
-		[trackArray addObject:track];
+		[trackArray addObject:[NSNull null]];
 
-		DELEGATE_NOTIFY( track );
+		dispatch_group_async( group2, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
+
+			NSNumber *index						= (eurRom.romTrackThemeMappingArray)[i];
+			
+			RomObjTheme *theme					= themeArray[[index unsignedIntValue]];
+			
+			RomObjOverlay *overlay				= [eurRom overlayItemFromHandle:( kRomHandleOverlayMarioCircuit3 + i ) commonTileGroup:theme.tileGroupCommon];
+		
+			RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme trackOverlay:overlay];
+			
+			[track setTrackType:i];
+			
+			@synchronized( trackArray )
+			{
+				[trackArray replaceObjectAtIndex:i withObject:track];
+			}
+
+			dispatch_async( dispatch_get_main_queue(), ^{
+
+				DELEGATE_NOTIFY( track );
+			});
+		});
 	}
 	
 	NSMutableArray *aiArray					= [[NSMutableArray alloc] initWithCapacity:kRomNumTrackGPTracks];
 	
 	for( int i = 0; i < kRomNumAIData; ++i )
 	{
-		RomObjAIData *aiData				= [eurRom aiDataFromHandle:( kRomHandleAIDataMarioCircuit3 + i )];
+		[aiArray addObject:[NSNull null]];
 
-		[aiData setAiDataType:i];
+		dispatch_group_async( group2, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
 
-		[aiArray addObject:aiData];
+			RomObjAIData *aiData				= [eurRom aiDataFromHandle:( kRomHandleAIDataMarioCircuit3 + i )];
 
-		DELEGATE_NOTIFY( aiData );
+			[aiData setAiDataType:i];
+
+			@synchronized( aiArray )
+			{
+				[aiArray replaceObjectAtIndex:i withObject:aiData];
+			}
+
+			dispatch_async( dispatch_get_main_queue(), ^{
+
+				DELEGATE_NOTIFY( aiData );
+			});
+		});
 	}
 	
 	NSMutableArray *kartArray				= [[NSMutableArray alloc] initWithCapacity:kRomNumKarts];
-	
+		
 	for( int i = 0; i < kRomNumKarts; ++i )
 	{
-		RomObjTheme *t						= themeArray[0];
-		RomObjPaletteGroup *pg				= t.paletteGroup;
-		RomObjPalette *p					= (pg.paletteArray)[0];
+		[kartArray addObject:[NSNull null]];
+
+		dispatch_group_async( group2, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
 		
-		RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
+			RomObjTheme *t						= themeArray[0];
+			RomObjPaletteGroup *pg				= t.paletteGroup;
+			RomObjPalette *p					= (pg.paletteArray)[0];
+			
+			RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
 
-		[kartArray addObject:kart];
+			@synchronized( kartArray )
+			{
+				[kartArray replaceObjectAtIndex:i withObject:kart];
+			}
 
-		DELEGATE_NOTIFY( kart );
+			dispatch_async( dispatch_get_main_queue(), ^{
+
+				DELEGATE_NOTIFY( kart );
+			});
+		});
 	}
-
-	eurRom.themes							= themeArray;
-	eurRom.tracks							= trackArray;
-	eurRom.karts							= kartArray;
 	
-	return( eurRom );
-}
+	dispatch_group_wait( group2, DISPATCH_TIME_FOREVER );
+	
+	dispatch_async( dispatch_get_main_queue(), ^{
 
--(RomBase*)extract
-{
-	return( [self extractWithDelegate:nil] );
+		eurRom.themes							= themeArray;
+		eurRom.tracks							= trackArray;
+		eurRom.karts							= kartArray;
+
+		if( [delegate respondsToSelector:@selector(notifyExtractionComplete:)] )
+		{
+			[delegate notifyExtractionComplete:eurRom];
+		}
+	});
 }
 
 +(DataRom*)dataRomFromObjectID:(NSManagedObjectID*)romID viaManagedObjectContext:(NSManagedObjectContext*)context
