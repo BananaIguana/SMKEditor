@@ -3,7 +3,7 @@
 //  SMK Editor
 //
 //  Created by Ian Sidor on 08/11/2011.
-//  Copyright (c) 2011 Banana Iguana. All rights reserved.
+//  Copyright © Banana Iguana. All rights reserved.
 //
 
 #import "NSData+Decompressor.h"
@@ -40,141 +40,141 @@
 
 -(NSData*)decompressRange:(NSRange)range
 {
-	@synchronized( self )
+	unsigned char *sourceData								= malloc( NSDATA_DECOMPRESSOR_BUFFER_MAX );
+	unsigned char *decompressionBuffer						= malloc( NSDATA_DECOMPRESSOR_BUFFER_MAX );
+	
+	range.length = MIN( range.length, NSDATA_DECOMPRESSOR_BUFFER_MAX );
+	
+	[self getBytes:sourceData range:range];
+	
+	NSInteger destinationPosition = 0, sourcePosition = 0;
+	unsigned char cmd;
+
+	while( ( cmd = sourceData[ sourcePosition++ ] ) != 0xFF )
 	{
-		unsigned char sourceData[ NSDATA_DECOMPRESSOR_BUFFER_MAX ];
-		unsigned char decompressionBuffer[ NSDATA_DECOMPRESSOR_BUFFER_MAX ];
+		unsigned char ctrl = (unsigned char)( ( cmd & 0xE0 ) >> 5 );
+		NSInteger count;
 		
-		range.length = MIN( range.length, NSDATA_DECOMPRESSOR_BUFFER_MAX );
-		
-		[self getBytes:sourceData range:range];
-		
-		NSInteger destinationPosition = 0, sourcePosition = 0;
-		unsigned char cmd;
-
-		while( ( cmd = sourceData[ sourcePosition++ ] ) != 0xFF )
+		if( ( ctrl != NSDATA_DECOMPRESSOR_COMMAND_EXTEND ) && ( cmd < 0xE0 ) )
 		{
-			unsigned char ctrl = (unsigned char)( ( cmd & 0xE0 ) >> 5 );
-			NSInteger count;
-			
-			if( ( ctrl != NSDATA_DECOMPRESSOR_COMMAND_EXTEND ) && ( cmd < 0xE0 ) )
-			{
-				count = ( cmd & 0x1F );
-			}
-			else
-			{
-				ctrl = (unsigned char)( ( cmd & 0x1C ) >> 2 );
-				count = ( ( ( ( cmd & 0x3 ) << 8 ) & 0xFF00 ) | ( ( sourceData[ sourcePosition++ ] ) & 0xFF ) );
-			}
-			
-			count++;
-			
-			switch( ctrl )
-			{
-				case NSDATA_DECOMPRESSOR_COMMAND_NO_COMPRESSION :
-					{
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition++ ];
-						}
-						
-					}break;
-					
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_SINGLE :
-					{
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition ];
-						}
-						
-						sourcePosition++;
-						
-					}break;
-					
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_DOUBLE :
-					{
-						NSInteger j = 0;
-						
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition + j ];
-							
-							j = 1 - j;
-						}
-						
-						sourcePosition += 2;
-						
-					}break;
-					
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_SINGLE_INC :
-					{
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							NSInteger temp = ( ( sourceData[ sourcePosition ] + i ) & 0xFF ) % 256;
-														
-							decompressionBuffer[ destinationPosition++ ] = (unsigned char)temp;
-						}
-						
-						sourcePosition++;
-						
-					}break;
-					
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET :
-					{
-						NSInteger byte1 = sourceData[ sourcePosition++ ] & 0xFF;
-						NSInteger byte2 = sourceData[ sourcePosition++ ] & 0xFF;
-												
-						NSInteger srcPosition = ( ( byte1 ) | ( byte2 << 8 ) );
-						
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							decompressionBuffer[ destinationPosition++ ] = decompressionBuffer[ srcPosition + i ];
-						}
-						
-					}break;
-
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET_XOR :
-					{
-						NSInteger byte1 = sourceData[ sourcePosition++ ] & 0xFF;
-						NSInteger byte2 = sourceData[ sourcePosition++ ] & 0xFF;
-						
-						NSInteger srcPosition = ( byte1 ) | ( byte2 << 8 );
-						
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							NSInteger temp = ( decompressionBuffer[ srcPosition + i ] & 0xFF ) ^ 0xFF;
-							
-							decompressionBuffer[ destinationPosition++ ] = (unsigned char)temp;
-						}
-						
-					}break;
-					
-				case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET_DEST :
-					{
-						NSInteger byteData = sourceData[ sourcePosition++ ] & 0xFF;
-						
-						NSInteger srcPosition = destinationPosition - byteData;
-						
-						for( NSInteger i = 0; i < count; i++ )
-						{
-							decompressionBuffer[ destinationPosition++ ] = decompressionBuffer[ srcPosition++ ];
-						}
-						
-					}break;
-					
-				default:
-					{
-						// Corruption ? // Error ?
-						
-						NSAssert( 0, @"Unhandled state encountered while decompressing" );
-					}
-			}
+			count = ( cmd & 0x1F );
+		}
+		else
+		{
+			ctrl = (unsigned char)( ( cmd & 0x1C ) >> 2 );
+			count = ( ( ( ( cmd & 0x3 ) << 8 ) & 0xFF00 ) | ( ( sourceData[ sourcePosition++ ] ) & 0xFF ) );
 		}
 		
-		NSData *returnData = [NSData dataWithBytes:decompressionBuffer length:destinationPosition];
+		count++;
+		
+		switch( ctrl )
+		{
+			case NSDATA_DECOMPRESSOR_COMMAND_NO_COMPRESSION :
+				{
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition++ ];
+					}
+					
+				}break;
+				
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_SINGLE :
+				{
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition ];
+					}
+					
+					sourcePosition++;
+					
+				}break;
+				
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_DOUBLE :
+				{
+					NSInteger j = 0;
+					
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						decompressionBuffer[ destinationPosition++ ] = sourceData[ sourcePosition + j ];
+						
+						j = 1 - j;
+					}
+					
+					sourcePosition += 2;
+					
+				}break;
+				
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_SINGLE_INC :
+				{
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						NSInteger temp = ( ( sourceData[ sourcePosition ] + i ) & 0xFF ) % 256;
+													
+						decompressionBuffer[ destinationPosition++ ] = (unsigned char)temp;
+					}
+					
+					sourcePosition++;
+					
+				}break;
+				
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET :
+				{
+					NSInteger byte1 = sourceData[ sourcePosition++ ] & 0xFF;
+					NSInteger byte2 = sourceData[ sourcePosition++ ] & 0xFF;
+											
+					NSInteger srcPosition = ( ( byte1 ) | ( byte2 << 8 ) );
+					
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						decompressionBuffer[ destinationPosition++ ] = decompressionBuffer[ srcPosition + i ];
+					}
+					
+				}break;
 
-		return( returnData );
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET_XOR :
+				{
+					NSInteger byte1 = sourceData[ sourcePosition++ ] & 0xFF;
+					NSInteger byte2 = sourceData[ sourcePosition++ ] & 0xFF;
+					
+					NSInteger srcPosition = ( byte1 ) | ( byte2 << 8 );
+					
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						NSInteger temp = ( decompressionBuffer[ srcPosition + i ] & 0xFF ) ^ 0xFF;
+						
+						decompressionBuffer[ destinationPosition++ ] = (unsigned char)temp;
+					}
+					
+				}break;
+				
+			case NSDATA_DECOMPRESSOR_COMMAND_COPY_OFFSET_DEST :
+				{
+					NSInteger byteData = sourceData[ sourcePosition++ ] & 0xFF;
+					
+					NSInteger srcPosition = destinationPosition - byteData;
+					
+					for( NSInteger i = 0; i < count; i++ )
+					{
+						decompressionBuffer[ destinationPosition++ ] = decompressionBuffer[ srcPosition++ ];
+					}
+					
+				}break;
+				
+			default:
+				{
+					// Corruption ? // Error ?
+					
+					NSAssert( 0, @"Unhandled state encountered while decompressing" );
+				}
+		}
 	}
+	
+	NSData *returnData = [NSData dataWithBytes:decompressionBuffer length:destinationPosition];
+	
+	free( sourceData );
+	free( decompressionBuffer );
+
+	return( returnData );
 }
 
 -(NSData*)decompressTrackRange:(NSRange)range
