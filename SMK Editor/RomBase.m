@@ -193,13 +193,15 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 	return( theme );
 }
 
--(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay
+-(RomObjTrack*)trackFromHandle:(kRomHandle)trackHandle trackTheme:(RomObjTheme*)theme trackOverlay:(RomObjOverlay*)overlay aiData:(RomObjAIData*)aiData
 {
 	RomRange romRange								= [self romRangeFromHandle:trackHandle];
 	
 	RomObjTrack *track								= [[RomObjTrack alloc] initWithRomData:self.data range:romRange theme:theme overlay:overlay];
 	
 	track.trackType									= (kRomTrack)( trackHandle - kRomHandleTrackMarioCircuit3 );
+	
+	track.aiData									= aiData;
 
 	NSAssert( ( ( track.trackType >= kRomTrackMarioCircuit3 ) && ( track.trackType <= kRomTrackBattleCourse2 ) ), @"Invalid theme, check kRomTrack runs sequentially with kRomHandle" );
 	

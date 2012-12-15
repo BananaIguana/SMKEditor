@@ -9,6 +9,7 @@
 #import "SMKTrackView.h"
 #import "RomObjTrack.h"
 #import "RomObjOverlay.h"
+#import "RomObjAIData.h"
 #import "TrackEditorWindow.h"
 
 @interface SMKTrackView()
@@ -205,6 +206,13 @@
 	if( self.drawOverlay )
 	{
 		RomObjOverlay *o						= self.track.overlay;
+		NSRect r								= NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
+		[o draw:r];
+	}
+	
+	if( self.drawAI )
+	{
+		RomObjAIData *o							= self.track.aiData;
 		NSRect r								= NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
 		[o draw:r];
 	}

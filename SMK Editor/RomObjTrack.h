@@ -11,6 +11,7 @@
 
 @class RomObjTheme;
 @class RomObjOverlay;
+@class RomObjAIData;
 
 @interface RomObjTrack : RomObj
 
@@ -20,6 +21,7 @@
 @property(strong) NSBitmapImageRep		*imageBitmap;
 @property(assign) kRomTrack				trackType;
 @property(strong) RomObjOverlay			*overlay;
+@property(strong) RomObjAIData			*aiData;
 
 -(id)initWithRomData:(NSData*)romData range:(RomRange)range theme:(RomObjTheme*)theme overlay:(RomObjOverlay*)trackOverlay;
 -(void)draw:(NSRect)rect;

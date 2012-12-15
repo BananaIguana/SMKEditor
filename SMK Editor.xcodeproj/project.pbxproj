@@ -50,6 +50,9 @@
 		3CDF988814DF543800B29526 /* ProcessWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF988714DF543800B29526 /* ProcessWindowController.m */; };
 		3CF4085414C4BC9800F92E60 /* ImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4085314C4BC9800F92E60 /* ImportWindow.xib */; };
 		3CF4085F14C4C82B00F92E60 /* ImportWindowTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */; };
+		FEB22343167C1D7E00ACF773 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B16140874B200A46814 /* AppKit.framework */; };
+		FEB22345167C1D9600ACF773 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B17140874B200A46814 /* CoreData.framework */; };
+		FEB22346167C1DA200ACF773 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B18140874B200A46814 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +145,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB22346167C1DA200ACF773 /* Foundation.framework in Frameworks */,
+				FEB22345167C1D9600ACF773 /* CoreData.framework in Frameworks */,
+				FEB22343167C1D7E00ACF773 /* AppKit.framework in Frameworks */,
 				3C904B14140874B200A46814 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

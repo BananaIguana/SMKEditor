@@ -128,6 +128,30 @@
 		});
 	}
 	
+	NSMutableArray *aiArray					= [[NSMutableArray alloc] initWithCapacity:kRomNumTrackGPTracks];
+	
+	for( int i = 0; i < kRomNumAIData; ++i )
+	{
+		[aiArray addObject:[NSNull null]];
+
+		dispatch_group_async( group1, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
+
+			RomObjAIData *aiData				= [eurRom aiDataFromHandle:( kRomHandleAIDataMarioCircuit3 + i )];
+
+			[aiData setAiDataType:i];
+
+			@synchronized( aiArray )
+			{
+				[aiArray replaceObjectAtIndex:i withObject:aiData];
+			}
+
+			dispatch_async( dispatch_get_main_queue(), ^{
+
+				DELEGATE_NOTIFY( aiData );
+			});
+		});
+	}
+	
 	dispatch_group_wait( group1, DISPATCH_TIME_FOREVER );
 	
 	dispatch_group_t group2					= dispatch_group_create();
@@ -146,7 +170,12 @@
 			
 			RomObjOverlay *overlay				= [eurRom overlayItemFromHandle:( kRomHandleOverlayMarioCircuit3 + i ) commonTileGroup:theme.tileGroupCommon];
 		
-			RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme trackOverlay:overlay];
+			RomObjAIData *aiData				= nil;
+			
+			if( i < kRomNumAIData )
+				aiData							= [aiArray objectAtIndex:i];
+		
+			RomObjTrack *track					= [eurRom trackFromHandle:( kRomHandleTrackMarioCircuit3 + i ) trackTheme:theme trackOverlay:overlay aiData:aiData];
 			
 			[track setTrackType:i];
 			
@@ -158,30 +187,6 @@
 			dispatch_async( dispatch_get_main_queue(), ^{
 
 				DELEGATE_NOTIFY( track );
-			});
-		});
-	}
-	
-	NSMutableArray *aiArray					= [[NSMutableArray alloc] initWithCapacity:kRomNumTrackGPTracks];
-	
-	for( int i = 0; i < kRomNumAIData; ++i )
-	{
-		[aiArray addObject:[NSNull null]];
-
-		dispatch_group_async( group2, dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
-
-			RomObjAIData *aiData				= [eurRom aiDataFromHandle:( kRomHandleAIDataMarioCircuit3 + i )];
-
-			[aiData setAiDataType:i];
-
-			@synchronized( aiArray )
-			{
-				[aiArray replaceObjectAtIndex:i withObject:aiData];
-			}
-
-			dispatch_async( dispatch_get_main_queue(), ^{
-
-				DELEGATE_NOTIFY( aiData );
 			});
 		});
 	}

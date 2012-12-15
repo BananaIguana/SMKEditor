@@ -22,14 +22,15 @@ typedef enum kAIZone
 @interface ReadBuffer : NSObject
 {
 @public
-	unsigned char shapeID;
-	unsigned char boundX;
-	unsigned char boundY;
-	unsigned char boundWidth;
-	unsigned char boundHeight;
-	unsigned char targetX;
-	unsigned char targetY;
-	unsigned char speed;
+	unsigned char		shapeID;
+	unsigned char		boundX;
+	unsigned char		boundY;
+	unsigned char		boundWidth;
+	unsigned char		boundHeight;
+	unsigned char		targetX;
+	unsigned char		targetY;
+	unsigned char		speed;
+	kAIZone				zone;
 }
 
 @end
@@ -37,6 +38,7 @@ typedef enum kAIZone
 @interface RomObjAIData : RomObj
 
 -(id)initWithRomData:(NSData*)romData zoneRange:(RomRange)zoneRange targetRange:(RomRange)targetRange;
+-(void)draw:(NSRect)rect;
 
 @property(assign) RomRange				dataRangeTarget;
 @property(strong) NSArray				*readBuffer;
