@@ -72,9 +72,9 @@
 			
 			NSUInteger bitmapColour[ 4 ];			
 			
-			bitmapColour[ 0 ]						= (NSUInteger)( red * 255.0f );
-			bitmapColour[ 1 ]						= (NSUInteger)( green * 255.0f );
-			bitmapColour[ 2 ]						= (NSUInteger)( blue * 255.0f );
+			bitmapColour[ 0 ]						= (NSUInteger)( red * 255.0 );
+			bitmapColour[ 1 ]						= (NSUInteger)( green * 255.0 );
+			bitmapColour[ 2 ]						= (NSUInteger)( blue * 255.0 );
 			bitmapColour[ 3 ]						= 255;
 			
 			[bitmap setPixel:bitmapColour atX:x y:y];

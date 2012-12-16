@@ -25,8 +25,8 @@ typedef enum TrackViewOperationMode
 @interface SMKTrackView : NSView
 {
 	NSPoint						trans;
-	float						scale;
-	float						scaleSource;
+	CGFloat						scale;
+	CGFloat						scaleSource;
 	NSPoint						currentPoint;
 	BOOL						_drawOverlay;
 	BOOL						_drawAI;

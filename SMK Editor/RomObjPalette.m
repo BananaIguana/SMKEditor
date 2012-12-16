@@ -21,11 +21,11 @@
 	unsigned char nG			= ( ( ( ( hibyte & 0x03 ) << 3 ) + ( ( lobyte & 0xE0 ) >> 5 ) ) << 3 ) & 0xFF;
 	unsigned char nB			= ( ( hibyte & 0x7C ) << 1 ) & 0xFF;
 	
-	float fR					= (float)nR / 255.0f;
-	float fG					= (float)nG / 255.0f;
-	float fB					= (float)nB / 255.0f;
+	CGFloat fR					= (CGFloat)nR / 255.0;
+	CGFloat fG					= (CGFloat)nG / 255.0;
+	CGFloat fB					= (CGFloat)nB / 255.0;
 
-	NSColor *colourFromData		= [NSColor colorWithDeviceRed:fR green:fG blue:fB alpha:1.0f];
+	NSColor *colourFromData		= [NSColor colorWithDeviceRed:fR green:fG blue:fB alpha:1.0];
 
 	return( colourFromData );
 }
@@ -68,10 +68,10 @@
 		[desc appendFormat:@"\n--> Colour Index %02lu : R-%03d G-%03d B-%03d A-%03d",
 		
 			idx,
-			(int)( [col redComponent]		* 255.0f ),
-			(int)( [col greenComponent]		* 255.0f ),
-			(int)( [col blueComponent]		* 255.0f ),
-			(int)( [col alphaComponent]		* 255.0f )];		
+			(int)( [col redComponent]		* 255.0 ),
+			(int)( [col greenComponent]		* 255.0 ),
+			(int)( [col blueComponent]		* 255.0 ),
+			(int)( [col alphaComponent]		* 255.0 )];		
 	}];
 	
 	return( desc );

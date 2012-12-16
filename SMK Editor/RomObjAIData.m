@@ -127,8 +127,6 @@
 {
 	[self.readBuffer enumerateObjectsUsingBlock:^( ReadBuffer *obj, NSUInteger idx, BOOL *stop ){
 
-		BOOL bOk					= YES;
-		
 		kAIZone type				= Rectangle;
 					
 		switch( obj->shapeID )
@@ -156,6 +154,8 @@
 
 -(void)draw:(NSRect)rect
 {
+	NSBezierPath *path				= [NSBezierPath bezierPath];
+
 	[self.readBuffer enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
 
 		ReadBuffer *buf				= (ReadBuffer*)obj;
@@ -170,216 +170,101 @@
 			buf->boundHeight		* POLY_SCALAR
 		);
 		
+		const CGFloat kCircleSize	= 4.0;
+		
+		CGRect pointRect			= CGRectMake( point.x - kCircleSize, point.y - kCircleSize, kCircleSize * 2.0, kCircleSize * 2.0 );
+		
+		[path appendBezierPathWithOvalInRect:pointRect];
+		
 		switch( buf->zone )
 		{
 			case Rectangle :
 				{
-					NSBezierPath *path = [NSBezierPath bezierPath];
-
+					CGFloat X2		= rect.origin.x + rect.size.width;
+					CGFloat Y2		= rect.origin.y + rect.size.height;
+		
 					[path moveToPoint:rect.origin];
-					[path lineToPoint:NSMakePoint( rect.origin.x + rect.size.width, rect.origin.y )];
-					[path lineToPoint:NSMakePoint( rect.origin.x + rect.size.width, rect.origin.y + rect.size.height )];
-					[path lineToPoint:NSMakePoint( rect.origin.x, rect.origin.y + rect.size.height )];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y )];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y + rect.size.height )];
+					[path lineToPoint:NSMakePoint( rect.origin.x, Y2 )];
 					[path lineToPoint:rect.origin];
 					[path closePath];
-					[[NSColor redColor] set];
-					[path stroke];
 				
 				}break;
 				
 			case TriangleTopLeft :
 				{
+					CGFloat X2		= rect.origin.x + rect.size.width;
+					CGFloat Y2		= rect.origin.y + rect.size.width;
+					
+					X2				+= POLY_SCALAR;
+					Y2				+= POLY_SCALAR;
+
+					[path moveToPoint:rect.origin];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y )];
+					[path lineToPoint:NSMakePoint( rect.origin.x, Y2 )];
+					[path lineToPoint:rect.origin];
+
 				}break;
 				
 			case TriangleTopRight :
 				{
-				
+					rect.origin.x	+= POLY_SCALAR;
+
+					CGFloat X2		= rect.origin.x - rect.size.width;
+					CGFloat Y2		= rect.origin.y + rect.size.width;
+					
+					X2				-= POLY_SCALAR;
+
+					[path moveToPoint:rect.origin];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y )];
+					[path lineToPoint:NSMakePoint( rect.origin.x, Y2 )];
+					[path lineToPoint:rect.origin];
+
 				}break;
 				
 			case TriangleBottomLeft :
 				{
+					rect.origin.y	+= POLY_SCALAR;
 				
+					CGFloat X2		= rect.origin.x + rect.size.width;
+					CGFloat Y2		= rect.origin.y - rect.size.width;
+					
+					X2				+= POLY_SCALAR;
+
+					[path moveToPoint:rect.origin];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y )];
+					[path lineToPoint:NSMakePoint( rect.origin.x, Y2 )];
+					[path lineToPoint:rect.origin];
+
 				}break;
 				
 			case TriangleBottomRight :
 				{
-				
+					rect.origin.x	+= POLY_SCALAR;
+					rect.origin.y	+=POLY_SCALAR;
+					
+					CGFloat X2		= rect.origin.x - rect.size.width;
+					CGFloat Y2		= rect.origin.y - rect.size.width;
+
+					[path moveToPoint:rect.origin];
+					[path lineToPoint:NSMakePoint( rect.origin.x, Y2 )];
+					[path lineToPoint:NSMakePoint( X2, rect.origin.y )];
+					[path lineToPoint:rect.origin];
+
 				}break;
 		}
 	}];
+	
+	NSAffineTransform *transform	= [NSAffineTransform transform];
+	
+	[transform translateXBy:0.0 yBy:1024];
+	[transform scaleXBy:1.0 yBy:-1.0];
+	
+	[path transformUsingAffineTransform:transform];
+	
+	[[NSColor whiteColor] set];
+	[path stroke];
 }
-
-/*
-package RomUtils.Containers;
-
-import java.awt.Point;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.graphics.Transform;
-
-import Global.Global;
-import ROM.eZone;
-
-public class ContainerAIZoneEx extends ContainerAIZone
-{
-	private int[]		m_nPolygonPoints			= null;
-	private Point		m_targetVisualPoint			= null;
-	private final int	kPolyScalar					= 16;
-	private final int	kTargetScalar				= 8;
-	
-	public ContainerAIZoneEx( final eZone zone, final Rectangle rect, final Point target, float speed )
-	{
-		super( zone, rect, target, speed );
-		
-		doit();
-	}
-	
-	public void doit()
-	{
-		m_targetVisualPoint		= new Point( m_target.x * kTargetScalar, m_target.y * kTargetScalar );
-		Rectangle rect			= new Rectangle(
-				
-				m_rect.x		*	kPolyScalar,
-				m_rect.y		*	kPolyScalar,
-				m_rect.width	*	kPolyScalar,
-				m_rect.height	*	kPolyScalar
-		);
-
-		switch( m_eZone )
-		{
-			case Rectangle :
-				{
-					int nX2 = rect.x + rect.width;
-					int nY2 = rect.y + rect.height;
-
-					m_nPolygonPoints = new int[ 4 * 2 ];
-					
-					m_nPolygonPoints[ 0 ] = rect.x;
-					m_nPolygonPoints[ 1 ] = rect.y;
-					
-					m_nPolygonPoints[ 2 ] = nX2;
-					m_nPolygonPoints[ 3 ] = rect.y;
-					
-					m_nPolygonPoints[ 4 ] = nX2;
-					m_nPolygonPoints[ 5 ] = nY2;
-					
-					m_nPolygonPoints[ 6 ] = rect.x;
-					m_nPolygonPoints[ 7 ] = nY2;
-		
-				}break;
-				
-			case TriangleBottomRight :
-				{
-					rect.x += kPolyScalar;
-					rect.y += kPolyScalar;
-
-					int nX2 = rect.x - rect.width;
-					int nY2 = rect.y - rect.width;
-					
-					m_nPolygonPoints = new int[ 3 * 2 ];
-					
-					m_nPolygonPoints[ 0 ] = rect.x;
-					m_nPolygonPoints[ 1 ] = rect.y;
-					
-					m_nPolygonPoints[ 2 ] = rect.x;
-					m_nPolygonPoints[ 3 ] = nY2;
-					
-					m_nPolygonPoints[ 4 ] = nX2;
-					m_nPolygonPoints[ 5 ] = rect.y;
-	
-				}break;
-				
-			case TriangleTopLeft :
-				{
-					int nX2 = rect.x + rect.width;
-					int nY2 = rect.y + rect.width;
-					
-					nX2 += kPolyScalar;
-					nY2 += kPolyScalar;
-					
-					m_nPolygonPoints = new int[ 3 * 2 ];
-					
-					m_nPolygonPoints[ 0 ] = rect.x;
-					m_nPolygonPoints[ 1 ] = rect.y;
-					
-					m_nPolygonPoints[ 2 ] = nX2;
-					m_nPolygonPoints[ 3 ] = rect.y;
-					
-					m_nPolygonPoints[ 4 ] = rect.x;
-					m_nPolygonPoints[ 5 ] = nY2;
-				
-				}break;
-				
-			case TriangleBottomLeft :
-				{
-					rect.y += kPolyScalar;
-					
-					int nX2 = rect.x + rect.width;
-					int nY2 = rect.y - rect.width;
-					
-					nX2 += kPolyScalar;
-					
-					m_nPolygonPoints = new int[ 3 * 2 ];
-					
-					m_nPolygonPoints[ 0 ] = rect.x;
-					m_nPolygonPoints[ 1 ] = rect.y;
-					
-					m_nPolygonPoints[ 2 ] = nX2;
-					m_nPolygonPoints[ 3 ] = rect.y;
-					
-					m_nPolygonPoints[ 4 ] = rect.x;
-					m_nPolygonPoints[ 5 ] = nY2;
-					
-				}break;
-				
-			case TriangleTopRight :
-				{
-					rect.x += kPolyScalar;
-					
-					int nX2 = rect.x - rect.width;
-					int nY2 = rect.y + rect.width;
-					
-					nX2 -= kPolyScalar;
-					
-					m_nPolygonPoints = new int[ 3 * 2 ];
-					
-					m_nPolygonPoints[ 0 ] = rect.x;
-					m_nPolygonPoints[ 1 ] = rect.y;
-					
-					m_nPolygonPoints[ 2 ] = nX2;
-					m_nPolygonPoints[ 3 ] = rect.y;
-					
-					m_nPolygonPoints[ 4 ] = rect.x;
-					m_nPolygonPoints[ 5 ] = nY2;
-					
-				}break;
-		}
-		
-	}
-	
-	public void drawDebug( GC gc, int x, int y )
-	{
-		Transform t = new Transform( Global.display );
-		
-		t.identity();
-		t.translate( (float)x, (float)y );
-		
-		gc.setTransform( t );
-		
-		if( m_nPolygonPoints != null )
-		{
-			gc.setForeground( Global.display.getSystemColor( SWT.COLOR_YELLOW ) );
-			gc.setBackground( Global.display.getSystemColor( SWT.COLOR_YELLOW ) );
-	
-			gc.drawPolygon( m_nPolygonPoints );
-		}
-		
-		gc.drawOval( m_targetVisualPoint.x, m_targetVisualPoint.y, 5, 5 );
-	}
-}
-
-*/
 
 @end

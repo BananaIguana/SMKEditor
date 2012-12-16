@@ -99,11 +99,11 @@
 
 -(void)drawTile:(RomObjTile*)tile atX:(int)x y:(int)y
 {
-	NSPoint point						= NSMakePoint( x, 1016.0f - y );
+	NSPoint point						= NSMakePoint( x, 1016.0 - y );
 	
-	NSRect rect							= NSMakeRect( 0.0f, 0.0f, 8.0f, 8.0f );
+	NSRect rect							= NSMakeRect( 0.0, 0.0, 8.0, 8.0 );
 
-	[tile.image drawAtPoint:point fromRect:rect operation:NSCompositeSourceOver fraction:1.0f];
+	[tile.image drawAtPoint:point fromRect:rect operation:NSCompositeSourceOver fraction:1.0];
 }
 
 -(void)draw22:(OverlayItem*)item startIndex:(int)startIndex

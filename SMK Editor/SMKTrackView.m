@@ -31,9 +31,9 @@
 	{
 		self.mode							= TrackViewOperationModeNone;
 		
-		scale								= 1.0f;
-		scaleSource							= 1024.0f;
-		trans								= NSMakePoint( 0.0f, 0.0f );
+		scale								= 1.0;
+		scaleSource							= 1024.0;
+		trans								= NSMakePoint( 0.0, 0.0 );
 		
 		self.drawOverlay					= YES;
 		self.drawAI							= NO;
@@ -128,7 +128,7 @@
 	{
 		scaleSource							+= ( diff.x );
 		
-		scale								= scaleSource / 1024.0f;
+		scale								= scaleSource / 1024.0;
 		
 		currentPoint						= loc;
 		
@@ -186,8 +186,8 @@
 
 	NSAffineTransform *identityXform		= [NSAffineTransform transform];
 	
-	float fOfX								= self.frame.size.width / 2.0f;
-	float fOfY								= self.frame.size.height / 2.0f;
+	float fOfX								= self.frame.size.width / 2.0;
+	float fOfY								= self.frame.size.height / 2.0;
 	
 	[identityXform translateXBy:fOfX yBy:fOfY];	
 	[identityXform scaleBy:scale];
@@ -206,14 +206,14 @@
 	if( self.drawOverlay )
 	{
 		RomObjOverlay *o						= self.track.overlay;
-		NSRect r								= NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
+		NSRect r								= NSMakeRect( 0.0, 0.0, 1024.0, 1024.0 );
 		[o draw:r];
 	}
 	
 	if( self.drawAI )
 	{
 		RomObjAIData *o							= self.track.aiData;
-		NSRect r								= NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
+		NSRect r								= NSMakeRect( 0.0, 0.0, 1024.0, 1024.0 );
 		[o draw:r];
 	}
 

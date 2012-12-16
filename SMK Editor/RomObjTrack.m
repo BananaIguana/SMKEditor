@@ -86,10 +86,10 @@
 			RomObjTile *tile				= buffer[byte];
 			imageTile						= tile.image;
 			
-			NSRect dst						= NSMakeRect( x * 8, 1016.0f - ( y * 8 ), 8, 8 );
+			NSRect dst						= NSMakeRect( x * 8, 1016.0 - ( y * 8 ), 8, 8 );
 			NSRect src						= NSMakeRect( 0, 0, 8, 8 );
 					
-			[imageTile drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1.0f];
+			[imageTile drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1.0];
 
 			index++;		
 		}	
@@ -107,8 +107,8 @@
 
 -(void)draw:(NSRect)rect
 {
-	NSRect r = NSMakeRect( 0.0f, 0.0f, 1024.0f, 1024.0f );
-	[self.image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0f];
+	NSRect r = NSMakeRect( 0.0, 0.0, 1024.0, 1024.0 );
+	[self.image drawInRect:r fromRect:r operation:NSCompositeCopy fraction:1.0];
 }
 
 -(NSString*)description
