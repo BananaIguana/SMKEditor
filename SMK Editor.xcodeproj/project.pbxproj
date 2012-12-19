@@ -53,6 +53,9 @@
 		FEB22343167C1D7E00ACF773 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B16140874B200A46814 /* AppKit.framework */; };
 		FEB22345167C1D9600ACF773 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B17140874B200A46814 /* CoreData.framework */; };
 		FEB22346167C1DA200ACF773 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B18140874B200A46814 /* Foundation.framework */; };
+		FEF62408167E1C95002ACEEA /* SpriteViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF62406167E1C95002ACEEA /* SpriteViewerController.m */; };
+		FEF62411167E2296002ACEEA /* SpriteViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF62410167E2296002ACEEA /* SpriteViewer.m */; };
+		FEF62413167E22AE002ACEEA /* SpriteViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEF62412167E22AE002ACEEA /* SpriteViewer.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +141,11 @@
 		3CF4085314C4BC9800F92E60 /* ImportWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportWindow.xib; sourceTree = "<group>"; };
 		3CF4085D14C4C82B00F92E60 /* ImportWindowTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportWindowTableRowView.h; sourceTree = "<group>"; };
 		3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWindowTableRowView.m; sourceTree = "<group>"; };
+		FEF62405167E1C95002ACEEA /* SpriteViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteViewerController.h; sourceTree = "<group>"; };
+		FEF62406167E1C95002ACEEA /* SpriteViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteViewerController.m; sourceTree = "<group>"; };
+		FEF6240F167E2296002ACEEA /* SpriteViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteViewer.h; sourceTree = "<group>"; };
+		FEF62410167E2296002ACEEA /* SpriteViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteViewer.m; sourceTree = "<group>"; };
+		FEF62412167E22AE002ACEEA /* SpriteViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpriteViewer.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +230,7 @@
 		3C6095F314B1193B00355751 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
+				FEF62400167E1C24002ACEEA /* Sprite Viewer */,
 				3C881F0814D88E1B0096F949 /* Processing Window */,
 				3C5C1B0914D63316001039D6 /* Tool Window */,
 				3C5C1B0814D6309C001039D6 /* Track Editor */,
@@ -403,6 +412,18 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		FEF62400167E1C24002ACEEA /* Sprite Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				FEF62410167E2296002ACEEA /* SpriteViewer.m */,
+				FEF6240F167E2296002ACEEA /* SpriteViewer.h */,
+				FEF62412167E22AE002ACEEA /* SpriteViewer.xib */,
+				FEF62406167E1C95002ACEEA /* SpriteViewerController.m */,
+				FEF62405167E1C95002ACEEA /* SpriteViewerController.h */,
+			);
+			name = "Sprite Viewer";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -464,6 +485,7 @@
 				3CA38A5B14D4E6A300FB277B /* ImportDeleteWindow.xib in Resources */,
 				3C5C1B0B14D6334F001039D6 /* ToolWindow.xib in Resources */,
 				3C881F0614D88B530096F949 /* ProcessWindow.xib in Resources */,
+				FEF62413167E22AE002ACEEA /* SpriteViewer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +528,8 @@
 				3CDF988814DF543800B29526 /* ProcessWindowController.m in Sources */,
 				3C8169AB166311F5002583D3 /* RomBase+Info.m in Sources */,
 				3C2EC60C16757960004BC8F5 /* RomObjAIData.m in Sources */,
+				FEF62408167E1C95002ACEEA /* SpriteViewerController.m in Sources */,
+				FEF62411167E2296002ACEEA /* SpriteViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

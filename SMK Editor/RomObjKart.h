@@ -18,8 +18,9 @@
 @interface RomObjKart : RomObj
 
 @property(strong) RomObjPalette		*palette;
-@property(strong) NSArray			*imageArray;
+@property(strong) NSArray			*imageTileArray;
 @property(assign) kRomKart			kartType;
+@property(strong) NSArray			*imageArray;
 
 -(id)initWithRomData:(NSData *)romData range:(RomRange)range palette:(RomObjPalette*)palette;
 

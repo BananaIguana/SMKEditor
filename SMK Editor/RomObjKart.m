@@ -177,7 +177,77 @@
 		i											+= 32;
 	}
 
-	self.imageArray									= array;
+	self.imageTileArray								= array;
+	
+	NSMutableArray *ar								= [NSMutableArray array];
+	
+	for( NSInteger i = 0; i < 5; ++i )
+	{
+		NSImage *image								= [self processImage:i];
+		
+		[ar addObject:image];
+	}
+	
+	self.imageArray									= ar;
+}
+
+-(NSImage*)processImage:(NSInteger)imageIndex
+{
+	const int xMax = 4;
+	const int yMax = 4;
+	
+	NSBitmapImageRep *bitmap						= [[NSBitmapImageRep alloc]
+	
+		initWithBitmapDataPlanes:nil
+		pixelsWide:( 8 * xMax )
+		pixelsHigh:( 8 * yMax )
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:( 8 * xMax * 4 )
+		bitsPerPixel:32];
+		
+	[NSGraphicsContext saveGraphicsState];
+	
+	NSGraphicsContext *context						= [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
+	
+	[NSGraphicsContext setCurrentContext:context];
+
+	NSUInteger indices[] = {
+	
+		( 16 * 3 ) + 0,		( 16 * 2 ) + 0,		( 16 * 1 ) + 0,		( 16 * 0 ) + 0,
+		( 16 * 3 ) + 1,		( 16 * 2 ) + 1,		( 16 * 1 ) + 1,		( 16 * 0 ) + 1,
+		( 16 * 3 ) + 2,		( 16 * 2 ) + 2,		( 16 * 1 ) + 2,		( 16 * 0 ) + 2,
+		( 16 * 3 ) + 3,		( 16 * 2 ) + 3,		( 16 * 1 ) + 3,		( 16 * 0 ) + 3,
+	};
+
+	NSUInteger count								= 0;
+
+	for( int x = 0; x < xMax; ++x )
+	{
+		for( int y = 0; y < yMax; ++y )
+		{
+			NSUInteger index						= indices[ count++ ] + ( 4 * imageIndex );
+
+			NSImage *current						= [self.imageTileArray objectAtIndex:index];
+			
+			NSRect srcRect							= NSMakeRect( 0.0f, 0.0f, current.size.width, current.size.height );
+			
+			NSRect rect								= NSMakeRect( x * 8, y * 8	, 8, 8 );
+			
+			[current drawInRect:rect fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:NO hints:0];
+		}
+	}
+	
+	CGImageRef ref									= [bitmap CGImage];
+
+	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( ( 8 * xMax ), ( 8 * yMax ) )];
+
+	[NSGraphicsContext restoreGraphicsState];
+	
+	return( im );
 }
 
 -(NSString*)description

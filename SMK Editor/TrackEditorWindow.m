@@ -9,14 +9,15 @@
 #import "TrackEditorWindow.h"
 #import "SMKTrackView.h"
 #import "RomTypes.h"
+#import "SpriteViewerController.h"
 
 @implementation TrackEditorWindow
 
 -(IBAction)trackSelectorChanged:(id)sender
 {
-	NSInteger index = [self.trackSelector indexOfSelectedItem];
+	NSInteger index							= [self.trackSelector indexOfSelectedItem];
 
-	self.trackView.track = (self.trackArray)[index];
+	self.trackView.track					= (self.trackArray)[index];
 	
 	[self.trackView setNeedsDisplay:YES];
 }
@@ -25,7 +26,7 @@
 {
 	self.trackArray = tracks;
 
-	NSMutableArray *trackNameArray = [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
+	NSMutableArray *trackNameArray			= [[NSMutableArray alloc] initWithCapacity:kRomNumTracks];
 	
 	[tracks enumerateObjectsUsingBlock:^( id obj, NSUInteger idx, BOOL *stop ){
 
@@ -38,16 +39,25 @@
 
 -(IBAction)overlayButtonChanged:(NSButton*)sender
 {
-	BOOL toggle = ( sender.state == NSOnState ) ? YES : NO;
+	BOOL toggle								= ( sender.state == NSOnState ) ? YES : NO;
 	
 	[self.trackView setDrawOverlay:toggle];
 }
 
 -(IBAction)aiButtonChanged:(NSButton*)sender
 {
-	BOOL toggle = ( sender.state == NSOnState ) ? YES : NO;
+	BOOL toggle								= ( sender.state == NSOnState ) ? YES : NO;
 	
 	[self.trackView setDrawAI:toggle];
+}
+
+-(IBAction)didSelectSpriteViewer:(id)sender
+{
+	self.viewerWindowController				= [[SpriteViewerController alloc] initWithWindowNibName:@"SpriteViewer"];
+	
+	self.viewerWindowController.romBase 	= self.romBase;
+
+	[self.viewerWindowController showWindow:self];
 }
 
 @end

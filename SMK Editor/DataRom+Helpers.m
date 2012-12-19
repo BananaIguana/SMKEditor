@@ -201,7 +201,7 @@
 		
 			RomObjTheme *t						= themeArray[0];
 			RomObjPaletteGroup *pg				= t.paletteGroup;
-			RomObjPalette *p					= (pg.paletteArray)[0];
+			RomObjPalette *p					= (pg.paletteArray)[9]; // 16
 			
 			RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
 

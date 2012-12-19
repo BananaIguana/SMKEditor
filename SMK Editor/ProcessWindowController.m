@@ -42,15 +42,17 @@
 		[self.trackEditor.trackView setNeedsDisplay:YES];
 	}
 	
+	[self.trackEditor setRomBase:self.romBase];
+	
 	[self.trackEditor makeKeyAndOrderFront:nil];
 	[self.window orderOut:nil];
 }
 
 -(void)doIt:(ProcessWindowController*)var
 {
-	NSManagedObjectContext *context				= [[DataRomManager sharedInstance] threadedContext];
+	NSManagedObjectContext *context					= [[DataRomManager sharedInstance] threadedContext];
 
-	DataRom *rom								= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
+	DataRom *rom									= [DataRom dataRomFromObjectID:self.romID viaManagedObjectContext:context];
 		
 	[rom extractWithDelegate:self];
 }
@@ -66,7 +68,7 @@
 	
 	// The below text string value doesn't work too well due to the main thread doing all the work.
 
-	NSString *processingString					= [NSString stringWithFormat:@"Processing - %@", obj];
+	NSString *processingString						= [NSString stringWithFormat:@"Processing - %@", obj];
 
 	[self.textProgress setStringValue:processingString];
 	
@@ -78,12 +80,12 @@
 	[self.progress setMinValue:0.0];
 	[self.progress setMaxValue:(double)steps];
 	
-	self.currentExtraction						= 0;
+	self.currentExtraction							= 0;
 }
 
 -(void)notifyExtractionComplete:(RomBase*)rom
 {
-	self.romBase								= rom;
+	self.romBase									= rom;
 
 	[self finishThread];
 }
