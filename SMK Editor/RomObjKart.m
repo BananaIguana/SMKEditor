@@ -183,38 +183,80 @@
 	
 	for( NSInteger i = 0; i < 5; ++i )
 	{
-		NSImage *image								= [self processImage:i];
-		
-		[ar addObject:image];
+		NSImage *image;
+
+		switch( i )
+		{
+			case 0 :
+				{
+					image							= [self processImage24_1:i];
+					
+					[ar addObject:image];
+				
+					image							= [self processImage24_2:i];
+					
+					[ar addObject:image];
+				
+				}break;
+				
+			default :
+				{
+					image							= [self processImage44:i];
+
+					[ar addObject:image];
+				}
+		}
 	}
 	
 	self.imageArray									= ar;
 }
 
--(NSImage*)processImage:(NSInteger)imageIndex
+-(NSImage*)flipImageVertically:(NSImage*)srcImage
 {
-	const int xMax = 4;
-	const int yMax = 4;
-	
-	NSBitmapImageRep *bitmap						= [[NSBitmapImageRep alloc]
-	
-		initWithBitmapDataPlanes:nil
-		pixelsWide:( 8 * xMax )
-		pixelsHigh:( 8 * yMax )
-		bitsPerSample:8
-		samplesPerPixel:4
-		hasAlpha:YES
-		isPlanar:NO
-		colorSpaceName:NSDeviceRGBColorSpace
-		bytesPerRow:( 8 * xMax * 4 )
-		bitsPerPixel:32];
-		
-	[NSGraphicsContext saveGraphicsState];
-	
-	NSGraphicsContext *context						= [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
-	
-	[NSGraphicsContext setCurrentContext:context];
+	NSImage *dstImage								= [[NSImage alloc] initWithSize:srcImage.size];
 
+	[dstImage lockFocus];
+
+	NSAffineTransform *transform					= [NSAffineTransform transform];
+	
+	[transform translateXBy:srcImage.size.width yBy:0.0];
+	[transform scaleXBy:-1.0 yBy:1.0];
+	
+	[transform set];
+
+	NSRect rect										= NSMakeRect( 0.0f, 0.0f, srcImage.size.width, srcImage.size.height );
+
+	[srcImage drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:nil];
+	
+	[dstImage unlockFocus];
+
+	return( dstImage );
+}
+
+-(NSImage*)mergeImage:(NSImage*)left withImage:(NSImage*)right
+{
+	NSSize srcSize									= left.size;
+	NSSize dstSize									= NSMakeSize( srcSize.width * 2.0, srcSize.height );
+	
+	NSImage *dstImage								= [[NSImage alloc] initWithSize:dstSize];
+	
+	[dstImage lockFocus];
+
+	NSRect srcRect									= NSMakeRect( 0.0f, 0.0f, srcSize.width, srcSize.height );
+
+	[left drawInRect:srcRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:nil];
+
+	NSRect altRect									= NSMakeRect( srcSize.width, 0.0f, srcSize.width, srcSize.height );
+
+	[right drawInRect:altRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:nil];
+	
+	[dstImage unlockFocus];
+	
+	return( dstImage );
+}
+
+-(NSImage*)processImage44:(NSInteger)imageIndex
+{
 	NSUInteger indices[] = {
 	
 		( 16 * 3 ) + 0,		( 16 * 2 ) + 0,		( 16 * 1 ) + 0,		( 16 * 0 ) + 0,
@@ -223,13 +265,69 @@
 		( 16 * 3 ) + 3,		( 16 * 2 ) + 3,		( 16 * 1 ) + 3,		( 16 * 0 ) + 3,
 	};
 
+	return( [self processImageIndex:imageIndex withOffsetMatrix:indices x:4 y:4] );
+}
+
+-(NSImage*)processImage24_1:(NSInteger)imageIndex
+{
+	NSUInteger indices[] = {
+	
+		( 16 * 3 ) + 0,		( 16 * 2 ) + 0,
+		( 16 * 1 ) + 0,		( 16 * 0 ) + 0,
+		( 16 * 3 ) + 1,		( 16 * 2 ) + 1,
+		( 16 * 1 ) + 1,		( 16 * 0 ) + 1,		
+	};
+	
+	NSImage *left									= [self processImageIndex:imageIndex withOffsetMatrix:indices x:2 y:4];	
+	NSImage *right									= [self flipImageVertically:left];
+
+	return( [self mergeImage:left withImage:right] );
+}
+
+-(NSImage*)processImage24_2:(NSInteger)imageIndex
+{
+	NSUInteger indices[] = {
+	
+		( 16 * 3 ) + 2,		( 16 * 2 ) + 2,
+		( 16 * 1 ) + 2,		( 16 * 0 ) + 2,
+		( 16 * 3 ) + 3,		( 16 * 2 ) + 3,
+		( 16 * 1 ) + 3,		( 16 * 0 ) + 3,
+	};
+	
+	NSImage *left									= [self processImageIndex:imageIndex withOffsetMatrix:indices x:2 y:4];	
+	NSImage *right									= [self flipImageVertically:left];
+
+	return( [self mergeImage:left withImage:right] );
+}
+
+-(NSImage*)processImageIndex:(NSInteger)imageIndex withOffsetMatrix:(NSUInteger*)matrix x:(NSUInteger)xLen y:(NSUInteger)yLen
+{
+	NSBitmapImageRep *bitmap						= [[NSBitmapImageRep alloc]
+	
+		initWithBitmapDataPlanes:nil
+		pixelsWide:( 8 * xLen )
+		pixelsHigh:( 8 * yLen )
+		bitsPerSample:8
+		samplesPerPixel:4
+		hasAlpha:YES
+		isPlanar:NO
+		colorSpaceName:NSDeviceRGBColorSpace
+		bytesPerRow:( 8 * xLen * 4 )
+		bitsPerPixel:32];
+		
+	[NSGraphicsContext saveGraphicsState];
+	
+	NSGraphicsContext *context						= [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
+	
+	[NSGraphicsContext setCurrentContext:context];
+
 	NSUInteger count								= 0;
 
-	for( int x = 0; x < xMax; ++x )
+	for( int x = 0; x < xLen; ++x )
 	{
-		for( int y = 0; y < yMax; ++y )
+		for( int y = 0; y < yLen; ++y )
 		{
-			NSUInteger index						= indices[ count++ ] + ( 4 * imageIndex );
+			NSUInteger index						= matrix[ count++ ] + ( 4 * imageIndex );
 
 			NSImage *current						= [self.imageTileArray objectAtIndex:index];
 			
@@ -243,7 +341,7 @@
 	
 	CGImageRef ref									= [bitmap CGImage];
 
-	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( ( 8 * xMax ), ( 8 * yMax ) )];
+	NSImage *im										= [[NSImage alloc] initWithCGImage:ref size:NSMakeSize( ( 8 * xLen ), ( 8 * yLen ) )];
 
 	[NSGraphicsContext restoreGraphicsState];
 	

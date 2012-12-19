@@ -201,7 +201,11 @@
 		
 			RomObjTheme *t						= themeArray[0];
 			RomObjPaletteGroup *pg				= t.paletteGroup;
-			RomObjPalette *p					= (pg.paletteArray)[9]; // 16
+			RomObjPalette *p;
+			
+			NSInteger mapping[]					= { 9, 8, 11, 11, 8, 10, 10, 9 };
+
+			p									= [pg.paletteArray objectAtIndex:mapping[ i ]];
 			
 			RomObjKart *kart					= [eurRom kartFromHandle:( kRomHandleKartMario + i ) palette:p];
 
