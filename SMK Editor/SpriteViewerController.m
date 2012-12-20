@@ -58,6 +58,8 @@
 {
 	if( self.drawIndex < [self.arraySprites count] )
 	{
+		self.imageDisplay.imageScaling	= NSImageScaleProportionallyUpOrDown;
+
 		self.imageDisplay.image			= [self.arraySprites objectAtIndex:self.drawIndex];
 	}
 }

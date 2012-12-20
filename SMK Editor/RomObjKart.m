@@ -179,9 +179,12 @@
 
 	self.imageTileArray								= array;
 	
+	if( self.dataRange.range.length == 8192 )
+		return;
+	
 	NSMutableArray *ar								= [NSMutableArray array];
 	
-	for( NSInteger i = 0; i < 5; ++i )
+	for( NSInteger i = 0; i < 24; ++i )
 	{
 		NSImage *image;
 
@@ -189,21 +192,114 @@
 		{
 			case 0 :
 				{
-					image							= [self processImage24_1:i];
+					image							= [self processImage24_1:i level:0];
 					
 					[ar addObject:image];
 				
-					image							= [self processImage24_2:i];
+					image							= [self processImage24_2:i level:0];
 					
 					[ar addObject:image];
 				
 				}break;
 				
-			default :
+			case 1 :
+			case 2 :
+			case 3 :
 				{
-					image							= [self processImage44:i];
+					image							= [self processImage44:i level:0];
 
 					[ar addObject:image];
+
+				}break;
+				
+			case 4 :
+			case 5 :
+			case 6 :
+			case 7 :
+				{
+					image							= [self processImage44:i level:1];
+
+					[ar addObject:image];
+				
+				}break;
+				
+			case 8 :
+			case 9 :
+			case 10 :
+				{
+					image							= [self processImage44:i level:2];
+
+					[ar addObject:image];
+				
+				}break;
+				
+			case 11 :
+				{
+					image							= [self processImage24_1:i level:2];
+					
+					[ar addObject:image];
+				
+					image							= [self processImage24_2:i level:2];
+					
+					[ar addObject:image];
+
+				}break;
+				
+			case 12 :
+			case 13 :
+			case 14 :
+			case 15 :
+				{
+					image							= [self processImage44:i level:3];
+
+					[ar addObject:image];
+				
+				}break;
+
+			case 16 :
+			case 17 :
+			case 18 :
+			case 19 :
+				{
+					image							= [self processImage44:i level:4];
+
+					[ar addObject:image];
+				
+				}break;
+				
+			case 20 :
+			case 21 :
+				{
+					image							= [self processImage44:i level:5];
+
+					[ar addObject:image];
+				
+				}break;
+				
+			case 22 :
+				{
+					image							= [self processImage24_1:i level:5];
+					
+					[ar addObject:image];
+				
+					image							= [self processImage24_2:i level:5];
+					
+					[ar addObject:image];
+				
+				}break;
+
+			case 23 :
+				{
+					image							= [self processImage44:i level:5];
+
+					[ar addObject:image];
+				
+				}break;
+				
+
+			default :
+				{
+					NSAssert( 0, @"Unhandled path." );
 				}
 		}
 	}
@@ -255,27 +351,27 @@
 	return( dstImage );
 }
 
--(NSImage*)processImage44:(NSInteger)imageIndex
+-(NSImage*)processImage44:(NSInteger)imageIndex level:(NSInteger)level
 {
 	NSUInteger indices[] = {
 	
-		( 16 * 3 ) + 0,		( 16 * 2 ) + 0,		( 16 * 1 ) + 0,		( 16 * 0 ) + 0,
-		( 16 * 3 ) + 1,		( 16 * 2 ) + 1,		( 16 * 1 ) + 1,		( 16 * 0 ) + 1,
-		( 16 * 3 ) + 2,		( 16 * 2 ) + 2,		( 16 * 1 ) + 2,		( 16 * 0 ) + 2,
-		( 16 * 3 ) + 3,		( 16 * 2 ) + 3,		( 16 * 1 ) + 3,		( 16 * 0 ) + 3,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 0,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 0,		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 0,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 0,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 1,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 1,		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 1,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 1,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 2,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 2,		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 2,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 2,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 3,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 3,		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 3,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 3,
 	};
 
 	return( [self processImageIndex:imageIndex withOffsetMatrix:indices x:4 y:4] );
 }
 
--(NSImage*)processImage24_1:(NSInteger)imageIndex
+-(NSImage*)processImage24_1:(NSInteger)imageIndex level:(NSInteger)level
 {
 	NSUInteger indices[] = {
 	
-		( 16 * 3 ) + 0,		( 16 * 2 ) + 0,
-		( 16 * 1 ) + 0,		( 16 * 0 ) + 0,
-		( 16 * 3 ) + 1,		( 16 * 2 ) + 1,
-		( 16 * 1 ) + 1,		( 16 * 0 ) + 1,		
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 0,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 0,
+		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 0,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 0,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 1,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 1,
+		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 1,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 1,
 	};
 	
 	NSImage *left									= [self processImageIndex:imageIndex withOffsetMatrix:indices x:2 y:4];	
@@ -284,14 +380,14 @@
 	return( [self mergeImage:left withImage:right] );
 }
 
--(NSImage*)processImage24_2:(NSInteger)imageIndex
+-(NSImage*)processImage24_2:(NSInteger)imageIndex level:(NSInteger)level
 {
 	NSUInteger indices[] = {
 	
-		( 16 * 3 ) + 2,		( 16 * 2 ) + 2,
-		( 16 * 1 ) + 2,		( 16 * 0 ) + 2,
-		( 16 * 3 ) + 3,		( 16 * 2 ) + 3,
-		( 16 * 1 ) + 3,		( 16 * 0 ) + 3,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 2,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 2,
+		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 2,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 2,
+		( ( 16 * 3 ) + ( ( 16 * 3 ) * level ) ) + 3,		( ( 16 * 2 ) + ( ( 16 * 3 ) * level ) ) + 3,
+		( ( 16 * 1 ) + ( ( 16 * 3 ) * level ) ) + 3,		( ( 16 * 0 ) + ( ( 16 * 3 ) * level ) ) + 3,
 	};
 	
 	NSImage *left									= [self processImageIndex:imageIndex withOffsetMatrix:indices x:2 y:4];	
