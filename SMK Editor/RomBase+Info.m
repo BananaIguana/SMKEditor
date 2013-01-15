@@ -51,6 +51,35 @@
 	return( @"Unknown" );
 }
 
+-(NSImage*)generateImageIcon
+{
+	unsigned char byte							= [self byteFromOffsetHandle:kRomHandleDestinationCodeOffset];
+
+	switch( byte )
+	{
+		case 0x0 :	{			return( [NSImage imageNamed:@"japan_flag_256"] );			}break;
+		case 0x1 :	{			return( [NSImage imageNamed:@"usa_flag_256"] );				}break;
+		case 0x2 :	{			return( [NSImage imageNamed:@"europe_flag_256"] );			}break;
+		case 0x3 :	{			return( [NSImage imageNamed:@"sweden_flag_256"] );			}break;
+		case 0x4 :	{			return( [NSImage imageNamed:@"finland_flag_256"] );			}break;
+		case 0x5 :	{			return( [NSImage imageNamed:@"denmark_flag_256"] );			}break;
+		case 0x6 :	{			return( [NSImage imageNamed:@"france_flag_256"] );			}break;
+		case 0x7 :	{			return( [NSImage imageNamed:@"netherlands_flag_256"] );		}break;
+		case 0x8 :	{			return( [NSImage imageNamed:@"spain_flag_256"] );			}break;
+		case 0x9 :	{			return( [NSImage imageNamed:@"germany_flag_256"] );			}break;
+		case 0xA :	{			return( [NSImage imageNamed:@"italy_flag_256"] );			}break;
+		case 0xB :	{			return( [NSImage imageNamed:@"honk_kong_flag_256"] );		}break;
+		case 0xC :	{			return( [NSImage imageNamed:@"indonesia_flag_256"] );		}break;
+		case 0xD :	{			return( [NSImage imageNamed:@"korea_flag_256"] );			}break;
+		default :
+			{
+				NSAssert( 0, @"Unknown country code detected in ROM data." );
+			}
+	}
+				
+	return( nil );
+}
+
 -(NSString*)licencee
 {
 	unsigned char byte							= [self byteFromOffsetHandle:kRomHandleLicenseeCodeOffset];
