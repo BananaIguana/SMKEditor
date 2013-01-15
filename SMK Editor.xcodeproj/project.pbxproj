@@ -43,13 +43,28 @@
 		3CC56385146A1177005FBADC /* RomObjTileGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC56384146A1177005FBADC /* RomObjTileGroup.m */; };
 		3CC9F88014B2FDC4000AE6A4 /* RomObjOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC9F87F14B2FDC4000AE6A4 /* RomObjOverlay.m */; };
 		3CCED08514D4AC2D00CE3C72 /* DataRomTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCED08414D4AC2D00CE3C72 /* DataRomTransformer.m */; };
-		3CD9059614C792840018B80B /* eur_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD9059314C792840018B80B /* eur_flag_256.png */; };
-		3CD9059714C792840018B80B /* jap_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD9059414C792840018B80B /* jap_flag_256.png */; };
 		3CD9059814C792840018B80B /* usa_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD9059514C792840018B80B /* usa_flag_256.png */; };
 		3CDB04E41409C7FC00D4201D /* RomEUR.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB04E31409C7FC00D4201D /* RomEUR.m */; };
 		3CDF988814DF543800B29526 /* ProcessWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF988714DF543800B29526 /* ProcessWindowController.m */; };
 		3CF4085414C4BC9800F92E60 /* ImportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4085314C4BC9800F92E60 /* ImportWindow.xib */; };
 		3CF4085F14C4C82B00F92E60 /* ImportWindowTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */; };
+		FE1DB59D16A4DE49001B0FF2 /* australia_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB58C16A4DE49001B0FF2 /* australia_flag_256.png */; };
+		FE1DB59E16A4DE49001B0FF2 /* austria_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB58D16A4DE49001B0FF2 /* austria_flag_256.png */; };
+		FE1DB59F16A4DE49001B0FF2 /* china_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB58E16A4DE49001B0FF2 /* china_flag_256.png */; };
+		FE1DB5A016A4DE49001B0FF2 /* denmark_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB58F16A4DE49001B0FF2 /* denmark_flag_256.png */; };
+		FE1DB5A116A4DE49001B0FF2 /* europe_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59016A4DE49001B0FF2 /* europe_flag_256.png */; };
+		FE1DB5A216A4DE49001B0FF2 /* finland_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59116A4DE49001B0FF2 /* finland_flag_256.png */; };
+		FE1DB5A316A4DE49001B0FF2 /* france_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59216A4DE49001B0FF2 /* france_flag_256.png */; };
+		FE1DB5A416A4DE49001B0FF2 /* germany_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59316A4DE49001B0FF2 /* germany_flag_256.png */; };
+		FE1DB5A516A4DE49001B0FF2 /* hong_kong_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59416A4DE49001B0FF2 /* hong_kong_flag_256.png */; };
+		FE1DB5A616A4DE49001B0FF2 /* indonesia_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59516A4DE49001B0FF2 /* indonesia_flag_256.png */; };
+		FE1DB5A716A4DE49001B0FF2 /* italy_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59616A4DE49001B0FF2 /* italy_flag_256.png */; };
+		FE1DB5A816A4DE49001B0FF2 /* japan_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59716A4DE49001B0FF2 /* japan_flag_256.png */; };
+		FE1DB5A916A4DE49001B0FF2 /* korea_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59816A4DE49001B0FF2 /* korea_flag_256.png */; };
+		FE1DB5AA16A4DE49001B0FF2 /* netherlands_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59916A4DE49001B0FF2 /* netherlands_flag_256.png */; };
+		FE1DB5AB16A4DE49001B0FF2 /* spain_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59A16A4DE49001B0FF2 /* spain_flag_256.png */; };
+		FE1DB5AC16A4DE49001B0FF2 /* switzerland_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59B16A4DE49001B0FF2 /* switzerland_flag_256.png */; };
+		FE1DB5AD16A4DE49001B0FF2 /* usa_flag_256.png in Resources */ = {isa = PBXBuildFile; fileRef = FE1DB59C16A4DE49001B0FF2 /* usa_flag_256.png */; };
 		FEB22343167C1D7E00ACF773 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B16140874B200A46814 /* AppKit.framework */; };
 		FEB22345167C1D9600ACF773 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B17140874B200A46814 /* CoreData.framework */; };
 		FEB22346167C1DA200ACF773 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C904B18140874B200A46814 /* Foundation.framework */; };
@@ -130,8 +145,6 @@
 		3CC9F87F14B2FDC4000AE6A4 /* RomObjOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomObjOverlay.m; sourceTree = "<group>"; };
 		3CCED08314D4AC2D00CE3C72 /* DataRomTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRomTransformer.h; sourceTree = "<group>"; };
 		3CCED08414D4AC2D00CE3C72 /* DataRomTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRomTransformer.m; sourceTree = "<group>"; };
-		3CD9059314C792840018B80B /* eur_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eur_flag_256.png; path = Images/eur_flag_256.png; sourceTree = "<group>"; };
-		3CD9059414C792840018B80B /* jap_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jap_flag_256.png; path = Images/jap_flag_256.png; sourceTree = "<group>"; };
 		3CD9059514C792840018B80B /* usa_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = usa_flag_256.png; path = Images/usa_flag_256.png; sourceTree = "<group>"; };
 		3CDB04E21409C7FC00D4201D /* RomEUR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomEUR.h; sourceTree = "<group>"; };
 		3CDB04E31409C7FC00D4201D /* RomEUR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomEUR.m; sourceTree = "<group>"; };
@@ -141,6 +154,23 @@
 		3CF4085314C4BC9800F92E60 /* ImportWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportWindow.xib; sourceTree = "<group>"; };
 		3CF4085D14C4C82B00F92E60 /* ImportWindowTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportWindowTableRowView.h; sourceTree = "<group>"; };
 		3CF4085E14C4C82B00F92E60 /* ImportWindowTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportWindowTableRowView.m; sourceTree = "<group>"; };
+		FE1DB58C16A4DE49001B0FF2 /* australia_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = australia_flag_256.png; path = Images/australia_flag_256.png; sourceTree = "<group>"; };
+		FE1DB58D16A4DE49001B0FF2 /* austria_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = austria_flag_256.png; path = Images/austria_flag_256.png; sourceTree = "<group>"; };
+		FE1DB58E16A4DE49001B0FF2 /* china_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = china_flag_256.png; path = Images/china_flag_256.png; sourceTree = "<group>"; };
+		FE1DB58F16A4DE49001B0FF2 /* denmark_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = denmark_flag_256.png; path = Images/denmark_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59016A4DE49001B0FF2 /* europe_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = europe_flag_256.png; path = Images/europe_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59116A4DE49001B0FF2 /* finland_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finland_flag_256.png; path = Images/finland_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59216A4DE49001B0FF2 /* france_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = france_flag_256.png; path = Images/france_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59316A4DE49001B0FF2 /* germany_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = germany_flag_256.png; path = Images/germany_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59416A4DE49001B0FF2 /* hong_kong_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hong_kong_flag_256.png; path = Images/hong_kong_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59516A4DE49001B0FF2 /* indonesia_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = indonesia_flag_256.png; path = Images/indonesia_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59616A4DE49001B0FF2 /* italy_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = italy_flag_256.png; path = Images/italy_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59716A4DE49001B0FF2 /* japan_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = japan_flag_256.png; path = Images/japan_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59816A4DE49001B0FF2 /* korea_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = korea_flag_256.png; path = Images/korea_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59916A4DE49001B0FF2 /* netherlands_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = netherlands_flag_256.png; path = Images/netherlands_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59A16A4DE49001B0FF2 /* spain_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spain_flag_256.png; path = Images/spain_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59B16A4DE49001B0FF2 /* switzerland_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switzerland_flag_256.png; path = Images/switzerland_flag_256.png; sourceTree = "<group>"; };
+		FE1DB59C16A4DE49001B0FF2 /* usa_flag_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = usa_flag_256.png; path = Images/usa_flag_256.png; sourceTree = "<group>"; };
 		FEF62405167E1C95002ACEEA /* SpriteViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteViewerController.h; sourceTree = "<group>"; };
 		FEF62406167E1C95002ACEEA /* SpriteViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteViewerController.m; sourceTree = "<group>"; };
 		FEF6240F167E2296002ACEEA /* SpriteViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteViewer.h; sourceTree = "<group>"; };
@@ -368,8 +398,23 @@
 		3CD9059114C7926F0018B80B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3CD9059314C792840018B80B /* eur_flag_256.png */,
-				3CD9059414C792840018B80B /* jap_flag_256.png */,
+				FE1DB58C16A4DE49001B0FF2 /* australia_flag_256.png */,
+				FE1DB58D16A4DE49001B0FF2 /* austria_flag_256.png */,
+				FE1DB58E16A4DE49001B0FF2 /* china_flag_256.png */,
+				FE1DB58F16A4DE49001B0FF2 /* denmark_flag_256.png */,
+				FE1DB59016A4DE49001B0FF2 /* europe_flag_256.png */,
+				FE1DB59116A4DE49001B0FF2 /* finland_flag_256.png */,
+				FE1DB59216A4DE49001B0FF2 /* france_flag_256.png */,
+				FE1DB59316A4DE49001B0FF2 /* germany_flag_256.png */,
+				FE1DB59416A4DE49001B0FF2 /* hong_kong_flag_256.png */,
+				FE1DB59516A4DE49001B0FF2 /* indonesia_flag_256.png */,
+				FE1DB59616A4DE49001B0FF2 /* italy_flag_256.png */,
+				FE1DB59716A4DE49001B0FF2 /* japan_flag_256.png */,
+				FE1DB59816A4DE49001B0FF2 /* korea_flag_256.png */,
+				FE1DB59916A4DE49001B0FF2 /* netherlands_flag_256.png */,
+				FE1DB59A16A4DE49001B0FF2 /* spain_flag_256.png */,
+				FE1DB59B16A4DE49001B0FF2 /* switzerland_flag_256.png */,
+				FE1DB59C16A4DE49001B0FF2 /* usa_flag_256.png */,
 				3CD9059514C792840018B80B /* usa_flag_256.png */,
 			);
 			name = Images;
@@ -479,13 +524,28 @@
 				3C904B24140874B200A46814 /* Credits.rtf in Resources */,
 				3C904B2A140874B200A46814 /* MainMenu.xib in Resources */,
 				3CF4085414C4BC9800F92E60 /* ImportWindow.xib in Resources */,
-				3CD9059614C792840018B80B /* eur_flag_256.png in Resources */,
-				3CD9059714C792840018B80B /* jap_flag_256.png in Resources */,
 				3CD9059814C792840018B80B /* usa_flag_256.png in Resources */,
 				3CA38A5B14D4E6A300FB277B /* ImportDeleteWindow.xib in Resources */,
 				3C5C1B0B14D6334F001039D6 /* ToolWindow.xib in Resources */,
 				3C881F0614D88B530096F949 /* ProcessWindow.xib in Resources */,
 				FEF62413167E22AE002ACEEA /* SpriteViewer.xib in Resources */,
+				FE1DB59D16A4DE49001B0FF2 /* australia_flag_256.png in Resources */,
+				FE1DB59E16A4DE49001B0FF2 /* austria_flag_256.png in Resources */,
+				FE1DB59F16A4DE49001B0FF2 /* china_flag_256.png in Resources */,
+				FE1DB5A016A4DE49001B0FF2 /* denmark_flag_256.png in Resources */,
+				FE1DB5A116A4DE49001B0FF2 /* europe_flag_256.png in Resources */,
+				FE1DB5A216A4DE49001B0FF2 /* finland_flag_256.png in Resources */,
+				FE1DB5A316A4DE49001B0FF2 /* france_flag_256.png in Resources */,
+				FE1DB5A416A4DE49001B0FF2 /* germany_flag_256.png in Resources */,
+				FE1DB5A516A4DE49001B0FF2 /* hong_kong_flag_256.png in Resources */,
+				FE1DB5A616A4DE49001B0FF2 /* indonesia_flag_256.png in Resources */,
+				FE1DB5A716A4DE49001B0FF2 /* italy_flag_256.png in Resources */,
+				FE1DB5A816A4DE49001B0FF2 /* japan_flag_256.png in Resources */,
+				FE1DB5A916A4DE49001B0FF2 /* korea_flag_256.png in Resources */,
+				FE1DB5AA16A4DE49001B0FF2 /* netherlands_flag_256.png in Resources */,
+				FE1DB5AB16A4DE49001B0FF2 /* spain_flag_256.png in Resources */,
+				FE1DB5AC16A4DE49001B0FF2 /* switzerland_flag_256.png in Resources */,
+				FE1DB5AD16A4DE49001B0FF2 /* usa_flag_256.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

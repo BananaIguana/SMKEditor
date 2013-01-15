@@ -12,5 +12,6 @@
 
 -(NSString*)country;
 -(NSString*)licencee;
+-(NSImage*)generateImageIcon;
 
 @end

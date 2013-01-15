@@ -10,6 +10,8 @@
 
 #import "DataRomManager.h"
 #import "DataRom.h"
+#import "RomBase.h"
+#import "RomBase+Info.h"
 
 @interface DataRomManager()
 
@@ -75,12 +77,19 @@ SINGLETON_IMPLEMENTATION( DataRomManager );
 
 	if( data )
 	{
+		// Detect ROM type
+		
+		RomBase *base									= [[RomBase alloc] initWithData:data];
+
+		// Insert into store
+		
 		newObj											= [NSEntityDescription insertNewObjectForEntityForName:@"DataRom" inManagedObjectContext:self.context];
 
 		NSString *lastComponent							= [[url pathComponents] lastObject];
 
 		newObj.rom										= data;
 		newObj.name										= lastComponent ? lastComponent : @"New Rom";
+		newObj.region									= [base objectFromHandle:kRomHandleDestinationCodeOffset]; 
 
 		NSDate *date									= [NSDate date];
 

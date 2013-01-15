@@ -19,6 +19,27 @@
 #import "RomObjKart.h"
 #import "NSValue+Rom.h"
 
+static const RomRange kRomRangeTitle							=		{ 0xFFC0,		16,			21,			kRomRangeTypeString };
+static const RomRange kRomRangeCartridgeTypeOffset				=		{ 0xFFD6,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeRomSizeOffset					=		{ 0xFFD7,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeRamSizeOffset					=		{ 0xFFD8,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeDestinationCodeOffset			=		{ 0xFFD9,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeLicenseeCode						=		{ 0xFFDA,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeMaskRomVerOffset					=		{ 0xFFDB,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeComplementCheckLowOffset			=		{ 0xFFDC,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeComplementCheckHighOffset		=		{ 0xFFDD,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeChecksumLowOffset				=		{ 0xFFDE,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeChecksumHighOffset				=		{ 0xFFDF,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeMarkerCode1Offset				=		{ 0xFFB0,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeMarkerCode2Offset				=		{ 0xFFB1,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeGameCode1Offset					=		{ 0xFFB2,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeGameCode2Offset					=		{ 0xFFB3,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeGameCode3Offset					=		{ 0xFFB4,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeGameCode4Offset					=		{ 0xFFB5,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeExpansionRamSizeOffset			=		{ 0xFFBD,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeSpecialVersionOffset				=		{ 0xFFBE,		1,			1,			kRomRangeTypeUnsignedChar };
+static const RomRange kRomRangeCartridgeTypeSubNumOffset		=		{ 0xFFBF,		1,			1,			kRomRangeTypeUnsignedChar };
+
 static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0, 6, 3, 2, 4, 5, 1, 1, 0, 6, 3, 2, 4, 1, 2, 5 };
 
 @implementation RomBase
@@ -252,9 +273,35 @@ static const unsigned int kRomTrackThemeMapping[]	= { 1, 0, 2, 6, 4, 7, 5, 1, 0,
 
 -(NSDictionary*)offsetDictionary
 {
-	NSAssert( 0, @"You must override this function" );
+	// Basic common catridge ROM layout.
+
+	NSMutableDictionary *dictionary	= [NSMutableDictionary dictionaryWithObjectsAndKeys:
 	
-	return( nil );
+		// Rom Header
+	
+		[NSValue valueWithRomRange:kRomRangeTitle],							[NSNumber numberWithUnsignedInt:kRomHandleTitle],
+		[NSValue valueWithRomRange:kRomRangeCartridgeTypeOffset],			[NSNumber numberWithUnsignedInt:kRomHandleCartridgeTypeOffset],
+		[NSValue valueWithRomRange:kRomRangeRomSizeOffset],					[NSNumber numberWithUnsignedInt:kRomHandleRomSizeOffset],
+		[NSValue valueWithRomRange:kRomRangeRamSizeOffset],					[NSNumber numberWithUnsignedInt:kRomHandleRamSizeOffset],
+		[NSValue valueWithRomRange:kRomRangeDestinationCodeOffset],			[NSNumber numberWithUnsignedInt:kRomHandleDestinationCodeOffset],	// $00, $01, $0d use NTSC. Values in range $02..$0c use PAL. Other values are invalid.
+		[NSValue valueWithRomRange:kRomRangeLicenseeCode],					[NSNumber numberWithUnsignedInt:kRomHandleLicenseeCodeOffset],
+		[NSValue valueWithRomRange:kRomRangeMaskRomVerOffset],				[NSNumber numberWithUnsignedInt:kRomHandleMaskRomVerOffset],
+		[NSValue valueWithRomRange:kRomRangeComplementCheckLowOffset],		[NSNumber numberWithUnsignedInt:kRomHandleComplementCheckLowOffset],
+		[NSValue valueWithRomRange:kRomRangeComplementCheckHighOffset],		[NSNumber numberWithUnsignedInt:kRomHandleComplementCheckHighOffset],
+		[NSValue valueWithRomRange:kRomRangeChecksumLowOffset],				[NSNumber numberWithUnsignedInt:kRomHandleChecksumLowOffset],
+		[NSValue valueWithRomRange:kRomRangeChecksumHighOffset],			[NSNumber numberWithUnsignedInt:kRomHandleChecksumHighOffset],
+		[NSValue valueWithRomRange:kRomRangeMarkerCode1Offset],				[NSNumber numberWithUnsignedInt:kRomHandleMarkerCode1Offset],
+		[NSValue valueWithRomRange:kRomRangeMarkerCode2Offset],				[NSNumber numberWithUnsignedInt:kRomHandleMarkerCode2Offset],
+		[NSValue valueWithRomRange:kRomRangeGameCode1Offset],				[NSNumber numberWithUnsignedInt:kRomHandleGameCode1Offset],
+		[NSValue valueWithRomRange:kRomRangeGameCode2Offset],				[NSNumber numberWithUnsignedInt:kRomHandleGameCode2Offset],
+		[NSValue valueWithRomRange:kRomRangeGameCode3Offset],				[NSNumber numberWithUnsignedInt:kRomHandleGameCode3Offset],
+		[NSValue valueWithRomRange:kRomRangeGameCode4Offset],				[NSNumber numberWithUnsignedInt:kRomHandleGameCode4Offset],
+		[NSValue valueWithRomRange:kRomRangeExpansionRamSizeOffset],		[NSNumber numberWithUnsignedInt:kRomHandleExpansionRamSizeOffset],
+		[NSValue valueWithRomRange:kRomRangeSpecialVersionOffset],			[NSNumber numberWithUnsignedInt:kRomHandleSpecialVersionOffset],
+		[NSValue valueWithRomRange:kRomRangeCartridgeTypeSubNumOffset],		[NSNumber numberWithUnsignedInt:kRomHandleCartridgeTypeSubNumOffset],
+		nil];
+
+	return( dictionary );
 }
 
 @end
